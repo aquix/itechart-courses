@@ -4,6 +4,16 @@ body {
     color: #003d48;
 }
 
+a {
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+a:hover {
+    color: dodgerblue;
+}
+
 #content {
     border-radius: 5px;
     width: 1200px;

@@ -10,7 +10,7 @@
 
 #site-logo > img {
     float: left;
-    margin: 10px;
+    margin: 15px;
 }
 
 #site-headtext {
@@ -37,7 +37,6 @@
 #navlinks ul li {
     display: inline;
     border-right: 1px solid #bbb;
-    line-height: 1px;
 }
 
 #navlinks ul li:last-child {
@@ -63,7 +62,7 @@
     margin-left: 100px;
     margin-top: 50px;
     position: relative;
-    bottom: -17px;
+    bottom: -18px;
 }
 
 #banner-text {
@@ -77,4 +76,8 @@
 
 #banner-text a {
     margin-top: 40px;
+}
+
+#banner-text a:hover {
+    color: white;
 }
