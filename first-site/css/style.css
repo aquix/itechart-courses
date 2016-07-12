@@ -1,0 +1,36 @@
+body {
+    background-image: url("../images/background.jpg");
+    font-family: Calibri;
+    color: #003d48;
+}
+
+#content {
+    border-radius: 5px;
+    width: 1200px;
+    background: white;
+    margin: auto;
+}
+
+.text-link {
+    font-weight: bolder;
+}
+
+.text-thin-header {
+    font-size: 200%;
+    font-weight: lighter;
+}
+
+.lighttext {
+    color: darkgray;
+}
+
+.btn {
+    border-radius: 2px;
+    background-color: #f77462;
+    margin: auto;
+    padding: 10px 15px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}

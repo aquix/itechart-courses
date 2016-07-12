@@ -1,0 +1,80 @@
+#header {
+    position: relative;
+}
+
+#site-logo {
+    position: relative;
+    margin: 20px;
+    display: inline-block;
+}
+
+#site-logo > img {
+    float: left;
+    margin: 10px;
+}
+
+#site-headtext {
+    float: left;
+    line-height: 20%;
+    color: #d3d3d3;
+}
+
+#site-headtext h1 {
+    color: orange;
+}
+
+#navlinks {
+    float: right;
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#navlinks ul {
+    list-style-type: none;
+}
+
+#navlinks ul li {
+    display: inline;
+    border-right: 1px solid #bbb;
+    line-height: 1px;
+}
+
+#navlinks ul li:last-child {
+    border-right: none;
+}
+
+#navlinks ul li a {
+    text-decoration: none;
+    text-align: center;
+    padding: 20px;
+    font-weight: bolder;
+}
+
+#navlinks ul li a:hover {
+    color: dodgerblue;
+}
+
+#banner {
+    background: linear-gradient(#e7e7e7, #ffffff);
+}
+
+#banner img {
+    margin-left: 100px;
+    margin-top: 50px;
+    position: relative;
+    bottom: -17px;
+}
+
+#banner-text {
+    font-size: larger;
+    display: inline-block;
+    position: relative;
+    bottom: 50px;
+    margin-left: 100px;
+    width: 500px;
+}
+
+#banner-text a {
+    margin-top: 40px;
+}
