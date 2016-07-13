@@ -2,6 +2,7 @@ body {
     background-image: url("../images/background.jpg");
     font-family: Calibri;
     color: #003d48;
+    min-width: 360px;
 }
 
 a {
@@ -16,9 +17,19 @@ a:hover {
 
 #content {
     border-radius: 5px;
-    width: 1200px;
+    width: 90%;
     background: white;
     margin: auto;
+}
+
+@media screen and (max-width: 1000px) {
+    #content {
+        border-radius: 0px;
+        width: 100%;
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .text-link {

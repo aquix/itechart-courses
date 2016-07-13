@@ -1,11 +1,9 @@
 #header {
-    position: relative;
 }
 
 #site-logo {
-    position: relative;
+    float: left;
     margin: 20px;
-    display: inline-block;
 }
 
 #site-logo > img {
@@ -25,10 +23,23 @@
 
 #navlinks {
     float: right;
-    position: relative;
-    display: inline-block;
     margin-right: 20px;
     margin-top: 30px;
+}
+
+@media screen and (max-width: 1000px) {
+    #site-logo {
+        float: none;
+        margin: 0;
+        display: block;
+    }
+    
+    #navlinks {
+        float: none;
+        margin-right: 20px;
+        margin-top: 30px;
+        display: block;
+    }
 }
 
 #navlinks ul {
@@ -62,19 +73,37 @@
 #banner img {
     margin-left: 100px;
     margin-top: 50px;
+    float: left;
+    width: 30%;
     position: relative;
-    bottom: -34px;
+    bottom: -18px;
 }
 
 #banner-text {
+    float: left;
     font-size: larger;
-    display: inline-block;
-    position: relative;
-    bottom: 50px;
     margin-left: 100px;
-    width: 500px;
+    width: 50%;
+    margin-top: 70px;
 }
 
 #banner-text a {
     margin-top: 40px;
+}
+
+@media screen and (max-width: 1150px) {
+    #banner-text {
+        font-size: smaller;
+        width: 80%;
+        margin-top: 20px;
+        margin-left: 60px;
+    }
+
+    #banner img {
+        display: none;
+    }
+
+    #banner-text a {
+        margin-top: 10px;
+    }
 }

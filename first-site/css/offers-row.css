@@ -27,7 +27,7 @@
 
 .row1-card {
     display: inline-block;
-    width: 350px;
+    width: 30%;
     margin: 50px 0;
 }
 
@@ -55,4 +55,17 @@
 
 .row1-card-text {
     margin: 20px 0;
+}
+
+@media screen and (max-width: 1254px) {
+    .row1-card {
+        margin: 10px 0;
+        width: 49%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .row1-card {
+        width: 100%;
+    }
 }

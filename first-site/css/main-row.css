@@ -6,6 +6,7 @@ main {
 #articles {
     display: inline-block;
     width: 60%;
+    float: left;
 }
 
 .article {
@@ -15,6 +16,11 @@ main {
 .article-img {
     float: left;
     margin: 20px;
+    width: 100%;
+}
+
+.article-img img {
+    width: 100%;
 }
 
 .article-text {
@@ -25,7 +31,7 @@ main {
 #sidebar {
     display: inline-block;
     width: 30%;
-    float: right;
+    float: left;
     margin: 20px;
 }
 
@@ -101,4 +107,18 @@ main {
 .tab-selected {
     background-color: #003d48;
     color: #f77462;
+}
+
+@media screen and (max-width: 970px) {
+    #articles {
+        display: inline-block;
+        width: 100%;
+    }
+
+    #sidebar {
+        width: 100%;
+        float: none;
+        margin: 0;
+        margin-top: 30px;
+    }
 }
