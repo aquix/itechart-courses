@@ -1,0 +1,111 @@
+#news-row {
+}
+
+#news-row > h1 {
+    color: #003d48;
+    font-size: xx-large;
+    width: 90%;
+    margin: 50px auto 20px auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#news-row > h2 {
+    color: #6dc5dd;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding: 15px;
+    font-size: 150%;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.news-box {
+    float: left;
+    margin-left: 20px;
+    width: 50%;
+    overflow: auto;
+}
+
+.comments-box {
+    float: left;
+    width: 45%;
+}
+
+.card {
+    margin: 50px 20px;
+}
+
+.card-img {
+    float: left;
+}
+
+.card-text {
+    float: left;
+    margin-left: 20px;
+    width: 75%;
+}
+
+.date-pic {
+    background-color: #6dc5dd;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    width: 70px;
+    height: 70px;
+}
+
+.date-day {
+    font-size: 200%;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+}
+
+.date-month {
+    text-align: center;
+    vertical-align: middle;
+}
+
+#news-row .card-text > h1 {
+    color: #003d48;
+    font-size: larger;
+    margin: 0;
+}
+
+#news-row .card-text a {
+    color: #f77462;
+}
+
+.comment {
+    text-align: left;
+    background-color: #ececec;
+    border-radius: 3px;
+}
+
+.comment > .card-img {
+    border-radius: 100%;
+    background-color: white;
+    width: 80px;
+    height: 80px;
+    margin-top: 20px;
+}
+
+.comment > .card-text {
+    margin-bottom: 20px;
+}
+
+.comment > .card-text > .author {
+    color: #f77462;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.comment > .card-img > img {
+    width: 100%;
+    height: 100%;
+}

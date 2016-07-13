@@ -1,0 +1,19 @@
+#quote-row {
+    background-color: #f77462;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+#quote-row > h1 {
+    font-size: xx-large;
+}
+
+#quote-row > p {
+    display: block;
+    width: 50%;
+    margin: auto;
+    font-size: larger;
+}

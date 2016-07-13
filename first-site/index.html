@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/row1.css">
     <link rel="stylesheet" href="./css/row2.css">
+    <link rel="stylesheet" href="./css/quote-row.css">
+    <link rel="stylesheet" href="./css/news-row.css">
 </head>
 <body>
     <div id="content">
@@ -93,7 +95,7 @@
         </section>
 
         <section id="row2">
-            <div id="articles">
+            <div id="articles" class="clearfix">
                 <div class="article">
                     <div class="article-img"><img src="./images/human1.png" alt=""></div>
                     <span class="article-text">
@@ -118,7 +120,6 @@
                         <a href="" class="btn">MORE</a>
                     </span>
                 </div>
-                <div style="clear:both"></div>
             </div>
             <div id="sidebar">
                 <div class="tab tab-selected">
@@ -145,6 +146,86 @@
                             <li>Fusce lobortis lorem at ipsum semper </li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section id="quote-row">
+            <h1>Praesent Clacerat</h1>
+            <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet
+            lectus arcu pulvinar risus</p>
+        </section>
+        <section id="news-row" class="clearfix">
+            <h1 class="text-thin-header">Vestibulum Commodo Felis</h1>
+            <h2 class="text-thin-header">Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna</h2>
+            <div class="news-box">
+                <div class="card clearfix">
+                    <div class="card-img">
+                        <div class="date-pic">
+                            <div class="date-day">07</div>
+                            <div class="date-month">Jan</div>
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        <h1>Gravida Ultrice</h1>
+                        <a href="#">14 Comments</a>
+                        <p class="lighttext">
+                            Suspendisse ac urna. Etiam pellentesque mauris ut lectus nunc tellus ante, mattis eget,
+                            gravida vitae, ultricies atinvio
+                            <a href="#">➜</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card clearfix">
+                    <div class="card-img">
+                        <div class="date-pic">
+                            <div class="date-day">06</div>
+                            <div class="date-month">Jan</div>
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        <h1>Tellus Mattis Pelle</h1>
+                        <a href="#">07 Comments</a>
+                        <p class="lighttext">
+                            Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a,
+                            ultricies in, diam. Sed arcu
+                            <a href="#">➜</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card clearfix">
+                    <div class="card-img">
+                        <div class="date-pic">
+                            <div class="date-day">05</div>
+                            <div class="date-month">Jan</div>
+                        </div>
+                    </div>
+                    <div class="card-text">
+                        <h1>Phasellus Lacina</h1>
+                        <a href="#">22 Comments</a>
+                        <p class="lighttext">
+                            Lospendisse ac urna. Etiam pellentesque mauris ut lectus. Nunc tellus ante, mattis
+                            eget, gravida vitae, ultricies atinvio
+                            <a href="#">➜</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="comments-box">
+                <div class="card comment clearfix">
+                    <div class="card-text">
+                        <p class="lighttext">“ Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae
+                            luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing’</p>
+                        <div class="author">- John Doe</div>
+                    </div>
+                    <div class="card-img"><img src="./images/comment.png" alt="Comment"></div>
+                </div>
+                <div class="card comment clearfix">
+                    <div class="card-text">
+                        <p class="lighttext">“ Ced egestas, ante et vulputate volutpat, eros pede semper est, vitae
+                            luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing’</p>
+                        <div class="author">- Kate Doe</div>
+                    </div>
+                    <div class="card-img"><img src="./images/comment.png" alt="Comment"></div>
                 </div>
             </div>
         </section>
