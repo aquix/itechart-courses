@@ -1,4 +1,4 @@
-#quote-row {
+#quotes {
     background-color: #f77462;
     color: white;
     text-align: center;
@@ -7,11 +7,11 @@
     padding-bottom: 50px;
 }
 
-#quote-row > h1 {
+#quotes > h1 {
     font-size: xx-large;
 }
 
-#quote-row > p {
+#quotes > p {
     display: block;
     width: 50%;
     margin: auto;

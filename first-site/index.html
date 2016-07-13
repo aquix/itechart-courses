@@ -6,18 +6,18 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Beautiful site</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/header.css">
-    <link rel="stylesheet" href="./css/row1.css">
-    <link rel="stylesheet" href="./css/row2.css">
-    <link rel="stylesheet" href="./css/quote-row.css">
-    <link rel="stylesheet" href="./css/news-row.css">
-    <link rel="stylesheet" href="./css/footer.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/offers-row.css">
+    <link rel="stylesheet" href="css/main-row.css">
+    <link rel="stylesheet" href="css/quote-row.css">
+    <link rel="stylesheet" href="css/news-row.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
     <div id="content">
         <section id="header">
-            <div id="navbar">
+            <nav>
                 <div id="site-logo">
                     <img src="./images/plane.png" alt="Site logo">
                     <div id="site-headtext">
@@ -35,7 +35,7 @@
                         <li><a class="lighttext" href="#">Contact</a></li>
                     </ul>
                 </div>
-            </div>
+            </nav>
         </section>
 
         <section id="banner">
@@ -50,12 +50,12 @@
             </div>
         </section>
 
-        <section id="row1">
+        <section id="offers">
             <ul>
                 <li>
                     <div class="row1-card">
                         <div class="row1-img">
-                            <img src="./images/row1-card1.png" alt="">
+                            <img src="images/offers-flag.png" alt="">
                         </div>
                         <div class="row1-text">
                             <span class="row1-card-head">Ausce Cellentes</span>
@@ -68,7 +68,7 @@
                 <li>
                     <div class="row1-card">
                         <div class="row1-img">
-                            <img src="./images/row1-card2.png" alt="">
+                            <img src="images/offers-photo.png" alt="">
                         </div>
                         <div class="row1-text">
                             <span class="row1-card-head">Ausce Cellentes</span>
@@ -82,7 +82,7 @@
                 <li>
                     <div class="row1-card">
                         <div class="row1-img">
-                            <img src="./images/row1-card3.png" alt="">
+                            <img src="images/offers-house.png" alt="">
                         </div>
                         <div class="row1-text">
                             <span class="row1-card-head">Ausce Cellentes</span>
@@ -95,7 +95,7 @@
             </ul>
         </section>
 
-        <section id="row2">
+        <main>
             <div id="articles" class="clearfix">
                 <div class="article">
                     <div class="article-img"><img src="./images/human1.png" alt=""></div>
@@ -149,13 +149,15 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section id="quote-row">
+        </main>
+
+        <section id="quotes">
             <h1>Praesent Clacerat</h1>
             <p>Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna a ullamcorper laoreet
             lectus arcu pulvinar risus</p>
         </section>
-        <section id="news-row" class="clearfix">
+
+        <section id="news" class="clearfix">
             <h1 class="text-thin-header">Vestibulum Commodo Felis</h1>
             <h2 class="text-thin-header">Morbi interdum mollis sapien. Sed ac risus. Phasellus lacinia, magna</h2>
             <div class="news-box">

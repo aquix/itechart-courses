@@ -1,7 +1,7 @@
-#news-row {
+#news {
 }
 
-#news-row > h1 {
+#news > h1 {
     color: #003d48;
     font-size: xx-large;
     width: 90%;
@@ -10,7 +10,7 @@
     vertical-align: middle;
 }
 
-#news-row > h2 {
+#news > h2 {
     color: #6dc5dd;
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
@@ -71,13 +71,13 @@
     vertical-align: middle;
 }
 
-#news-row .card-text > h1 {
+#news .card-text > h1 {
     color: #003d48;
     font-size: larger;
     margin: 0;
 }
 
-#news-row .card-text a {
+#news .card-text a {
     color: #f77462;
 }
 
