@@ -44,3 +44,7 @@ a:hover {
     text-align: center;
     color: white;
 }
+
+.btn:hover {
+    color: white;
+}
