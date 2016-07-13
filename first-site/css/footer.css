@@ -1,0 +1,34 @@
+footer {
+    background-color: #6dc5dd;
+    color: white;
+    padding-top: 30px;
+}
+
+.linkgroup {
+    float: left;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: larger;
+    width: 150px;
+}
+
+.linkgroup li {
+    font-weight: normal;
+    font-size: smaller;
+    margin: 10px 0;
+}
+
+.copyright {
+    margin: 30px 38px;
+    padding-top: 20px;
+    border-top: 1px solid white;
+}
+
+.copyright p {
+    float: left;
+}
+
+.copyright .social {
+    float: right;
+    margin-top: 5px;
+}
