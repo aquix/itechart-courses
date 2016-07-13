@@ -6,7 +6,7 @@
     display: inline;
 }
 
-.row1-img {
+#offers .card-img {
     width: 50px;
     height: 50px;
     background-color: white;
@@ -15,45 +15,42 @@
     margin-top: 5px;
     margin-left: 5px;
     display: inline-block;
-    float: left;
 }
 
-.row1-img img {
+#offers .card-img img {
     height: 40px;
     width: auto;
     display: block;
     margin: 5px auto;
 }
 
-.row1-card {
+#offers .card {
     display: inline-block;
     width: 30%;
     margin: 50px 0;
 }
 
-.row1-text {
-    float: left;
+#offers .card-text {
     position: relative;
     display: inline-block;
     width: 250px;
-    margin-left: 20px;
     color: white;
 }
 
-.row1-card span {
+#offers .card span {
     display: block;
 }
 
-.row1-card-head {
+.card-head {
     font-weight: bolder;
     font-size: larger;
 }
 
-.row1-card-readmore {
+.card-readmore {
     font-weight: bolder;
 }
 
-.row1-card-text {
+.card-snippet {
     margin: 20px 0;
 }
 
