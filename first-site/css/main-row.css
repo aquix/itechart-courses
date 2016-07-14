@@ -11,10 +11,11 @@ main {
 
 #articles .card {
     display: flex;
+    margin-left: 1%;
 }
 
 #articles .card-img {
-    margin: 20px;
+    margin: 1%;
     width: 100%;
 }
 

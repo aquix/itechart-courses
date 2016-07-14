@@ -55,14 +55,14 @@
 }
 
 @media screen and (max-width: 1254px) {
-    .row1-card {
+    #offers .card {
         margin: 10px 0;
         width: 49%;
     }
 }
 
 @media screen and (max-width: 750px) {
-    .row1-card {
+    #offers .card {
         width: 100%;
     }
 }
