@@ -5,3 +5,11 @@ class InvalidDateString extends Error {
         this.name = this.constructor.name;
     }
 }
+
+class InvalidFormatString extends Error {
+    constructor(formatString) {
+        super();
+        this.message = `Invalid format string: ${formatString}`;
+        this.name = this.constructor.name;
+    }
+}
