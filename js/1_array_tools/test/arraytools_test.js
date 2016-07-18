@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var ArrayTools = require('../script');
+var ArrayTools = require('../array_tools');
 
 describe('ArrayTools', () => {
     describe('#getMaxSubSum2()', () => {
@@ -26,7 +26,7 @@ describe('ArrayTools', () => {
 describe('ArrayTools', () => {
    describe('#findMin()', () => {
        it('should return min element', () => {
-           assert.equal(-40, ArrayTools.findMin([7, -7, 13, 39, 1, -40, 8]));
+               assert.equal(-40, ArrayTools.findMin([7, -7, 13, 39, 1, -40, 8]));
        });
    });
 });
