@@ -28,6 +28,74 @@ class DateFormatter {
         return this._date.getFullYear();
     };
 
+    format(formatString) {
+        let result = [];
+        let tokenStart = 0;
+        let tokenEnd = 1;
+
+        while (true) {
+            if (DateFormatter._getDividers().indexOf(formatString[tokenEnd]) != -1 ||
+                tokenEnd === formatString.length ||
+                (formatString[tokenEnd] != formatString[tokenEnd - 1] &&
+                DateFormatter._getDividers().indexOf(formatString[tokenEnd - 1]) == -1)) {
+
+                let token = formatString.slice(tokenStart, tokenEnd).toLowerCase();
+                result.push(this._getTokenFormattedValue(token));
+
+                tokenStart = tokenEnd;
+
+                // Skip dividers
+                while (DateFormatter._getDividers().indexOf(formatString[tokenStart]) !== -1 ) {
+                    // Add divider to result string
+                    result.push(formatString[tokenStart]);
+                    tokenStart++;
+                }
+
+                tokenEnd = tokenStart + 1;
+
+                if (tokenStart >= formatString.length) {
+                    break;
+                }
+            } else {
+                tokenEnd++;
+            }
+        }
+
+        return result.join('');
+    }
+
+    _getTokenFormattedValue(token) {
+        switch (token) {
+            case 'd':
+                return this.getDay().toString();
+            case 'dd':
+                let day = this.getDay().toString();
+                if (day.length === 1) {
+                    day = "0" + day;
+                }
+                return day;
+            case 'm':
+                return this.getMonth().toString();
+            case 'mm':
+                let month = (this.getMonth() + 1).toString();
+                if (month.length === 1) {
+                    month = "0" + month;
+                }
+                return month;
+            case 'mmm':
+                return this.getMonthShortName();
+            case 'mmmm':
+                return this.getMonthFullName();
+            case 'yy':
+                let year = this.getYear().toString();
+                return year.slice(2, 4);
+            case 'yyyy':
+                return this.getYear().toString();
+            default:
+                throw new InvalidFormatStringError(token);
+        }
+    }
+
     static parse(dateString, formatString) {
         if (formatString !== undefined) {
             return this.parseWithFormat(dateString, formatString);

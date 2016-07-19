@@ -31,4 +31,18 @@ describe('DateFormatter', () => {
             assert.equal(2000, date.getYear());
         });
     });
+
+    describe('#format()', () => {
+        it('should present date in correct format', () => {
+            let date = new Date(2015, 0, 16);
+            let formattedDate = (new DateFormatter(date)).format("MM-DD-YYYY");
+            assert.equal("01-16-2015", formattedDate);
+        });
+
+        it('should present date in correct format', () => {
+            let date = new Date(2015, 0, 16);
+            let formattedDate = (new DateFormatter(date)).format("DDMMYY");
+            assert.equal("160115", formattedDate);
+        });
+    })
 });
