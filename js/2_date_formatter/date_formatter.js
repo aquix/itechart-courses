@@ -12,7 +12,7 @@ class DateFormatter {
     };
 
     getMonth() {
-        return this._date.getMonth();
+        return this._date.getMonth() + 1;
     };
 
     getMonthFullName() {
@@ -77,7 +77,7 @@ class DateFormatter {
             case 'm':
                 return this.getMonth().toString();
             case 'mm':
-                let month = (this.getMonth() + 1).toString();
+                let month = (this.getMonth()).toString();
                 if (month.length === 1) {
                     month = "0" + month;
                 }
@@ -129,13 +129,17 @@ class DateFormatter {
                 tokenStart = tokenEnd;
                 parsePosition += value.length;
 
+                if (formatString[tokenStart] !== dateString[parsePosition]) {
+                    throw new DateFormatMatchingError(dateString, formatString);
+                }
+
                 // Skip dividers
                 while (this._getDividers().indexOf(formatString[tokenStart]) !== -1 ) {
                     if (formatString[tokenStart] === dateString[parsePosition]) {
                         parsePosition++;
                         tokenStart++;
                     } else {
-                        throw new Error(dateString, formatString);
+                        throw new DateFormatMatchingError(dateString, formatString);
                     }
                 }
 

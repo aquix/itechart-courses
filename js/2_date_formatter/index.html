@@ -5,7 +5,23 @@
     <title>Date formatter</title>
 </head>
 <body>
+    <div>
+        <label for="date-input">Enter date:</label>
+        <input type="text" id="date-input" value="12-05-2016">
+    </div>
+    <div>
+        <label for="format-input">Enter format string (optionally):</label>
+        <input type="text" id="format-input" value="DD-MM-YYYY">
+    </div>
+    <div>
+        <label for="reformat-input">Enter format string you want to reconvert:</label>
+        <input type="text" id="reformat-input">
+    </div>
+    <button id="parse-btn">Parse date</button>
+    <button id="reformat-btn">Reformat date</button>
+    <div id="result">
 
+    </div>
 <script src="date_formatter_errors.js"></script>
 <script src="date_formatter.js"></script>
 <script src="script.js"></script>
