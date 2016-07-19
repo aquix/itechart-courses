@@ -32,6 +32,23 @@ class DateFormatter {
         return this._date.getFullYear();
     };
 
+    fromNow() {
+        let dateNow = new Date();
+        let millisecondsDiff = this._date - dateNow;
+        let inPast = millisecondsDiff < 0;
+
+        if (millisecondsDiff < 0) {
+            millisecondsDiff *= -1;
+        }
+
+        let diffDate = new Date(millisecondsDiff);
+
+        let years = diffDate.getFullYear() - 1970;
+
+        let postfix = inPast ? " ago" : "in future";
+        return years + " year(s)" + postfix;
+    }
+
     format(formatString) {
         let result = [];
         let tokenStart = 0;

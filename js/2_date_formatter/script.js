@@ -15,19 +15,25 @@ function createDateByString(dateString, formatString) {
     return date;
 }
 
-document.getElementById('parse-btn').onclick = () => {
+function parseDate() {
     let dateString = document.getElementById("date-input").value;
     let formatString = document.getElementById("format-input").value || undefined;
 
-    let date = createDateByString(dateString, formatString);
+    return createDateByString(dateString, formatString);
+}
+
+document.getElementById('parse-btn').onclick = () => {
+    let date = parseDate();
     printDate(date);
 };
 
 document.getElementById('reformat-btn').onclick = () => {
-    let dateString = document.getElementById("date-input").value;
-    let formatString = document.getElementById("format-input").value || undefined;
+    let date = parseDate();
     let reformatString = document.getElementById("reformat-input").value;
-
-    let date = createDateByString(dateString, formatString);
     document.getElementById("result").innerHTML = date.format(reformatString);
+};
+
+document.getElementById('fromnow-btn').onclick = () => {
+    let date = parseDate();
+    document.getElementById("result").innerHTML = date.fromNow();;
 };
