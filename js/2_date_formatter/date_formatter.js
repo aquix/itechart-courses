@@ -1,85 +1,113 @@
 class DateFormatter {
     constructor(date=new Date()) {
         this._date = date;
-        this._dividers = ['.', '-', '/', ' '];
-        this._months = {
-            "Jan": 0,
-            "Feb": 1,
-            "Mar": 2,
-            "Apr": 3,
-            "May": 4,
-            "Jun": 5,
-            "Jul": 6,
-            "Aug": 7,
-            "Sep": 8,
-            "Oct": 9,
-            "Nov": 10,
-            "Dec": 11
-        };
     };
 
     asDate() {
         return this._date;
     };
 
-    parse(dateString, formatString) {
+    getDay() {
+        return this._date.getDate();
+    };
+
+    getMonth() {
+        return this._date.getMonth();
+    };
+
+    getMonthFullName() {
+        let month = this.getMonth();
+        return DateFormatter._getFullMonths()[month];
+    };
+
+    getMonthShortName() {
+        return this.getMonthFullName().slice(0, 3);
+    };
+
+    getYear() {
+        return this._date.getFullYear();
+    };
+
+    static parse(dateString, formatString) {
         if (formatString !== undefined) {
-            dateString.trim();
-            formatString.trim();
+            return this.parseWithFormat(dateString, formatString);
+        } else {
+            return this.parseWithoutFormat(dateString);
+        }
+    };
 
-            let tokenStart = 0;
-            let tokenEnd = 1;
+    static parseWithFormat(dateString, formatString) {
+        dateString.trim();
+        formatString.trim();
 
-            let parsePosition = 0;
+        let tokenStart = 0;
+        let tokenEnd = 1;
 
-            let tokens = {};
+        let parsePosition = 0;
 
-            while (true) {
-                if (this._dividers.indexOf(formatString[tokenEnd]) != -1 ||
-                    tokenEnd === formatString.length ||
-                    (formatString[tokenEnd] != formatString[tokenEnd - 1] &&
-                        this._dividers.indexOf(formatString[tokenEnd - 1]) == -1)) {
+        let tokens = {};
 
-                    let token = formatString.slice(tokenStart, tokenEnd).toLowerCase();
-                    let value = this._parseTokenValue(token, dateString, parsePosition);
-                    tokens[token] = value;
+        while (true) {
+            if (this._getDividers().indexOf(formatString[tokenEnd]) != -1 ||
+                tokenEnd === formatString.length ||
+                (formatString[tokenEnd] != formatString[tokenEnd - 1] &&
+                this._getDividers().indexOf(formatString[tokenEnd - 1]) == -1)) {
 
-                    tokenStart = tokenEnd;
-                    parsePosition += value.length;
+                // Get token and parse it value from dateString
+                let token = formatString.slice(tokenStart, tokenEnd).toLowerCase();
+                let value = this._parseTokenValue(token, dateString, parsePosition);
+                tokens[token] = value;
 
-                    // Skip dividers
-                    while (this._dividers.indexOf(formatString[tokenStart]) !== -1 ) {
-                        if (formatString[tokenStart] === dateString[parsePosition]) {
-                            parsePosition++;
-                            tokenStart++;
-                        } else {
-                            throw new Error("Date not matches pattern");
-                        }
+                tokenStart = tokenEnd;
+                parsePosition += value.length;
+
+                // Skip dividers
+                while (this._getDividers().indexOf(formatString[tokenStart]) !== -1 ) {
+                    if (formatString[tokenStart] === dateString[parsePosition]) {
+                        parsePosition++;
+                        tokenStart++;
+                    } else {
+                        throw new Error(dateString, formatString);
                     }
+                }
 
-                    tokenEnd = tokenStart + 1;
+                tokenEnd = tokenStart + 1;
 
-                    if (tokenStart >= formatString.length) {
-                        break;
-                    }
+                if (tokenStart >= formatString.length) {
+                    break;
+                }
+            } else {
+                tokenEnd++;
+            }
+        }
+
+        let cleanDate = this._validateTokens(tokens);
+        let date = new Date(0);
+        date.setYear(cleanDate['year']);
+        date.setDate(cleanDate['day']);
+        date.setMonth(cleanDate['month']);
+
+        return new DateFormatter(date);
+    };
+
+    static parseWithoutFormat(dateString) {
+        for (var format of this._getKnownFormats()) {
+            try {
+                return this.parseWithFormat(dateString, format);
+            } catch (e) {
+                if (true) {
+                    continue;
                 } else {
-                    tokenEnd++;
+                    throw e;
                 }
             }
-
-            let cleanDate = this._validateTokens(tokens);
-            let date = new Date(0);
-            date.setYear(cleanDate['year']);
-            date.setDate(cleanDate['day']);
-            date.setMonth(cleanDate['month']);
-
-            return new DateFormatter(date);
-        } else {
-            // try all variants
         }
-    }
 
-    _validateTokens(tokens) {
+        // If no patterns match the date then date is incorrect
+        throw new InvalidDateStringError(dateString);
+    };
+
+    static _validateTokens(tokens) {
         let day = 1;
         let month = 0;
         let year = 1970;
@@ -95,34 +123,34 @@ class DateFormatter {
             switch (token) {
                 case 'd':
                     if (value[0] === '0') {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
                 // fallthrough
                 case 'dd':
                     let day = parseInt(value);
                     if (day === undefined || !this._isDayCorrect(day)) {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
                     cleanDate['day'] = day;
                     break;
                 case 'm':
                     if (value[0] === '0') {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
                 // fallthrough
                 case 'mm':
                     month = parseInt(value);
                     if (month === undefined || !this._isMonthCorrect(month)) {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
                     cleanDate['month'] = month - 1;
                     break;
                 case 'mmm':
                 case 'mmmm':
                     let shortedMonthName = value.slice(0, 3);
-                    month = this._months[shortedMonthName];
+                    month = this._getMonths()[shortedMonthName];
                     if (month === undefined) {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
                     cleanDate['month'] = month;
                     break;
@@ -130,7 +158,7 @@ class DateFormatter {
                 case 'yy':
                     let year = parseInt(value);
                     if (year === undefined) {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
 
                     // If year in format YY
@@ -143,7 +171,7 @@ class DateFormatter {
                     }
 
                     if (!this._isYearCorrect(year)) {
-                        throw new InvalidDateString(value);
+                        throw new InvalidDateStringError(value);
                     }
 
                     cleanDate['year'] = year;
@@ -152,22 +180,22 @@ class DateFormatter {
         }
 
         return cleanDate;
-    }
+    };
 
-    _isMonthCorrect(month) {
+    static _isMonthCorrect(month) {
         return month >= 0 && month < 12;
     };
 
-    _isDayCorrect(day) {
+    static _isDayCorrect(day) {
         return day > 0 && day < 32;
-    }
+    };
 
-    _isYearCorrect(year) {
+    static _isYearCorrect(year) {
         // FIX year interval
         return year >= 1970 && year <= 3000;
-    }
+    };
 
-    _parseTokenValue(token, str, parsePosition) {
+    static _parseTokenValue(token, str, parsePosition) {
         switch (token) {
             case 'd':
             case 'm':
@@ -181,15 +209,82 @@ class DateFormatter {
             case 'yyyy':
                 return str.slice(parsePosition, parsePosition + token.length);
             default:
-                throw new InvalidFormatString(token);
+                throw new InvalidFormatStringError(token);
         }
-    }
+    };
 
-    _getVariableTokenValue(str, parsePosition) {
+    static _getVariableTokenValue(str, parsePosition) {
         let i = parsePosition;
-        while (this._dividers.indexOf(str[i]) == -1) {
+        while (this._getDividers().indexOf(str[i]) == -1) {
             i++;
         }
         return str.slice(parsePosition, i);
-    }
+    };
+
+    static _getDividers() {
+        return ['.', '-', '/', ' '];
+    };
+
+    static _getMonths() {
+        return {
+            "Jan": 0,
+            "Feb": 1,
+            "Mar": 2,
+            "Apr": 3,
+            "May": 4,
+            "Jun": 5,
+            "Jul": 6,
+            "Aug": 7,
+            "Sep": 8,
+            "Oct": 9,
+            "Nov": 10,
+            "Dec": 11
+        };
+    };
+
+    static _getFullMonths() {
+        return [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+    };
+
+    static _getKnownFormats() {
+        return [
+            "DDMMYYYY", "DDMMYY", "DD-MM-YYYY", "D-MM-YYYY", "DD-MMM-YYYY", "D-MMM-YYYY", "DD-MMMM-YYYY", "D-MMMM-YYYY",
+            "DD-MM-YY", "D-MM-YY", "DD-MMM-YY", "D-MMM-YY", "DD-MMMM-YY", "D-MMMM-YY",
+            "DD/MM/YYYY", "D/MM/YYYY", "DD/MMM/YYYY", "D/MMM/YYYY", "DD/MMMM/YYYY",
+            "D/MMMM/YYYY", "DD/MM/YY", "D/MM/YY", "DD/MMM/YY", "D/MMM/YY", "DD/MMMM/YY", "D/MMMM/YY",
+            "DD MM YYYY", "D MM YYYY", "DD MMM YYYY", "D MMM YYYY", "DD MMMM YYYY", "D MMMM YYYY",
+            "DD MM YY", "D MM YY", "DD MMM YY", "D MMM YY", "DD MMMM YY", "D MMMM YY", "DD.MM.YYYY", "D.MM.YYYY",
+            "DD.MMM.YYYY", "D.MMM.YYYY", "DD.MMMM.YYYY", "D.MMMM.YYYY", "DD.MM.YY", "D.MM.YY", "DD.MMM.YY",
+            "D.MMM.YY", "DD.MMMM.YY", "D.MMMM.YY", "MM-DD-YYYY", "MM-D-YYYY", "MMM-DD-YYYY", "MMM-D-YYYY",
+            "MMMM-DD-YYYY", "MMMM-D-YYYY", "MM-DD-YY", "MM-D-YY", "MMM-DD-YY", "MMM-D-YY", "MMMM-DD-YY", "MMMM-D-YY",
+            "DDMMYYYY", "DDMMYY", "MM/DD/YYYY", "MM/D/YYYY", "MMM/DD/YYYY", "MMM/D/YYYY", "MMMM/DD/YYYY",
+            "MMMM/D/YYYY", "MM/DD/YY", "MM/D/YY", "MMM/DD/YY", "MMM/D/YY", "MMMM/DD/YY", "MMMM/D/YY",
+            "MM DD YYYY", "MM D YYYY", "MMM DD YYYY", "MMM D YYYY", "MMMM DD YYYY", "MMMM D YYYY",
+            "MM DD YY", "MM D YY", "MMM DD YY", "MMM D YY", "MMMM DD YY", "MMMM D YY", "MM.DD.YYYY", "MM.D.YYYY",
+            "MMM.DD.YYYY", "MMM.D.YYYY", "MMMM.DD.YYYY", "MMMM.D.YYYY", "MM.DD.YY", "MM.D.YY", "MMM.DD.YY",
+            "MMM.D.YY", "MMMM.DD.YY", "MMMM.D.YY", "YYYY-MM-DD", "YYYY-MM-D", "YYYY-MMM-DD", "YYYY-MMM-D",
+            "YYYY-MMMM-DD", "YYYY-MMMM-D", "YY-MM-DD", "YY-MM-D", "YY-MMM-DD", "YY-MMM-D", "YY-MMMM-DD", "YY-MMMM-D",
+            "DDMMYYYY", "DDMMYY", "YYYY/MM/DD", "YYYY/MM/D", "YYYY/MMM/DD", "YYYY/MMM/D", "YYYY/MMMM/DD",
+            "YYYY/MMMM/D", "YY/MM/DD", "YY/MM/D", "YY/MMM/DD", "YY/MMM/D", "YY/MMMM/DD", "YY/MMMM/D",
+            "YYYY MM DD", "YYYY MM D", "YYYY MMM DD", "YYYY MMM D", "YYYY MMMM DD", "YYYY MMMM D",
+            "YY MM DD", "YY MM D", "YY MMM DD", "YY MMM D", "YY MMMM DD", "YY MMMM D", "YYYY.MM.DD", "YYYY.MM.D",
+            "YYYY.MMM.DD", "YYYY.MMM.D", "YYYY.MMMM.DD", "YYYY.MMMM.D", "YY.MM.DD", "YY.MM.D", "YY.MMM.DD",
+            "YY.MMM.D", "YY.MMMM.DD", "YY.MMMM.D"
+        ];
+    };
 }
+
+// module.exports = DateFormatter;
