@@ -1,5 +1,9 @@
 class DateFormatter {
     constructor(date=new Date()) {
+        // If date passed in milliseconds
+        if (typeof date === 'number') {
+            date = new Date(date);
+        }
         this._date = date;
     };
 
