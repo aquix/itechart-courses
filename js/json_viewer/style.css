@@ -1,0 +1,58 @@
+html, body {
+    height: 100%;
+}
+
+.json-source {
+    width: 45%;
+    height: 100%;
+    float: left;
+}
+
+#json-text {
+    width: 95%;
+    height: 100%;
+}
+
+.btn-wrap {
+    width: 10%;
+    height: 100%;
+    float: left;
+    display: inline-block;
+
+}
+
+#view-btn {
+    position: relative;
+    top: 50%;
+    margin: auto;
+    margin-left: 15%;
+}
+
+#json-obj {
+    width: 45%;
+    height: 100%;
+    float: left;
+    display: flex;
+    justify-content: center;
+}
+
+.warning-message {
+    color: red;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    align-self: center;
+}
+
+.childs {
+    margin-left: 10%;
+}
+
+/*+ no-beautify */
+.clearfix:after {
+    content: "."; /* добавить содержимое: "." */
+    display: block;  /* сделать блоком, т.к. inline не может иметь clear */
+    clear: both;  /* с обеих сторон clear */
+    visibility: hidden; /* сделать невидимым, зачем нам точка внизу? */
+    height: 0;  /* сделать высоту 0, чтобы не занимал место */
+}
