@@ -1,3 +1,7 @@
+* {
+    font-family: sans-serif;
+}
+
 html, body {
     height: 100%;
 }
@@ -33,7 +37,6 @@ html, body {
     height: 100%;
     float: left;
     display: flex;
-    justify-content: center;
 }
 
 .warning-message {
@@ -44,8 +47,75 @@ html, body {
     align-self: center;
 }
 
-.childs {
-    margin-left: 10%;
+.children {
+}
+
+.node-head {
+    position: relative;
+    margin: 10px auto;
+}
+
+.type-indicator:before {
+    content: '●';
+}
+
+.type-indicator {
+    width: 10px;
+    height: 100%;
+    float: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.content {
+    margin-left: 20px;
+    float: left;
+}
+
+.type-indicator.string {
+    color: green;
+}
+
+.type-indicator.number {
+    color: blue;
+}
+
+.type-indicator.boolean {
+    color: yellow;
+}
+
+.type-indicator.null {
+    color: red;
+}
+
+.type-indicator.array:before {
+    content: url("images/array.png");
+}
+
+.type-indicator.object:before {
+    content: url("images/bracket.png");
+    margin-left: -3px;
+}
+
+.spoiler {
+    background-image: url("images/minus.png");
+    background-size: 16px 16px;
+    float: left;
+    margin-left: -25px;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    cursor: pointer;
+}
+
+.minimized .spoiler {
+    background-image: url("images/plus.png");
+}
+
+.minimized .children {
+    display: none;
 }
 
 /*+ no-beautify */
