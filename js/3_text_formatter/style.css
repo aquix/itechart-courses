@@ -1,0 +1,34 @@
+body {
+    width: 100%;
+}
+
+.user-input {
+    float: left;
+    margin-right: 100px;
+    width: 45%;
+}
+
+.output {
+    float: left;
+    width: 45%;
+}
+
+textarea {
+    display: block;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 500px;
+}
+
+.option {
+    margin: 20px auto;
+}
+
+/*+ no-beautify */
+.clearfix:after {
+    content: "."; /* добавить содержимое: "." */
+    display: block;  /* сделать блоком, т.к. inline не может иметь clear */
+    clear: both;  /* с обеих сторон clear */
+    visibility: hidden; /* сделать невидимым, зачем нам точка внизу? */
+    height: 0;  /* сделать высоту 0, чтобы не занимал место */
+}

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text Formatter</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="clearfix">
+    <div class="user-input">
+        <div>
+            <label for="input-area">Enter text here</label>
+            <textarea name="Input" id="input-area" wrap="off"></textarea>
+        </div>
+        <div class="option">
+            <label for="options-select">Format options</label>
+            <select name="options-select" id="options-select">
+                <option value="none" selected>No wrap</option>
+                <option value="word">Word wrap</option>
+                <option value="sentence">Sentence wrap</option>
+                <option value="symbol">Symbol wrap</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="lines-count">Number of lines</label>
+            <input type="number" id="lines-count" value="0">
+        </div>
+        <div class="btn-wrap">
+            <button id="format-btn">Format!</button>
+        </div>
+    </div>
+    <div class="output">
+        <label for="output-area">Result:</label>
+        <textarea name="Output" id="output-area" wrap="off"></textarea>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+                ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+</body>
+</html>
