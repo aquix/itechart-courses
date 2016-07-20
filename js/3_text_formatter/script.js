@@ -8,13 +8,16 @@
 
     function formatText (text, wrapOption, linesCount, maxLength) {
         text = text || '';
-        maxLength = maxLength || document.getElementById('output-area').cols;
+        maxLength = maxLength || 50;
 
         var formattedText,
             lines,
             regExp,
-            currentLine,
-            words;
+            currentLine = '',
+            words,
+            i,
+            word,
+            formattedTextParts;
 
         switch (wrapOption) {
             case WrapOptions.SENTENCE:
@@ -29,7 +32,23 @@
                 formattedText = text;
                 break;
             case WrapOptions.WORD:
-                formattedText = text;
+                formattedTextParts = [];
+                words = text.match(/\S+\s?/g).reverse();
+
+                while (words.length != 0) {
+                    word = words.pop();
+                    // + 1 considers space on the end of each word
+                    if (currentLine.length + word.length > maxLength + 1) {
+                        words.push(word);
+                        // Cut last space
+                        formattedTextParts.push(currentLine.slice(0, -1));
+                        currentLine = '';
+                    } else {
+                        currentLine += word;
+                    }
+                }
+
+                formattedText = formattedTextParts.join('\n');
                 break;
         }
 
@@ -44,9 +63,11 @@
     document.getElementById('format-btn').onclick = function () {
         var text = document.getElementById('input-area').value,
             wrapOption = document.getElementById('options-select').value,
-            linesCount = document.getElementById('lines-count').value,
+            linesCount = parseInt(document.getElementById('lines-count').value),
+            maxLength = parseInt(document.getElementById('max-line-length').value) ||
+                        document.getElementById('output-area').cols,
             formattedText;
-        formattedText = formatText(text, wrapOption, linesCount);
+        formattedText = formatText(text, wrapOption, linesCount, maxLength);
         document.getElementById('output-area').value = formattedText;
 
     };

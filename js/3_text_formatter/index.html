@@ -28,13 +28,17 @@
             <label for="lines-count">Number of lines</label>
             <input type="number" id="lines-count" value="0">
         </div>
+        <div class="option">
+            <label for="max-line-length">Max line length</label>
+            <input type="number" id="max-line-length" value="0">
+        </div>
         <div class="btn-wrap">
             <button id="format-btn">Format!</button>
         </div>
     </div>
     <div class="output">
         <label for="output-area">Result:</label>
-        <textarea name="Output" id="output-area" wrap="off"></textarea>
+        <textarea name="Output" id="output-area" wrap="off" cols="200"></textarea>
     </div>
 
     <script src="script.js"></script>
