@@ -48,6 +48,10 @@
 
         divChildren.classList.add('children');
 
+        // Add more indent for children
+        var margin = parseFloat(divChildren.style.marginLeft) || 0;
+        divChildren.style.marginLeft = (margin + 15) + "px";
+
         div.appendChild(buildHeadView(key, type));
         div.appendChild(divChildren);
 
