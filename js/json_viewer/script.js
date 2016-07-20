@@ -62,7 +62,7 @@
         if (Array.isArray(obj)) {
             for (i = 0; i < obj.length; i++) {
                 child = obj[i];
-                if (typeof child === 'object') {
+                if (typeof child === 'object' && child !== null) {
                     divChildren.appendChild(buildJsonTree(obj[i], i));
                 } else {
                     divChildren.appendChild(buildPrimitiveView(i, obj[i]));
@@ -74,7 +74,7 @@
             for (prop in obj) {
                 if (obj.hasOwnProperty(prop)) {
                     child = obj[prop];
-                    if (typeof child === 'object') {
+                    if (typeof child === 'object' && child !== null) {
                         divChildren.appendChild(buildJsonTree(obj[prop], prop));
                     } else {
                         divChildren.appendChild(buildPrimitiveView(prop, obj[prop]));
@@ -89,7 +89,7 @@
 
         // Add more indent for children
         margin = parseFloat(divChildren.style.marginLeft) || 0;
-        divChildren.style.marginLeft = (margin + 15) + "px";
+        divChildren.style.marginLeft = (margin + 20) + "px";
 
         div.appendChild(buildHeadView(key, type));
         div.appendChild(divChildren);
