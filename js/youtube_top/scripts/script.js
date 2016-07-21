@@ -31,28 +31,24 @@
         // Bind listeners to slider
         slider.onmousedown = function (e) {
             e.preventDefault();
-            slider.style.zIndex = -1;
+
+            slider.onclick = function () {}
             window.onmousemove = sliderMove;
             console.log('mouse down');
         };
 
         window.onmouseup = function () {
-            slider.style.zIndex = 0;
             console.log('mouse up');
-            window.onmousemove = function () {
-            }
+            window.onmousemove = function () {};
         };
-
-        window.onclick = function(e) {
-            console.log(e);
-        }
     }
 
     function sliderMove(e) {
+        document.querySelector('.slider').onclick = function(e) {
+            e.preventDefault();
+        };
+
         var slider = document.querySelector('.slider');
-        if (e.movementX < 0) {
-            debugger
-        }
         var sliderOffsetLeft = slider.offsetLeft + e.movementX;
         slider.style.left = sliderOffsetLeft + 'px';
         console.log(e);
