@@ -1,0 +1,13 @@
+.preview {
+    margin: 0 20px;
+    float: left;
+}
+
+/*+ no-beautify */
+.clearfix:after {
+    content: "."; /* добавить содержимое: "." */
+    display: block;  /* сделать блоком, т.к. inline не может иметь clear */
+    clear: both;  /* с обеих сторон clear */
+    visibility: hidden; /* сделать невидимым, зачем нам точка внизу? */
+    height: 0;  /* сделать высоту 0, чтобы не занимал место */
+}
