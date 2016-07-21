@@ -50,6 +50,10 @@ class DateFormatter {
     }
 
     format(formatString) {
+        if (!formatString) {
+            formatString = 'DD-MM-YYYY';
+        }
+        
         let result = [];
         let tokenStart = 0;
         let tokenEnd = 1;
