@@ -1,6 +1,28 @@
+.slider-container {
+    position: relative;
+    width: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+
+.slider {
+    white-space:nowrap;
+    position: relative;
+}
+
 .preview {
     margin: 0 20px;
-    float: left;
+    width: 320px;
+    border: 1px solid;
+    display: inline-block;
+    white-space: normal;
+    position: relative;
+    vertical-align: top;
+}
+
+.title {
+    overflow: hidden;
 }
 
 /*+ no-beautify */

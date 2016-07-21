@@ -1,4 +1,4 @@
-function YoutubeService() {
+function YoutubeService()   {
     var key = 'AIzaSyCKMgvNd_gAxe_ugn9IqIqLCzlw4hfVTiA';
     var watchLink = 'https://www.youtube.com/watch?v=';
 
@@ -32,7 +32,7 @@ function YoutubeService() {
         for (i = 0; i < response.items.length; i++) {
             item = response.items[i];
             result = {
-                snippet: item.snippet.title,
+                title: item.snippet.title,
                 img: item.snippet.thumbnails.medium.url,
                 link: watchLink + item.id
             };
