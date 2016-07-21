@@ -1,7 +1,7 @@
 (function () {
     var yservice = new YoutubeService();
     var text = '';
-    yservice.getTopViewed(20, buildSlider);
+    yservice.getTopViewed(10, buildSlider);
 
     function buildSlider(previews) {
         var slider = document.querySelector('.slider'),
@@ -34,11 +34,11 @@
 
             slider.onclick = function () {}
             window.onmousemove = sliderMove;
-            console.log('mouse down');
         };
 
-        window.onmouseup = function () {
-            console.log('mouse up');
+        window.onmouseup = function (e) {
+            console.log(e);
+            sliderRelease(e);
             window.onmousemove = function () {};
         };
     }
@@ -51,7 +51,49 @@
         var slider = document.querySelector('.slider');
         var sliderOffsetLeft = slider.offsetLeft + e.movementX;
         slider.style.left = sliderOffsetLeft + 'px';
-        console.log(e);
+    }
+
+    function sliderRelease(e) {
+        var slider = document.querySelector('.slider'),
+            leftOffset = parseInt(slider.style.left || getComputedStyle(slider).left),
+            width = parseInt(getComputedStyle(slider).width);
+
+        var previews = slider.children;
+        var previewWidth = parseInt(getComputedStyle(previews[0]).width);
+        var previewIndent = parseInt(getComputedStyle(previews[0]).marginLeft) +
+            parseInt(getComputedStyle(previews[0]).marginRight);
+        var fullWidth = (previewWidth + previewIndent) * previews.length;
+        var rightLimit = width - fullWidth;
+
+        var interval;
+        if (leftOffset > 0) {
+            interval = setInterval(movingLeft, 1);
+        } else if (leftOffset < rightLimit) {
+            interval = setInterval(movingRight, 1);
+        }
+
+        function movingLeft () {
+            if (leftOffset <= 0) {
+                leftOffset = 0;
+                slider.style.left = leftOffset + 'px';
+                clearInterval(interval)
+            } else {
+                leftOffset -= 10;
+                slider.style.left = leftOffset + 'px';
+            }
+        }
+
+        function movingRight () {
+            debugger
+            if (leftOffset >= rightLimit) {
+                leftOffset = rightLimit;
+                slider.style.left = leftOffset + 'px';
+                clearInterval(interval)
+            } else {
+                leftOffset += 10;
+                slider.style.left = leftOffset + 'px';
+            }
+        }
     }
 
     function createLink(href, inner) {
