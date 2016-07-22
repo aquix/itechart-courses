@@ -11,18 +11,34 @@
     function Slider() {
         var slider,
             previews,
-            previewFullWidth,
+            previewWidth,
+            previewMargin,
             sliderVisibleWidth,
-            sliderFullWidth;
+            sliderFullWidth,
+            visiblePreviewsCount;
+
+        var MIN_PREVIEW_MARGIN = 10;
 
         function calcSizes() {
             sliderVisibleWidth = parseInt(getComputedStyle(slider).width);
-
             var previewWidth = parseInt(getComputedStyle(previews[0]).width);
-            var previewIndent = parseInt(getComputedStyle(previews[0]).marginLeft) +
-                parseInt(getComputedStyle(previews[0]).marginRight);
 
-            previewFullWidth = previewWidth + previewIndent;
+            // Calculate number of visible previews
+            visiblePreviewsCount = 0;
+            while (visiblePreviewsCount * (previewWidth + 2 * MIN_PREVIEW_MARGIN) <= sliderVisibleWidth) {
+                visiblePreviewsCount++;
+            }
+            visiblePreviewsCount--;
+            console.log(visiblePreviewsCount);
+            debugger
+
+            previewMargin = Math.floor((sliderVisibleWidth / visiblePreviewsCount - previewWidth) / 2);
+            for (var i = 0; i < previews.length; i++) {
+                previews[i].style.marginLeft = previewMargin + 'px';
+                previews[i].style.marginRight = previewMargin + 'px';
+            }
+
+            var previewFullWidth = previewWidth + previewMargin * 2;
             sliderFullWidth = previewFullWidth * previews.length;
         }
 
@@ -70,6 +86,10 @@
                 sliderRelease(e);
                 window.onmousemove = function () {};
             };
+
+            window.onresize = function () {
+                calcSizes();
+            }
         };
 
         function sliderMove(e) {
