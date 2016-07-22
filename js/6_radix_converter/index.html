@@ -5,6 +5,24 @@
     <title>Title</title>
 </head>
 <body>
+    <div>
+        <label for="input">Enter number:</label>
+        <input id='input' type="text" value="100">
+    </div>
+    <div>
+        <label for="radix-from">From:</label>
+        <input type="number" max="36" min="2" id="radix-from" value="10">
+        <label for="radix-to">:</label>
+        <input type="number" max="36" min="2" id="radix-to" value="2">
+    </div>
+    <div>
+        <button id="convert-btn">Convert!</button>
+    </div>
+    <div id="result">
 
+    </div>
+
+    <script src="radix_converter.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
