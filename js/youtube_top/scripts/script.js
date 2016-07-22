@@ -103,48 +103,61 @@
         }
 
         function sliderRelease(e) {
-            var leftOffset = parseInt(slider.style.left || getComputedStyle(slider).left);
-            var rightLimit = sliderVisibleWidth - sliderFullWidth;
+            var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
+            var rightLimit = sliderFullWidth - sliderVisibleWidth;
+            var elementToScroll;
 
-            var interval;
-
-            if (leftOffset >= 0) {
-                scrollTo(0, leftOffset);
-            } else if (leftOffset <= rightLimit) {
-                var elementToScroll = previews.length - visiblePreviewsCount;
-                scrollTo(elementToScroll, leftOffset);
+            if (leftOffset <= 0) {
+                elementToScroll = 0;
+            } else if (leftOffset >= rightLimit) {
+                elementToScroll = previews.length - visiblePreviewsCount;
+            } else {
+                var borderPos = leftOffset;
+                var leftPreview = 0;
+                var rightPreview;
+                while (borderPos >= previewFullWidth) {
+                    borderPos -= previewFullWidth;
+                    leftPreview++;
+                }
+                rightPreview = leftPreview + 1;
+                if (borderPos < previewFullWidth / 2) {
+                    elementToScroll = leftPreview;
+                } else {
+                    elementToScroll = rightPreview;
+                }
             }
+            scrollTo(elementToScroll, leftOffset);
         }
 
         // Scrolls slider to index-s preview
         function scrollTo(index, leftOffset) {
-            var posToScroll = -index * previewFullWidth;
+            var posToScroll = index * previewFullWidth;
 
-            if (leftOffset > posToScroll) {
+            if (leftOffset < posToScroll) {
                 interval = setInterval(movingLeft, 1);
             } else {
                 interval = setInterval(movingRight, 1);
             }
 
             function movingLeft () {
-                if (leftOffset <= posToScroll) {
+                if (leftOffset >= posToScroll) {
                     leftOffset = posToScroll;
-                    slider.style.left = leftOffset + 'px';
+                    slider.style.left = -leftOffset + 'px';
                     clearInterval(interval)
                 } else {
-                    leftOffset -= 10;
-                    slider.style.left = leftOffset + 'px';
+                    leftOffset += 10;
+                    slider.style.left = -leftOffset + 'px';
                 }
             }
 
             function movingRight () {
-                if (leftOffset >= posToScroll) {
+                if (leftOffset <= posToScroll) {
                     leftOffset = posToScroll;
-                    slider.style.left = leftOffset + 'px';
+                    slider.style.left = -leftOffset + 'px';
                     clearInterval(interval)
                 } else {
-                    leftOffset += 10;
-                    slider.style.left = leftOffset + 'px';
+                    leftOffset -= 10;
+                    slider.style.left = -leftOffset + 'px';
                 }
             }
         }
