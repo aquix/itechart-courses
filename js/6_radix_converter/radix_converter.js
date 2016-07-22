@@ -3,7 +3,6 @@ function RadixConverter() {
         'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
 
     this.anyToDec = function (number, radix) {
-        debugger
         if (radix === undefined) {
             radix = 2;
         }
@@ -22,6 +21,28 @@ function RadixConverter() {
         }
 
         return result;
+    };
+
+    this.decToAny = function (number, radix) {
+        debugger
+        var result = [],
+            decNumber = parseInt(number.reverse().join(''));
+
+        if (isNaN(decNumber)) {
+            throw new TypeError(number.reverse().join('') + ' isn\'t 10-radix number');
+        }
+
+        while (true) {
+            result.push(decNumber % radix);
+
+            if (Math.floor(decNumber / radix) === 0) {
+                break;
+            }
+
+            decNumber = Math.floor(decNumber / radix);
+        }
+
+        return result.reverse().join('');
     }
 }
 
