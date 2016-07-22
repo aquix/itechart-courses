@@ -1,3 +1,7 @@
+* {
+    font-family: Calibri;
+}
+
 .slider-container {
     position: relative;
     width: 70%;
@@ -15,11 +19,29 @@
 .preview {
     margin: 0 20px;
     width: 320px;
-    border: 1px solid;
     display: inline-block;
     white-space: normal;
     position: relative;
     vertical-align: top;
+}
+
+.play {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    background-image: url("../images/play.png");
+    background-size: 64px 45px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin: 0 auto;
+    top: 64px;
+    width: 64px;
+    height: 45px;
+    pointer-events: none;
+}
+
+.preview:hover .play {
+    opacity: 1;
 }
 
 .title {
@@ -27,20 +49,29 @@
 }
 
 .btn-container {
-    width: 100%;
-    display: flex;
+    display: table;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
-.slider-btn {
-    float: left;
+.slider-dot {
+    top: -5px;
+    width: 11px;
+    height: 11px;
+    margin: 0 4px;
+    position: relative;
     border-radius: 100%;
-    background-color: red;
-    width: 50px;
-    height: 50px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-.slider-btn.active {
-    background-color: green;
+.slider-dot.active {
+    background-color: #00CED1;
+}
+
+.slider-dot:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 /*+ no-beautify */

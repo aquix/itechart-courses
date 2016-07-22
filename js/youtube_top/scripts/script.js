@@ -14,9 +14,9 @@
             previewWidth,
             previewMargin,
             previewFullWidth,
-            sliderVisibleWidth,
+            pageWidth,
             sliderFullWidth,
-            visiblePreviewsCount,
+            pageSize,
             container,
             buttons,
             currentFirstPreview;
@@ -26,17 +26,17 @@
         function redraw() {
             var i;
 
-            sliderVisibleWidth = parseInt(getComputedStyle(slider).width);
+            pageWidth = parseInt(getComputedStyle(slider).width);
             previewWidth = parseInt(getComputedStyle(previews[0]).width);
 
             // Calculate number of visible previews
-            visiblePreviewsCount = 0;
-            while (visiblePreviewsCount * (previewWidth + 2 * MIN_PREVIEW_MARGIN) <= sliderVisibleWidth) {
-                visiblePreviewsCount++;
+            pageSize = 0;
+            while (pageSize * (previewWidth + 2 * MIN_PREVIEW_MARGIN) <= pageWidth) {
+                pageSize++;
             }
-            visiblePreviewsCount--;
+            pageSize--;
 
-            previewMargin = Math.floor((sliderVisibleWidth / visiblePreviewsCount - previewWidth) / 2);
+            previewMargin = Math.floor((pageWidth / pageSize - previewWidth) / 2);
             for (i = 0; i < previews.length; i++) {
                 previews[i].style.marginLeft = previewMargin + 'px';
                 previews[i].style.marginRight = previewMargin + 'px';
@@ -68,12 +68,14 @@
                 img,
                 link,
                 title,
-                i;
+                i,
+                playBtn;
 
             slider = createDiv('slider');
 
             for (i = 0; i < previewsData.length; i++) {
                 preview = createDiv('preview');
+                playBtn = createDiv('play');
 
                 img = document.createElement('img');
                 img.src = previewsData[i].img;
@@ -84,6 +86,7 @@
 
                 preview.appendChild(link);
                 preview.appendChild(title);
+                preview.appendChild(playBtn);
 
                 slider.appendChild(preview);
             }
@@ -121,23 +124,23 @@
 
         function sliderRelease() {
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
-            var rightLimit = sliderFullWidth - sliderVisibleWidth;
+            var rightLimit = sliderFullWidth - pageWidth;
             var elementToScroll;
 
             if (leftOffset <= 0) {
                 elementToScroll = 0;
             } else if (leftOffset >= rightLimit) {
-                elementToScroll = previews.length - visiblePreviewsCount;
+                elementToScroll = previews.length - pageSize;
             } else {
                 var borderPos = leftOffset;
                 var leftPreview = 0;
                 var rightPreview;
-                while (borderPos >= previewFullWidth) {
-                    borderPos -= previewFullWidth;
-                    leftPreview++;
+                while (borderPos >= pageWidth) {
+                    borderPos -= pageWidth;
+                    leftPreview += pageSize;
                 }
-                rightPreview = leftPreview + 1;
-                if (borderPos < previewFullWidth / 2) {
+                rightPreview = leftPreview + pageSize;
+                if (borderPos < pageWidth / 2) {
                     elementToScroll = leftPreview;
                 } else {
                     elementToScroll = rightPreview;
@@ -164,7 +167,7 @@
                 buttons[j].classList.remove('active');
             }
             var currentPage = getPage(index);
-            currentFirstPreview = currentPage * visiblePreviewsCount;
+            currentFirstPreview = currentPage * pageSize;
             buttons[currentPage].classList.add('active');
 
             function movingLeft () {
@@ -191,16 +194,16 @@
         }
 
         function buildButtons() {
-            var buttonsCount = Math.ceil(previews.length / visiblePreviewsCount),
+            var buttonsCount = Math.ceil(previews.length / pageSize),
                 button,
                 i;
 
             buttons = [];
             for (i = 0; i < buttonsCount; i++) {
-                button = createDiv('slider-btn');
+                button = createDiv('slider-dot');
                 (function (i) {
                    button.onclick = function () {
-                       scrollTo(i * visiblePreviewsCount);
+                       scrollTo(i * pageSize);
                    };
                 }(i));
                 buttons.push(button);
@@ -208,12 +211,12 @@
 
             // Last button shoudn't scroll out of slider
             buttons[buttons.length - 1].onclick = function () {
-                scrollTo(previews.length - visiblePreviewsCount);
+                scrollTo(previews.length - pageSize);
             };
         }
 
         function getPage(element) {
-            return Math.floor(element / visiblePreviewsCount);
+            return Math.floor((element + pageSize - 1) / pageSize);
         }
     }
 
