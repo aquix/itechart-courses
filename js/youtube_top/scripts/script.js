@@ -13,6 +13,7 @@
             previews,
             previewWidth,
             previewMargin,
+            previewFullWidth,
             sliderVisibleWidth,
             sliderFullWidth,
             visiblePreviewsCount;
@@ -21,7 +22,7 @@
 
         function calcSizes() {
             sliderVisibleWidth = parseInt(getComputedStyle(slider).width);
-            var previewWidth = parseInt(getComputedStyle(previews[0]).width);
+            previewWidth = parseInt(getComputedStyle(previews[0]).width);
 
             // Calculate number of visible previews
             visiblePreviewsCount = 0;
@@ -38,7 +39,7 @@
                 previews[i].style.marginRight = previewMargin + 'px';
             }
 
-            var previewFullWidth = previewWidth + previewMargin * 2;
+            previewFullWidth = previewWidth + previewMargin * 2;
             sliderFullWidth = previewFullWidth * previews.length;
         }
 
@@ -106,15 +107,28 @@
             var rightLimit = sliderVisibleWidth - sliderFullWidth;
 
             var interval;
-            if (leftOffset > 0) {
+
+            if (leftOffset >= 0) {
+                scrollTo(0, leftOffset);
+            } else if (leftOffset <= rightLimit) {
+                var elementToScroll = previews.length - visiblePreviewsCount;
+                scrollTo(elementToScroll, leftOffset);
+            }
+        }
+
+        // Scrolls slider to index-s preview
+        function scrollTo(index, leftOffset) {
+            var posToScroll = -index * previewFullWidth;
+
+            if (leftOffset > posToScroll) {
                 interval = setInterval(movingLeft, 1);
-            } else if (leftOffset < rightLimit) {
+            } else {
                 interval = setInterval(movingRight, 1);
             }
 
             function movingLeft () {
-                if (leftOffset <= 0) {
-                    leftOffset = 0;
+                if (leftOffset <= posToScroll) {
+                    leftOffset = posToScroll;
                     slider.style.left = leftOffset + 'px';
                     clearInterval(interval)
                 } else {
@@ -124,8 +138,8 @@
             }
 
             function movingRight () {
-                if (leftOffset >= rightLimit) {
-                    leftOffset = rightLimit;
+                if (leftOffset >= posToScroll) {
+                    leftOffset = posToScroll;
                     slider.style.left = leftOffset + 'px';
                     clearInterval(interval)
                 } else {
@@ -133,13 +147,6 @@
                     slider.style.left = leftOffset + 'px';
                 }
             }
-        }
-
-        // Scrolls slider to index-s preview
-        function scrollTo(index, slider, leftOffset) {
-
-
-
         }
     }
 
