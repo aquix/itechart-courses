@@ -5,7 +5,7 @@
     function init (previews) {
         var slider = new Slider();
         slider.buildSlider(previews);
-        slider.insertSlider(document.querySelector('.slider-container'));
+        slider.insertSlider(document.querySelector('.outer-container'));
     }
 
     function Slider() {
@@ -16,11 +16,16 @@
             previewFullWidth,
             sliderVisibleWidth,
             sliderFullWidth,
-            visiblePreviewsCount;
+            visiblePreviewsCount,
+            container,
+            buttons,
+            currentFirstPreview;
 
         var MIN_PREVIEW_MARGIN = 10;
 
-        function calcSizes() {
+        function redraw() {
+            var i;
+
             sliderVisibleWidth = parseInt(getComputedStyle(slider).width);
             previewWidth = parseInt(getComputedStyle(previews[0]).width);
 
@@ -30,22 +35,32 @@
                 visiblePreviewsCount++;
             }
             visiblePreviewsCount--;
-            console.log(visiblePreviewsCount);
-            debugger
 
             previewMargin = Math.floor((sliderVisibleWidth / visiblePreviewsCount - previewWidth) / 2);
-            for (var i = 0; i < previews.length; i++) {
+            for (i = 0; i < previews.length; i++) {
                 previews[i].style.marginLeft = previewMargin + 'px';
                 previews[i].style.marginRight = previewMargin + 'px';
             }
 
             previewFullWidth = previewWidth + previewMargin * 2;
             sliderFullWidth = previewFullWidth * previews.length;
+
+            buildButtons();
+            container.querySelector('.btn-container').innerHTML = "";
+            for (i = 0; i < buttons.length; i++) {
+                container.querySelector('.btn-container').appendChild(buttons[i]);
+            }
+            scrollTo(currentFirstPreview);
         }
 
         this.insertSlider = function(parent) {
-            parent.appendChild(slider);
-            calcSizes();
+            var sliderContainer = createDiv('slider-container'),
+                buttonContainer = createDiv('btn-container');
+            sliderContainer.appendChild(slider);
+            container = parent;
+            container.appendChild(sliderContainer);
+            container.appendChild(buttonContainer);
+            redraw();
         };
 
         this.buildSlider = function(previewsData) {
@@ -74,6 +89,8 @@
             }
 
             previews = slider.children;
+            currentFirstPreview = 0;
+            // Create navigation buttons
 
             // Bind listeners to slider
             slider.onmousedown = function (e) {
@@ -83,13 +100,13 @@
             };
 
             window.onmouseup = function (e) {
-                console.log(e);
                 sliderRelease(e);
                 window.onmousemove = function () {};
             };
 
             window.onresize = function () {
-                calcSizes();
+                redraw();
+                // sliderRelease();
             }
         };
 
@@ -102,7 +119,7 @@
             slider.style.left = sliderOffsetLeft + 'px';
         }
 
-        function sliderRelease(e) {
+        function sliderRelease() {
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var rightLimit = sliderFullWidth - sliderVisibleWidth;
             var elementToScroll;
@@ -126,18 +143,29 @@
                     elementToScroll = rightPreview;
                 }
             }
-            scrollTo(elementToScroll, leftOffset);
+            scrollTo(elementToScroll);
         }
 
         // Scrolls slider to index-s preview
-        function scrollTo(index, leftOffset) {
-            var posToScroll = index * previewFullWidth;
+        function scrollTo(index) {
+            console.log(index);
+            var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left)),
+                posToScroll = index * previewFullWidth,
+                interval;
 
             if (leftOffset < posToScroll) {
                 interval = setInterval(movingLeft, 1);
             } else {
                 interval = setInterval(movingRight, 1);
             }
+
+            // Set active class to pressed button
+            for (var j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+            }
+            var currentPage = getPage(index);
+            currentFirstPreview = currentPage * visiblePreviewsCount;
+            buttons[currentPage].classList.add('active');
 
             function movingLeft () {
                 if (leftOffset >= posToScroll) {
@@ -161,8 +189,33 @@
                 }
             }
         }
-    }
 
+        function buildButtons() {
+            var buttonsCount = Math.ceil(previews.length / visiblePreviewsCount),
+                button,
+                i;
+
+            buttons = [];
+            for (i = 0; i < buttonsCount; i++) {
+                button = createDiv('slider-btn');
+                (function (i) {
+                   button.onclick = function () {
+                       scrollTo(i * visiblePreviewsCount);
+                   };
+                }(i));
+                buttons.push(button);
+            }
+
+            // Last button shoudn't scroll out of slider
+            buttons[buttons.length - 1].onclick = function () {
+                scrollTo(previews.length - visiblePreviewsCount);
+            };
+        }
+
+        function getPage(element) {
+            return Math.floor(element / visiblePreviewsCount);
+        }
+    }
 
 
     function createLink(href, inner) {

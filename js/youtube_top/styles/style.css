@@ -4,6 +4,7 @@
     overflow: hidden;
     margin: 0 auto;
     margin-top: 200px;
+    min-width: 360px;
 }
 
 .slider {
@@ -23,6 +24,23 @@
 
 .title {
     overflow: hidden;
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+}
+
+.slider-btn {
+    float: left;
+    border-radius: 100%;
+    background-color: red;
+    width: 50px;
+    height: 50px;
+}
+
+.slider-btn.active {
+    background-color: green;
 }
 
 /*+ no-beautify */
