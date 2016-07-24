@@ -3,20 +3,22 @@ function YoutubeService()   {
     var watchLink = 'https://www.youtube.com/watch?v=';
 
     this.getTopViewed = function(count, callback) {
+        var request = new XMLHttpRequest();
+        var path = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=' +
+            count + '&key=' + key;
+
         if (count === undefined || count <= 0) {
             count = 1;
         }
 
-        var request = new XMLHttpRequest(),
-            path = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=' +
-                count + '&key=' + key,
-            result;
-
         request.onreadystatechange = function() {
-            if (request.readyState === 4) {
-                var results = parseResponse(request.responseText);
+            var results;
+            if(request.readyState === request.readyState) {
+                results = parseResponse(request.responseText);
                 callback(results);
             }
+
+
         };
         request.open('get', path);
         request.send(null);

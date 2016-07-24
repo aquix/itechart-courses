@@ -1,14 +1,23 @@
 function RadixConverter() {
-    var digits = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-        'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ],
-    self = this;
+    var MIN_RADIX = 2;
+    var MAX_RADIX = 36;
+
+    var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+        'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    var self = this;
+
+    var checkRadix = function (radix) {
+        if (radix === undefined || radix < MIN_RADIX || radix > MAX_RADIX) {
+            throw new Error('Incorrect radix: ' + radix);
+        }
+    };
 
     this.anyToDec = function (number, radix) {
-        checkRadix(radix);
+        var result = 0;
+        var i;
+        var decValue;
 
-        var result = 0,
-            i,
-            decValue;
+        checkRadix(radix);
 
         for (i = 0; i < number.length; i++) {
             decValue = digits.indexOf(number[i].toUpperCase());
@@ -28,10 +37,10 @@ function RadixConverter() {
     };
 
     this.decToAny = function (number, radix) {
-        checkRadix(radix);
+        var result = [];
+        var decNumber = parseInt(number.reverse().join(''));
 
-        var result = [],
-            decNumber = parseInt(number.reverse().join(''));
+        checkRadix(radix);
 
         if (isNaN(decNumber)) {
             throw new TypeError(number.reverse().join('') + ' isn\'t 10-radix number');
@@ -60,12 +69,6 @@ function RadixConverter() {
         var decNumber = self.anyToDec(number, radixFrom);
         return self.decToAny(decNumber, radixTo).reverse().join('');
     };
-
-    var checkRadix = function (radix) {
-        if (radix === undefined || radix < 2 || radix > 36) {
-            throw new Error('Incorrect radix: ' + radix);
-        }
-    }
 }
 
 // module.exports = RadixConverter;

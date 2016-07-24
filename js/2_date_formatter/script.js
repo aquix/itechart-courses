@@ -1,5 +1,7 @@
+/* eslint no-undef: 0 */
+
 function printDate(date) {
-    let resultElement = document.getElementById("result");
+    let resultElement = document.getElementById('result');
     resultElement.innerHTML = `Day: ${date.getDay()}, month: ${date.getMonth()}, year: ${date.getYear()}`;
 }
 
@@ -16,8 +18,8 @@ function createDateByString(dateString, formatString) {
 }
 
 function parseDate() {
-    let dateString = document.getElementById("date-input").value;
-    let formatString = document.getElementById("format-input").value || undefined;
+    let dateString = document.getElementById('date-input').value;
+    let formatString = document.getElementById('format-input').value || undefined;
 
     return createDateByString(dateString, formatString);
 }
@@ -29,11 +31,11 @@ document.getElementById('parse-btn').onclick = () => {
 
 document.getElementById('reformat-btn').onclick = () => {
     let date = parseDate();
-    let reformatString = document.getElementById("reformat-input").value;
-    document.getElementById("result").innerHTML = date.format(reformatString);
+    let reformatString = document.getElementById('reformat-input').value;
+    document.getElementById('result').innerHTML = date.format(reformatString);
 };
 
 document.getElementById('fromnow-btn').onclick = () => {
     let date = parseDate();
-    document.getElementById("result").innerHTML = date.fromNow();;
+    document.getElementById('result').innerHTML = date.fromNow();
 };

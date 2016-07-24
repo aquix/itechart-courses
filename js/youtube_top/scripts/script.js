@@ -1,4 +1,5 @@
 (function () {
+    /* eslint no-undef: 0 */
     var yservice = new YoutubeService();
     yservice.getTopViewed(10, init);
 
@@ -8,7 +9,7 @@
         slider.insertSlider(document.querySelector('.outer-container'));
     }
 
-    function Slider() {
+    function Slider () {
         var slider,
             previews,
             previewWidth,
@@ -23,7 +24,7 @@
 
         var MIN_PREVIEW_MARGIN = 10;
 
-        function redraw() {
+        function redraw () {
             var i;
 
             pageWidth = parseInt(getComputedStyle(slider).width);
@@ -46,16 +47,17 @@
             sliderFullWidth = previewFullWidth * previews.length;
 
             buildButtons();
-            container.querySelector('.btn-container').innerHTML = "";
+            container.querySelector('.btn-container').innerHTML = '';
             for (i = 0; i < buttons.length; i++) {
                 container.querySelector('.btn-container').appendChild(buttons[i]);
             }
             scrollTo(currentFirstPreview);
         }
 
-        this.insertSlider = function(parent) {
-            var sliderContainer = createDiv('slider-container'),
-                buttonContainer = createDiv('btn-container');
+        this.insertSlider = function (parent) {
+            var sliderContainer = createDiv('slider-container');
+            var buttonContainer = createDiv('btn-container');
+
             sliderContainer.appendChild(slider);
             container = parent;
             container.appendChild(sliderContainer);
@@ -63,7 +65,7 @@
             redraw();
         };
 
-        this.buildSlider = function(previewsData) {
+        this.buildSlider = function (previewsData) {
             var preview,
                 img,
                 link,
@@ -109,37 +111,40 @@
 
             window.onresize = function () {
                 redraw();
-                // sliderRelease();
-            }
+            };
         };
 
-        function sliderMove(e) {
-            slider.onclick = function(e) {
+        function sliderMove (e) {
+            var sliderOffsetLeft;
+
+            slider.onclick = function (e) {
                 e.preventDefault();
             };
 
-            var sliderOffsetLeft = slider.offsetLeft + e.movementX;
+            sliderOffsetLeft = slider.offsetLeft + e.movementX;
             slider.style.left = sliderOffsetLeft + 'px';
         }
 
-        function sliderRelease() {
+        function sliderRelease () {
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var rightLimit = sliderFullWidth - pageWidth;
             var elementToScroll;
+            var borderPos = leftOffset;
+            var leftPreview = 0;
+            var rightPreview;
 
             if (leftOffset <= 0) {
                 elementToScroll = 0;
             } else if (leftOffset >= rightLimit) {
                 elementToScroll = previews.length - pageSize;
             } else {
-                var borderPos = leftOffset;
-                var leftPreview = 0;
-                var rightPreview;
                 while (borderPos >= pageWidth) {
                     borderPos -= pageWidth;
                     leftPreview += pageSize;
                 }
+
                 rightPreview = leftPreview + pageSize;
+
                 if (borderPos < pageWidth / 2) {
                     elementToScroll = leftPreview;
                 } else {
@@ -150,11 +155,12 @@
         }
 
         // Scrolls slider to index-s preview
-        function scrollTo(index) {
-            console.log(index);
-            var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left)),
-                posToScroll = index * previewFullWidth,
-                interval;
+        function scrollTo (index) {
+            var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
+            var posToScroll = index * previewFullWidth;
+            var interval;
+            var j;
+            var currentPage;
 
             if (leftOffset < posToScroll) {
                 interval = setInterval(movingLeft, 1);
@@ -163,10 +169,10 @@
             }
 
             // Set active class to pressed button
-            for (var j = 0; j < buttons.length; j++) {
+            for (j = 0; j < buttons.length; j++) {
                 buttons[j].classList.remove('active');
             }
-            var currentPage = getPage(index);
+            currentPage = getPage(index);
             currentFirstPreview = currentPage * pageSize;
             buttons[currentPage].classList.add('active');
 
@@ -174,7 +180,7 @@
                 if (leftOffset >= posToScroll) {
                     leftOffset = posToScroll;
                     slider.style.left = -leftOffset + 'px';
-                    clearInterval(interval)
+                    clearInterval(interval);
                 } else {
                     leftOffset += 10;
                     slider.style.left = -leftOffset + 'px';
@@ -185,7 +191,7 @@
                 if (leftOffset <= posToScroll) {
                     leftOffset = posToScroll;
                     slider.style.left = -leftOffset + 'px';
-                    clearInterval(interval)
+                    clearInterval(interval);
                 } else {
                     leftOffset -= 10;
                     slider.style.left = -leftOffset + 'px';
@@ -193,7 +199,7 @@
             }
         }
 
-        function buildButtons() {
+        function buildButtons () {
             var buttonsCount = Math.ceil(previews.length / pageSize),
                 button,
                 i;
@@ -202,9 +208,9 @@
             for (i = 0; i < buttonsCount; i++) {
                 button = createDiv('slider-dot');
                 (function (i) {
-                   button.onclick = function () {
-                       scrollTo(i * pageSize);
-                   };
+                    button.onclick = function () {
+                        scrollTo(i * pageSize);
+                    };
                 }(i));
                 buttons.push(button);
             }
@@ -215,13 +221,12 @@
             };
         }
 
-        function getPage(element) {
+        function getPage (element) {
             return Math.floor((element + pageSize - 1) / pageSize);
         }
     }
 
-
-    function createLink(href, inner) {
+    function createLink (href, inner) {
         var link = document.createElement('a');
         link.href = href;
 
@@ -232,10 +237,9 @@
         return link;
     }
 
-    function createDiv() {
+    function createDiv () {
         var div = document.createElement('div');
         div.classList.add(Array.prototype.slice.call(arguments));
         return div;
     }
-
 }());
