@@ -51,8 +51,6 @@
                     operator = expression[i];
 
                     while (!canPushOperator(operator)) {
-                        operand1 = operands.pop();
-                        operand2 = operands.pop();
                         lastOperator = operators.pop();
                         processOperator(lastOperator);
                     }

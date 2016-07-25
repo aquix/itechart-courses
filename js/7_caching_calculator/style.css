@@ -1,0 +1,11 @@
+.result {
+    color: blue;
+}
+
+li {
+    color: red;
+}
+
+li.cached {
+    color: green;
+}
