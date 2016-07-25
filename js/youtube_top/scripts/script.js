@@ -100,13 +100,13 @@
             // Bind listeners to slider
             slider.onmousedown = function (e) {
                 e.preventDefault();
-                slider.onclick = function () {};
+                slider.onclick = null;
                 window.onmousemove = sliderMove;
             };
 
             window.onmouseup = function (e) {
                 sliderRelease(e);
-                window.onmousemove = function () {};
+                window.onmousemove = null;
             };
 
             window.onresize = function () {

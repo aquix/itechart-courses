@@ -34,7 +34,6 @@
                 } else if (expression[i] === '(') {
                     operators.push(expression[i]);
                 } else if (expression[i] === ')') {
-                    debugger
                     lastOperator = operators.pop();
                     while (lastOperator !== '(') {
                         processOperator(lastOperator);
@@ -94,7 +93,7 @@
 
         function canPushOperator(operator) {
             return operators.length === 0 ||
-                    priority[operator] > priority[operators[operators.length - 1]];
+                    priority[operator] >= priority[operators[operators.length - 1]];
         }
 
         function isDigit(char) {

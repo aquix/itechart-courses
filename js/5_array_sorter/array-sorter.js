@@ -61,8 +61,8 @@ function ArraySorter() {
         }
 
         var medium = Math.ceil(array.length / 2);
-        var arrLeft = this.mergeSort(array.slice(0, medium));
-        var arrRight = this.mergeSort(array.slice(medium, array.length));
+        var arrLeft = self.mergeSort(array.slice(0, medium));
+        var arrRight = self.mergeSort(array.slice(medium, array.length));
 
         return _merge(arrLeft, arrRight);
     };
