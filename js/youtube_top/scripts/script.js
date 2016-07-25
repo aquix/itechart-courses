@@ -20,7 +20,8 @@
             pageSize,
             container,
             buttons,
-            currentFirstPreview;
+            currentFirstPreview,
+            swipeDirection = 0;
 
         var MIN_PREVIEW_MARGIN = 10;
 
@@ -37,7 +38,7 @@
             }
             pageSize--;
 
-            previewMargin = Math.floor((pageWidth / pageSize - previewWidth) / 2);
+            previewMargin = Math.ceil((pageWidth / pageSize - previewWidth) / 2);
             for (i = 0; i < previews.length; i++) {
                 previews[i].style.marginLeft = previewMargin + 'px';
                 previews[i].style.marginRight = previewMargin + 'px';
@@ -47,11 +48,12 @@
             sliderFullWidth = previewFullWidth * previews.length;
 
             buildButtons();
+            scrollTo(currentFirstPreview);
             container.querySelector('.btn-container').innerHTML = '';
             for (i = 0; i < buttons.length; i++) {
                 container.querySelector('.btn-container').appendChild(buttons[i]);
             }
-            scrollTo(currentFirstPreview);
+
         }
 
         this.insertSlider = function (parent) {
@@ -66,12 +68,13 @@
         };
 
         this.buildSlider = function (previewsData) {
-            var preview,
-                img,
-                link,
-                title,
-                i,
-                playBtn;
+            var preview;
+            var img;
+            var link;
+            var title;
+            var i;
+            var playBtn;
+            var resizeTimeout;
 
             slider = createDiv('slider');
 
@@ -102,15 +105,16 @@
                 e.preventDefault();
                 slider.onclick = null;
                 window.onmousemove = sliderMove;
-            };
-
-            window.onmouseup = function (e) {
-                sliderRelease(e);
-                window.onmousemove = null;
+                window.onmouseup = function (e) {
+                    sliderRelease(e);
+                    window.onmousemove = null;
+                    window.onmouseup = null;
+                };
             };
 
             window.onresize = function () {
-                redraw();
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(redraw, 100);
             };
         };
 
@@ -123,15 +127,20 @@
 
             sliderOffsetLeft = slider.offsetLeft + e.movementX;
             slider.style.left = sliderOffsetLeft + 'px';
+
+            if (e.movementX !== 0) {
+                swipeDirection = e.movementX;
+            }
         }
 
-        function sliderRelease () {
+        function sliderRelease (e) {
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var rightLimit = sliderFullWidth - pageWidth;
             var elementToScroll;
             var borderPos = leftOffset;
             var leftPreview = 0;
             var rightPreview;
+            var swipeLength = pageWidth / 4;
 
             if (leftOffset <= 0) {
                 elementToScroll = 0;
@@ -145,10 +154,14 @@
 
                 rightPreview = leftPreview + pageSize;
 
-                if (borderPos < pageWidth / 2) {
-                    elementToScroll = leftPreview;
-                } else {
-                    elementToScroll = rightPreview;
+                if (swipeDirection != 0) {
+                    if (swipeDirection > 0 && borderPos > pageWidth - swipeLength ||
+                        swipeDirection < 0 && borderPos > swipeLength) {
+                        elementToScroll = rightPreview;
+                    } else {
+                        elementToScroll = leftPreview;
+                    }
+                    swipeDirection = 0;
                 }
             }
             scrollTo(elementToScroll);
@@ -156,6 +169,7 @@
 
         // Scrolls slider to index-s preview
         function scrollTo (index) {
+            debugger
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var posToScroll = index * previewFullWidth;
             var interval;

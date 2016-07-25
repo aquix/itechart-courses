@@ -40,7 +40,6 @@ function YoutubeService()   {
             };
             results.push(result);
         }
-        console.log(results);
         return results;
     }
 }
