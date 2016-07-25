@@ -35,7 +35,7 @@ function ArraySorter() {
                 i++;
             }
 
-            while (array[j] > medium) {
+            while (array[j] >= medium) {
                 j--;
             }
 
@@ -46,8 +46,8 @@ function ArraySorter() {
             }
         }
 
-        if (j > left) {
-            _qSort(array, left, j);
+        if (left < i - 1) {
+            _qSort(array, left, i - 1);
         }
 
         if (i < right) {

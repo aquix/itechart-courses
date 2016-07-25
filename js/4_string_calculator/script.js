@@ -2,13 +2,21 @@
     'use strict';
     document.getElementById('calc-btn').onclick = function () {
         var expression = document.getElementById('input-text').value;
+        var calculator;
+        var result;
 
         if (expression.trim() === '') {
             return;
         }
 
-        var calculator = new Calculator();
-        var result = calculator.calcString(expression);
+        calculator = new Calculator();
+
+        try {
+            result = calculator.calcString(expression);
+        } catch  (e) {
+            result = e.message;
+        }
+
         document.getElementById('result').innerHTML = result;
     };
 

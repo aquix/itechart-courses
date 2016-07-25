@@ -1,6 +1,6 @@
 (function () {
     window.onload = function () {
-        document.getElementById('input').value = generateRandArray(100).join(' ');
+        document.getElementById('input').value = generateRandArray(10).join(' ');
     };
 
     document.getElementById('sort-btn').onclick = function () {
@@ -8,6 +8,11 @@
         var array = document.getElementById('input').value.split(' ').map(function (elem) {
             return parseInt(elem);
         });
+
+        if (array.some(isNaN)) {
+            document.getElementById('result').innerHTML = 'Incorrect int array';
+            return;
+        }
 
         var sortMethod;
         switch (document.getElementById('sort-type').value) {
@@ -28,12 +33,11 @@
         }
 
         // Time profiling
-        var startTime = window.performance.now()
+        var startTime = window.performance.now();
         var result = sortMethod(array);
-        var workTime = window.performance.now() - startTime;
+        var workTime = Math.round((window.performance.now() - startTime) * 1000) / 1000;
 
-        document.getElementById('result').innerHTML = 'Result: ' + result + '\nTime: ' + workTime + 'ms';
-        console.log(workTime);
+        document.getElementById('result').innerHTML = 'Result: ' + result + '\nTime: ' + workTime + ' ms';
     };
 
     function generateRandArray(count) {

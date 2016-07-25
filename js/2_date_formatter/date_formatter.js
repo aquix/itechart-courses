@@ -2,12 +2,30 @@
 /* eslint no-magic-numbers: 0 */
 
 class DateFormatter {
+    // Static constructor
+
     constructor(date=new Date()) {
         // If date passed in milliseconds
         if (typeof date === 'number') {
             date = new Date(date);
         }
         this._date = date;
+    }
+
+    static get MAX_YEAR() {
+        return 3000;
+    }
+
+    static get MIN_YEAR() {
+        return 1970;
+    }
+
+    static get MAX_DAY() {
+        return 31;
+    }
+
+    static get MAX_MONTH() {
+        return 12;
     }
 
     asDate() {
@@ -46,7 +64,7 @@ class DateFormatter {
 
         let diffDate = new Date(millisecondsDiff);
 
-        let years = diffDate.getFullYear() - 1970;
+        let years = diffDate.getFullYear() - DateFormatter.MIN_YEAR;
 
         let postfix = inPast ? ' ago' : 'in future';
         return years + ' year(s)' + postfix;
@@ -190,9 +208,7 @@ class DateFormatter {
         for (var format of this._getKnownFormats()) {
             try {
                 return this.parseWithFormat(dateString, format);
-            } catch (e) {
-                continue;
-            }
+            } catch (e) { }
         }
 
         // If no patterns match the date then date is incorrect
@@ -202,7 +218,11 @@ class DateFormatter {
     static _validateTokens(tokens) {
         let day = 1;
         let month = 0;
-        let year = 1970;
+        let year = DateFormatter.MIN_YEAR;
+
+        const FIRST_THOUSAND_PREFIX = 1900;
+        const SECOND_THOUSAND_PREFIX = 2000;
+        const THOUSAND_BORDER = 70;
 
         let cleanDate = {};
         for (var token in tokens) {
@@ -253,12 +273,12 @@ class DateFormatter {
                     throw new InvalidDateStringError(value);
                 }
 
-                    // If year in format YY
+                // If year in format YY
                 if (year < 100) {
-                    if (year >= 70) {
-                        year += 1900;
+                    if (year >= THOUSAND_BORDER) {
+                        year += FIRST_THOUSAND_PREFIX;
                     } else {
-                        year += 2000;
+                        year += SECOND_THOUSAND_PREFIX;
                     }
                 }
 
@@ -277,16 +297,16 @@ class DateFormatter {
     }
 
     static _isMonthCorrect(month) {
-        return month >= 0 && month < 12;
+        return month >= 0 && month < DateFormatter.MAX_MONTH;
     }
 
     static _isDayCorrect(day) {
-        return day > 0 && day < 32;
+        return day > 0 && day <= DateFormatter.MAX_DAY;
     }
 
     static _isYearCorrect(year) {
         // FIX year interval
-        return year >= 1970 && year <= 3000;
+        return year >= this.MIN_YEAR && year <= this.MAX_YEAR;
     }
 
     static _parseTokenValue(token, str, parsePosition) {

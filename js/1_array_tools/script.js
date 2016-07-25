@@ -1,13 +1,26 @@
 (function () {
     let getArray = function() {
         let data = document.getElementById('array-input').value;
-        return data.split(' ').map(parseFloat);
+        let result = data.split(' ').map(parseFloat);
+
+        if (result.some(isNaN)) {
+            throw new TypeError('Incorrect array. Enter float numbers through space');
+        }
+
+        return result;
     };
 
     let processArray = function(func) {
         return function() {
-            let arr = getArray();
-            let result = func(arr);
+            let result;
+
+            try {
+                let arr = getArray();
+                result = func(arr);
+            } catch (e) {
+                result = e.message;
+            }
+
             document.getElementById('result').innerHTML = `Result: ${result}`;
         };
     };

@@ -4,18 +4,18 @@ class ArrayTools {
             return 0;
         }
 
-        let max_subsum = arr[0];
+        let maxSubsum = arr[0];
         for (let i = 0; i < arr.length; i++) {
             let current_sum = 0;
             for (let j = i; j < arr.length; j++) {
                 current_sum += arr[j];
-                if (current_sum > max_subsum) {
-                    max_subsum = current_sum;
+                if (current_sum > maxSubsum) {
+                    maxSubsum = current_sum;
                 }
             }
         }
 
-        return max_subsum;
+        return maxSubsum;
     }
 
     static getMaxSubSum(arr=[]) {

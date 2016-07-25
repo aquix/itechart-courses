@@ -5,6 +5,11 @@ function printDate(date) {
     resultElement.innerHTML = `Day: ${date.getDay()}, month: ${date.getMonth()}, year: ${date.getYear()}`;
 }
 
+function printError(error) {
+    let resultElement = document.getElementById('result');
+    resultElement.innerHTML = `Error: ${error.message}`;
+}
+
 function createDateByString(dateString, formatString) {
     let date;
     // Check if date is in milliseconds
@@ -25,17 +30,28 @@ function parseDate() {
 }
 
 document.getElementById('parse-btn').onclick = () => {
-    let date = parseDate();
-    printDate(date);
+    try {
+        let date = parseDate();
+        printDate(date);
+    } catch (e) {
+        printError(e)
+    }
 };
 
 document.getElementById('reformat-btn').onclick = () => {
-    let date = parseDate();
-    let reformatString = document.getElementById('reformat-input').value;
-    document.getElementById('result').innerHTML = date.format(reformatString);
+    try {
+        let date = parseDate();
+        let reformatString = document.getElementById('reformat-input').value;
+        document.getElementById('result').innerHTML = date.format(reformatString);
+    } catch (e) {
+        printError(e)
+    }
 };
 
 document.getElementById('fromnow-btn').onclick = () => {
-    let date = parseDate();
-    document.getElementById('result').innerHTML = date.fromNow();
+    try {
+        let date = parseDate();
+    } catch (e) {
+        document.getElementById('result').innerHTML = date.fromNow();
+    }
 };
