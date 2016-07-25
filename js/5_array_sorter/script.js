@@ -5,7 +5,7 @@
             return parseInt(elem);
         });
 
-        sorter.quickSort(array);
+        array = sorter.heapSort(array);
         document.getElementById('result').innerHTML = 'Result: ' + array;
     };
 }());
