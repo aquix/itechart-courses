@@ -2,6 +2,8 @@ function YoutubeService()   {
     var key = 'AIzaSyCKMgvNd_gAxe_ugn9IqIqLCzlw4hfVTiA';
     var watchLink = 'https://www.youtube.com/watch?v=';
 
+    var READY_STATUS_CODE = 4;
+
     this.getTopViewed = function(count, callback) {
         var request = new XMLHttpRequest();
         var path = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=' +
@@ -13,12 +15,10 @@ function YoutubeService()   {
 
         request.onreadystatechange = function() {
             var results;
-            if(request.readyState === request.readyState) {
+            if(request.readyState === READY_STATUS_CODE) {
                 results = parseResponse(request.responseText);
                 callback(results);
             }
-
-
         };
         request.open('get', path);
         request.send(null);

@@ -10,6 +10,5 @@
             var result = factorial(bignumber);
             document.getElementById('result').innerHTML = result;
         }, 5);
-
     };
 }());

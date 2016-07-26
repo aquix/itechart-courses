@@ -102,6 +102,7 @@
 
             // Bind listeners to slider
             slider.onmousedown = function (e) {
+                console.log(e);
                 e.preventDefault();
                 slider.onclick = null;
                 window.onmousemove = sliderMove;
@@ -133,7 +134,7 @@
             }
         }
 
-        function sliderRelease (e) {
+        function sliderRelease () {
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var rightLimit = sliderFullWidth - pageWidth;
             var elementToScroll;
@@ -154,7 +155,7 @@
 
                 rightPreview = leftPreview + pageSize;
 
-                if (swipeDirection != 0) {
+                if (swipeDirection !== 0) {
                     if (swipeDirection > 0 && borderPos > pageWidth - swipeLength ||
                         swipeDirection < 0 && borderPos > swipeLength) {
                         elementToScroll = rightPreview;
@@ -169,7 +170,6 @@
 
         // Scrolls slider to index-s preview
         function scrollTo (index) {
-            debugger
             var leftOffset = -(parseInt(slider.style.left || getComputedStyle(slider).left));
             var posToScroll = index * previewFullWidth;
             var interval;
