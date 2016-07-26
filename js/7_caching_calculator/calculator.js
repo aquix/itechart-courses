@@ -15,10 +15,8 @@ function Calculator() {
     this.calcString = function(expression) {
         operands = [];
         operators = [];
-        var parsedResult
+        var parsedResult;
         var operator;
-        var operand1;
-        var operand2;
         var lastOperator;
         var returnObj = {
             result: null,
@@ -75,7 +73,7 @@ function Calculator() {
             if (a > b) {
                 var temp = a;
                 a = b;
-                b = a;
+                b = temp;
             }
         }
 
@@ -83,21 +81,21 @@ function Calculator() {
         result = cache[expression];
         if (result === undefined) {
             switch (operator) {
-                case '+':
-                    result =  a + b;
-                    break;
-                case '-':
-                    result = a - b;
-                    break;
-                case '*':
-                    result =  a * b;
-                    break;
-                case '/':
-                    result = a / b;
-                    break;
-                case '^':
-                    result = Math.pow(a, b);
-                    break;
+            case '+':
+                result =  a + b;
+                break;
+            case '-':
+                result = a - b;
+                break;
+            case '*':
+                result =  a * b;
+                break;
+            case '/':
+                result = a / b;
+                break;
+            case '^':
+                result = Math.pow(a, b);
+                break;
             }
 
             cache[expression] = result;
@@ -134,9 +132,5 @@ function Calculator() {
 
     function isDelimiter(char) {
         return char === ' ' || char === '\t';
-    }
-
-    function isOperator(char) {
-
     }
 }
