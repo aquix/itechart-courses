@@ -1,0 +1,17 @@
+{
+  "name": "functional_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-plugin-mocha": "^4.2.0"
+  }
+}
