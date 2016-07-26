@@ -2,3 +2,4 @@
 .vscode
 .eslintrc.json
 jsconfig.json
+node_modules/
