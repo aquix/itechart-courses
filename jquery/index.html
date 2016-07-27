@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery plugins test</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="task task1">
+        <h1>Task 1 - sorting options in select</h1>
+        <select name="cities" id="cities">
+            <option value="1">Minsk (1)</option>
+            <option value="2">Mogilev (2)</option>
+            <option value="3">Vitebsk (3)</option>
+            <option value="4">Brest (4)</option>
+            <option value="5">Grodno (5)</option>
+            <option value="6">Gomel (6)</option>
+        </select>
+        <button id="sort-btn">Sort options in select</button>
+
+        <label for="sort-key">Sort by:</label>
+        <select name="sort-key" id="sort-key">
+            <option value="value">Value</option>
+            <option value="text" selected="selected">Text</option>
+        </select>
+        <label for="data-type">Data type:</label>
+        <select name="data-type" id="data-type">
+            <option value="number">Number</option>
+            <option value="string" selected="selected">String</option>
+        </select>
+        <label for="desc">Descending</label>
+        <input type="checkbox" id="desc">
+    </div>
+
+    <div class="task task2">
+        <h1>Task 2 - checking visible elements</h1>
+        <button id="inview-btn">Check visible task blocks</button>
+        <ul id="inview-tasks"></ul>
+    </div>
+
+    <script src="js/lib/jquery-3.1.0.min.js"></script>
+    <script src="js/1-select-sorter.js"></script>
+    <script src="js/2-in-view.js"></script>
+    <script src="js/3-tabcontrol.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
