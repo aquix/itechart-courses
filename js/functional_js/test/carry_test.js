@@ -1,5 +1,5 @@
 var assert = require('chai').assert;
-var carry = require('../src/carrying');
+var carry = require('../src/carry');
 
 function sayHello(name, age, greetPhrase) {
     return `Hello, my name is ${name}. I am ${age}. And I think: '${greetPhrase}'.`;
@@ -19,5 +19,4 @@ describe('#carry()', function() {
         assert.isFunction(littleCarried);
         assert.isFunction(onceMoreCarried);
     });
-
 });
