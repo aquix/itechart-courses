@@ -7,9 +7,9 @@
             if ($elem.offset().top > $window.scrollTop() - $elem.outerHeight(false) &&
                 $elem.offset().top < $window.scrollTop() + $window.height() + $elem.outerHeight(false)) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
     });
 }(jQuery));

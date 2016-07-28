@@ -20,6 +20,20 @@
         });
     }
 
+    function demo3() {
+        $('.tab-control').tabControl();
+    }
+
+    function demo4() {
+        $('.popup-test').popup({
+            text: 'Hello, I\'m popup',
+            delay: 100,
+            color: '#2979FF'
+        });
+    }
+
     demo1();
     demo2();
+    demo3();
+    demo4();
 }());

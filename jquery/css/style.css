@@ -2,4 +2,56 @@
     padding-bottom: 50px;
     margin: 50px auto;
     border-bottom: 2px solid black;
+    width: 1000px;
+}
+
+/* Tab control */
+
+.tab-header {
+    width: 50%;
+}
+
+.tab-btn {
+    padding: 5px;
+    border: 1px solid black;
+    float: left;
+}
+
+.tab-btn.selected {
+    background-color: yellow;
+}
+
+.tab-btn:hover {
+    cursor: pointer;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.selected {
+    display: block;
+}
+
+/* Popups */
+
+.popup-test {
+    display: inline-block;
+}
+
+.popup {
+    position: absolute;
+    border: 1px solid black;
+    padding: 5px;
+    width: 200px
+}
+
+
+/*+ no-beautify */
+.clearfix:after {
+    content: "."; /* добавить содержимое: "." */
+    display: block;  /* сделать блоком, т.к. inline не может иметь clear */
+    clear: both;  /* с обеих сторон clear */
+    visibility: hidden; /* сделать невидимым, зачем нам точка внизу? */
+    height: 0;  /* сделать высоту 0, чтобы не занимал место */
 }
