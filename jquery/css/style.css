@@ -43,7 +43,7 @@
     position: absolute;
     border: 1px solid black;
     padding: 5px;
-    width: 200px
+    width: 200px;
 }
 
 /* AudioPlayer */
@@ -100,6 +100,24 @@
 .sortable-table, .sortable-table th, .sortable-table td {
     border: 1px solid black;
     padding: 10px;
+}
+
+/* Image zoom */
+
+#spongebob {
+    width: 640px;
+}
+
+.zoom {
+    border-radius: 100%;
+    position: absolute;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.zoom img {
+    position: absolute;
+    /*cursor: none;*/
 }
 
 /*+ no-beautify */
