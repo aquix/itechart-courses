@@ -64,9 +64,9 @@
         };
 
         if (dataType === 'int') {
-            (function (key) {
+            (function (prevKey) {
                 key = function ($row) {
-                    return parseInt(key($row));
+                    return parseInt(prevKey($row));
                 };
             }(key));
         }
