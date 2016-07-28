@@ -26,7 +26,6 @@
                     });
 
                     $elem.on('mousemove.popUpMoving', function (event) {
-                        console.log(event.pageX, event.pageY);
                         $popup.css({
                             top: event.pageY + 10,
                             left: event.pageX + 10
