@@ -46,6 +46,20 @@
     width: 200px
 }
 
+/* AudioPlayer */
+.player {
+    background-image: url('../images/play.png');
+    width: 128px;
+    height: 128px;
+}
+
+.player.playing {
+    background-image: url('../images/pause.png');
+}
+
+.player audio {
+    display: none;
+}
 
 /*+ no-beautify */
 .clearfix:after {

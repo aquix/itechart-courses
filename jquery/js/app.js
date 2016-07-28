@@ -36,9 +36,14 @@
         $('.input-test').tableNavigation();
     }
 
+    function demo6() {
+        $('.player').audioPlayer('../media/audio.mp3');
+    }
+
     demo1();
     demo2();
     demo3();
     demo4();
     demo5();
+    demo6();
 }());
