@@ -40,10 +40,21 @@
         $('.player').audioPlayer('../media/audio.mp3');
     }
 
+    function demo7() {
+        $('#browser-input').optionsList([
+            'Internet Explorer',
+            'Firefox',
+            'Chrome',
+            'Opera',
+            'Safari'
+        ]);
+    }
+
     demo1();
     demo2();
     demo3();
     demo4();
     demo5();
     demo6();
+    demo7();
 }());
