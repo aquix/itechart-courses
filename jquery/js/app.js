@@ -59,6 +59,12 @@
         });
     }
 
+    function demo9() {
+        $('.sortable-table').sortableTable([
+            {}, {}, { dataType: 'int' }
+        ]);
+    }
+
     demo1();
     demo2();
     demo3();
@@ -67,4 +73,5 @@
     demo6();
     demo7();
     demo8();
+    demo9();
 }());
