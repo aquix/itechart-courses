@@ -50,6 +50,15 @@
         ]);
     }
 
+    function demo8() {
+        $('#lock-interface-btn').click(function () {
+            $('body').lockBanner({
+                delay: 5000,
+                text: 'Ahaha! Your browser is locked'
+            });
+        });
+    }
+
     demo1();
     demo2();
     demo3();
@@ -57,4 +66,5 @@
     demo5();
     demo6();
     demo7();
+    demo8();
 }());
