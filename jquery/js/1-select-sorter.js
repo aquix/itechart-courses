@@ -9,12 +9,13 @@
         var config = $.extend({}, defaults, settings);
 
         this.each(function () {
+            var $this = $(this);
             // element-specific code here
-            if (!$(this).is('select')) {
+            if (!$this.is('select')) {
                 return;
             }
 
-            var options = $(this).find('option').toArray();
+            var options = $this.find('option').toArray();
             options.sort(function(op1, op2) {
                 var key;
                 var result;
@@ -46,8 +47,8 @@
                 return config.descending ? -result : result;
             });
 
-            $(this).empty();
-            $(this).append(options);
+            $this.empty();
+            $this.append(options);
         });
 
         return this;
