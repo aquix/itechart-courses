@@ -5,7 +5,7 @@
             var $window = $(window);
 
             if ($elem.offset().top > $window.scrollTop() - $elem.outerHeight(false) &&
-                $elem.offset().top < $window.scrollTop() + $window.height() + $elem.outerHeight(false)) {
+                $elem.offset().top < $window.scrollTop() + $window.height()) {
                 return true;
             }
 

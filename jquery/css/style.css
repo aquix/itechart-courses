@@ -151,10 +151,6 @@
     display: none;
 }
 
-.accordion-content.visible {
-    display: block;
-}
-
 /*+ no-beautify */
 .clearfix:after {
     content: "."; /* добавить содержимое: "." */
