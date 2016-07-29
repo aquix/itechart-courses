@@ -84,6 +84,10 @@
         $('.accordion').accordion();
     }
 
+    function demoStarRating() {
+        $('.star-rating').starRating();
+    }
+
     demo1();
     demo2();
     demo3();
@@ -96,4 +100,5 @@
     demo10();
     demo11();
     demo12();
+    demoStarRating();
 }());
