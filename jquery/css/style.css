@@ -120,6 +120,13 @@
     /*cursor: none;*/
 }
 
+/* Ajax indicator */
+
+.ajax-btn {
+    margin: 20px;
+    margin-top: 0;
+}
+
 /*+ no-beautify */
 .clearfix:after {
     content: "."; /* добавить содержимое: "." */

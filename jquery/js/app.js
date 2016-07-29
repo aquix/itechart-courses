@@ -69,6 +69,17 @@
         $('#spongebob').imageZoom();
     }
 
+    function demo11() {
+        $('.ajax-btn').click(function () {
+            $(this).ajaxWithStatus({
+                url: $('#ajax-url').val(),
+                success: function (result) {
+                    $('#ajax-result').val(JSON.stringify(result));
+                }
+            });
+        });
+    }
+
     demo1();
     demo2();
     demo3();
@@ -79,4 +90,5 @@
     demo8();
     demo9();
     demo10();
+    demo11();
 }());
