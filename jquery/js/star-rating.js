@@ -5,12 +5,12 @@
             var $stars = $container.find('.star');
             var prevState;
 
-            var mouseIn = function (event) {
+            var mouseIn = function () {
                 prevState = saveState($stars);
                 $container.off('mouseenter', mouseIn);
             };
 
-            $container.hover(mouseIn, function (e) {
+            $container.hover(mouseIn, function () {
                 restoreState($stars, prevState);
                 $container.on('mouseenter', mouseIn);
             });
