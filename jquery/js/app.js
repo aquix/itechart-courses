@@ -80,6 +80,10 @@
         });
     }
 
+    function demo12() {
+        $('.accordion').accordion();
+    }
+
     demo1();
     demo2();
     demo3();
@@ -91,4 +95,5 @@
     demo9();
     demo10();
     demo11();
+    demo12();
 }());
