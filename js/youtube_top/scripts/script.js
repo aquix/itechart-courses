@@ -1,7 +1,8 @@
 (function () {
     /* eslint no-undef: 0 */
     var yservice = new YoutubeService();
-    yservice.getTopViewed(10, init);
+    yservice.getTopViewed(10)
+        .then(init);
 
     function init (previews) {
         var slider = new Slider();
