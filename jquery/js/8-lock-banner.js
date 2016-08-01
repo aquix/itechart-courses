@@ -11,20 +11,20 @@
             // element-specific code here
             var $this = $(this);
             $this.css('position', 'relative');
-            var $banner = $('<div />', { 'class': 'banner' });
+            var $background = $('<div />', { 'class': 'banner-background' });
             var $bannerContent = $('<div />', {
                 'class': 'banner-content',
                 'text': config.text
             });
-            $banner.append($bannerContent);
-            $banner.on('mousedown', function (event) {
+            $background.append($bannerContent);
+            $background.on('mousedown', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
             });
             setTimeout(function () {
-                $banner.remove();
+                $background.remove();
             }, config.delay);
-            $this.append($banner);
+            $this.append($background);
         });
 
         return this;
