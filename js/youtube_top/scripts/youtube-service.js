@@ -4,24 +4,26 @@ function YoutubeService()   {
 
     var READY_STATUS_CODE = 4;
 
-    this.getTopViewed = function(count, callback) {
-        var request = new XMLHttpRequest();
-        var path = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=' +
-            count + '&key=' + key;
+    this.getTopViewed = function (count) {
+        var getJsonData = new Promise(function (resolve) {
+            var request = new XMLHttpRequest();
+            var path = 'https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=' +
+                count + '&key=' + key;
 
-        if (count === undefined || count <= 0) {
-            count = 1;
-        }
-
-        request.onreadystatechange = function() {
-            var results;
-            if(request.readyState === READY_STATUS_CODE) {
-                results = parseResponse(request.responseText);
-                callback(results);
+            if (count === undefined || count <= 0) {
+                count = 1;
             }
-        };
-        request.open('get', path);
-        request.send(null);
+
+            request.onreadystatechange = function() {
+                if(request.readyState === READY_STATUS_CODE) {
+                    resolve(request.responseText);
+                }
+            };
+            request.open('get', path);
+            request.send(null);
+        });
+
+        return getJsonData.then(parseResponse);
     };
 
     function parseResponse(json) {
