@@ -24,7 +24,9 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping cart</a></li>
+                <li>
+                    <a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping cart (<span data-bind="text: cart.length"></span>)</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -44,6 +46,12 @@
                     <a class="btn btn-primary">Buy: <span data-bind="text: price"></span> BYN
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
+
+                    <button class="btn btn-success" data-bind="click: $root.addToCart">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span></button>
+
                 </div>
             </div>
         </div>
