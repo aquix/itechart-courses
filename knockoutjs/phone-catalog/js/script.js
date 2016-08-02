@@ -15,7 +15,7 @@ class ViewModel {
             showNotification(phone.phoneInfo.name + ' added to cart');
         };
 
-        this.removeFromCart = phone => {
+        this.removeFromCart = (phone, showNotification=true) => {
             let removeIndex = this.cart.indexOf(phone);
             if (removeIndex === -1) {
                 return;
@@ -28,7 +28,17 @@ class ViewModel {
 
             this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price);
 
-            showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
+            if (showNotification) {
+                showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
+            }
+        };
+
+        this.removeAllFromCart = phone => {
+            while (this.cart.indexOf(phone) !== -1) {
+                this.removeFromCart(phone, false);
+            }
+
+            showNotification(`All items of ${phone.phoneInfo.name} removed from cart`, 'danger');
         };
 
         this.isInCart = phone => {
@@ -65,3 +75,12 @@ function initCatalog(data) {
     viewModel.cart = ko.observableArray([]);
     ko.applyBindings(viewModel);
 }
+
+$(".modal-transparent").on('show.bs.modal', function () {
+  setTimeout( function() {
+    $(".modal-backdrop").addClass("modal-backdrop-transparent");
+  }, 0);
+});
+$(".modal-transparent").on('hidden.bs.modal', function () {
+  $(".modal-backdrop").addClass("modal-backdrop-transparent");
+});
