@@ -80,7 +80,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Your shopping cart</h4>
-                    <div data-bind="ifnot: isCartEmpty">
+                    <div data-bind="ifnot: cart().length === 0">
                         <button class="btn btn-success" data-bind="click: buy">
                             Buy: <span data-bind="text: totalPrice"></span> BYN
                         </button>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div data-bind="if: isCartEmpty">
+                    <div data-bind="if: cart().length === 0">
                         Your cart is empty. Please add something.
                     </div>
                     <div class="container" data-bind="foreach: cart">
@@ -127,7 +127,7 @@
     <script src="lib/js/bootstrap-notify.js"></script>
     <script src="lib/js/knockout.js"></script>
     <script src="js/highlight-binding.js"></script>
-    <script src="js/full-cost-binding.js"></script>
+    <script src="js/modal-cart.js"></script>
     <script src="js/notification.js"></script>
     <script src="js/script.js"></script>
 </body>
