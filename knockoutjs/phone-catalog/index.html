@@ -39,14 +39,14 @@
         <div data-bind="foreach: phones">
             <div class="row">
                 <div class="col-md-2">
-                    <a data-bind="attr: { href: infoLink }">
-                        <img class="phone-img img-responsive" data-bind="attr: { src: imgLink }">
+                    <a data-bind="attr: { href: phoneInfo.infoLink }">
+                        <img class="phone-img img-responsive" data-bind="attr: { src: phoneInfo.imgLink }">
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <h3><a data-bind="attr: { href: infoLink }, text: name"></a></h3>
-                    <p data-bind="text: description"></p>
-                    <a class="btn btn-primary">Buy: <span data-bind="text: price"></span> BYN
+                    <h3><a data-bind="attr: { href: phoneInfo.infoLink }, text: phoneInfo.name"></a></h3>
+                    <p data-bind="text: phoneInfo.description"></p>
+                    <a class="btn btn-primary">Buy: <span data-bind="text: phoneInfo.price"></span> BYN
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
 

@@ -25,6 +25,13 @@ class ViewModel {
     }
 }
 
+class PhoneViewModel {
+    constructor(phoneInfo) {
+        this.isInCart = ko.observable(false);
+        this.phoneInfo = phoneInfo;
+    }
+}
+
 let viewModel = new ViewModel();
 
 fetch('/data/phones-info.json')
@@ -36,7 +43,13 @@ fetch('/data/phones-info.json')
     });
 
 function initCatalog(data) {
-    viewModel.phones = ko.observableArray(data);
+    let phones = [];
+
+    for(let item of data) {
+        phones.push(new PhoneViewModel(item));
+    }
+
+    viewModel.phones = ko.observableArray(phones);
     viewModel.cart = ko.observableArray([]);
     ko.applyBindings(viewModel);
 }
