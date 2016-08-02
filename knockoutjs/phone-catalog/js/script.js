@@ -5,6 +5,14 @@ class ViewModel {
         this.phones = ko.observableArray();
         this.cart = ko.observableArray([]);
         this.totalPrice = ko.observable(0);
+        this.totalCount = ko.computed(() => {
+            let totalCount = 0;
+            for(let item of this.cart()) {
+                totalCount += item.countInCart();
+            }
+
+            return totalCount;
+        });
 
         this.isCartEmpty = ko.computed(() => this.cart().length === 0);
 
@@ -13,14 +21,16 @@ class ViewModel {
                 this.cart.push(phone);
             }
 
-            phone.countInCart(phone.countInCart() + 1);
+            phone.countInCart(phone.countInCart() + phone.selectedCount());
+            this.totalPrice(parseFloat(this.totalPrice()) +
+                phone.phoneInfo.price * phone.selectedCount());
 
-            this.totalPrice(parseFloat(this.totalPrice()) + phone.phoneInfo.price);
+            phone.selectedCount(1);
 
             showNotification(phone.phoneInfo.name + ' added to cart');
         };
 
-        this.removeFromCart = (phone) => {
+        this.removeFromCart = phone => {
             let removeIndex = this.cart.indexOf(phone);
             if (removeIndex === -1) {
                 return;
@@ -70,6 +80,7 @@ class PhoneViewModel {
         this.isInCart = ko.computed(() => this.countInCart > 0);
         this.phoneInfo = phoneInfo;
         this.countInCart = ko.observable(0);
+        this.selectedCount = ko.observable(1);
 
         this.fullCostPerItem = ko.computed(() => {
             let count = this.countInCart();

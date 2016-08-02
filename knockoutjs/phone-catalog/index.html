@@ -31,7 +31,8 @@
                 <li>
                     <a href="#">
                         <div>
-                            <span class="glyphicon glyphicon-shopping-cart"></span> &nbsp;Shopping cart (<span data-bind="text: cart().length"></span>)
+                            <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;Shopping cart&nbsp;
+                            <span class="badge" data-bind="text: totalCount"></span>
                         </div>
                         <div>
                             <span data-bind="text: totalPrice"></span>&nbsp;BYN
@@ -59,6 +60,8 @@
                     <span class="btn btn-primary nohover">Buy: <span data-bind="text: phoneInfo.price"></span> BYN
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     </span>
+
+                    <input type="number" class="form-control" value="1" min="1" data-bind="value: selectedCount">
 
                     <button class="btn btn-success" data-bind="click: $root.addToCart">
                         <span class="glyphicon glyphicon-plus"></span>
