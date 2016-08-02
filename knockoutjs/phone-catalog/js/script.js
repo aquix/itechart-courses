@@ -6,37 +6,41 @@ class ViewModel {
         this.cart = ko.observableArray([]);
         this.totalPrice = ko.observable(0);
 
+        this.isCartEmpty = ko.computed(() => this.cart().length === 0);
+
         this.addToCart = phone => {
-            this.cart.push(phone);
-            phone.isInCart(true);
+            if (this.cart.indexOf(phone) === -1) {
+                this.cart.push(phone);
+            }
+
+            phone.countInCart(phone.countInCart() + 1);
 
             this.totalPrice(parseFloat(this.totalPrice()) + phone.phoneInfo.price);
 
             showNotification(phone.phoneInfo.name + ' added to cart');
         };
 
-        this.removeFromCart = (phone, showNotification=true) => {
+        this.removeFromCart = (phone) => {
             let removeIndex = this.cart.indexOf(phone);
             if (removeIndex === -1) {
                 return;
             }
 
-            this.cart.splice(removeIndex, 1);
-            if (this.cart.indexOf(phone) === -1) {
-                phone.isInCart(false);
+            if (this.cart()[removeIndex].countInCart === 1) {
+                this.cart.remove(phone);
             }
 
+            phone.countInCart(phone.countInCart() - 1);
             this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price);
 
-            if (showNotification) {
-                showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
-            }
+            showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
         };
 
         this.removeAllFromCart = phone => {
-            while (this.cart.indexOf(phone) !== -1) {
-                this.removeFromCart(phone, false);
-            }
+            let count = phone.countInCart();
+            this.cart.remove(phone);
+            phone.countInCart(0);
+            this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price * count);
 
             showNotification(`All items of ${phone.phoneInfo.name} removed from cart`, 'danger');
         };
@@ -44,13 +48,39 @@ class ViewModel {
         this.isInCart = phone => {
             return this.cart().indexOf(phone) !== -1;
         };
+
+        this.clearCart = () => {
+            for(let phone of this.cart()) {
+                phone.countInCart(0);
+            }
+
+            this.cart.removeAll();
+            this.totalPrice(0);
+        };
+
+        this.buy = () => {
+            this.clearCart();
+            showNotification(`You've successfully bought this phones.`);
+        };
     }
 }
 
 class PhoneViewModel {
     constructor(phoneInfo) {
-        this.isInCart = ko.observable(false);
+        this.isInCart = ko.computed(() => this.countInCart > 0);
         this.phoneInfo = phoneInfo;
+        this.countInCart = ko.observable(0);
+
+        this.fullCostPerItem = ko.computed(() => {
+            let count = this.countInCart();
+            let price = this.phoneInfo.price;
+
+            if (count > 1) {
+                return `${count} x ${price} = ${count * price}`;
+            } else {
+                return (count * price).toString();
+            }
+        });
     }
 }
 

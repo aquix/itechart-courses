@@ -80,8 +80,19 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Your shopping cart</h4>
+                    <div data-bind="ifnot: isCartEmpty">
+                        <button class="btn btn-success" data-bind="click: buy">
+                            Buy: <span data-bind="text: totalPrice"></span> BYN
+                        </button>
+                        <button class="btn btn-danger" data-bind="click: clearCart">
+                            Remove all from cart
+                        </button>
+                    </div>
                 </div>
                 <div class="modal-body">
+                    <div data-bind="if: isCartEmpty">
+                        Your cart is empty. Please add something.
+                    </div>
                     <div class="container" data-bind="foreach: cart">
                         <div class="row">
                             <div class="col-md-1 small-image">
@@ -93,9 +104,7 @@
                                 <h3>
                                     <a data-bind="attr: { href: phoneInfo.infoLink }, text: phoneInfo.name"></a>
                                 </h3>
-                                <span class="btn btn-primary nohover">Buy: <span data-bind="text: phoneInfo.price"></span> BYN
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                                </span>
+                                <span class="btn btn-primary nohover"><span data-bind="text: fullCostPerItem"></span> BYN</span>
 
                                 <button class="btn btn-danger" data-bind="click: $root.removeFromCart">
                                     <span class="glyphicon glyphicon-minus"></span>
@@ -111,17 +120,14 @@
             </div>
         </div>
     </div>
-
-    <button type="button" class="btn btn-primary btn-lg" >
-        Launch modal transparent
-    </button>
-
     <!-- /.container -->
+
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
     <script src="lib/js/bootstrap-notify.js"></script>
     <script src="lib/js/knockout.js"></script>
     <script src="js/highlight-binding.js"></script>
+    <script src="js/full-cost-binding.js"></script>
     <script src="js/notification.js"></script>
     <script src="js/script.js"></script>
 </body>
