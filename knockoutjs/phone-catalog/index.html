@@ -28,8 +28,13 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
-                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                        Shopping cart (<span data-bind="text: cart().length"></span>)
+                        <div>
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            &nbsp;Shopping cart (<span data-bind="text: cart().length"></span>)
+                        </div>
+                        <div>
+                            <span data-bind="text: totalPrice"></span>&nbsp;BYN
+                        </div>
                     </a>
                 </li>
             </ul>

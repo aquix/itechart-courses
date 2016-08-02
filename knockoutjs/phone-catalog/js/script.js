@@ -10,6 +10,8 @@ class ViewModel {
             this.cart.push(phone);
             phone.isInCart(true);
 
+            this.totalPrice(parseFloat(this.totalPrice()) + phone.phoneInfo.price);
+
             showNotification(phone.phoneInfo.name + ' added to cart');
         };
 
@@ -23,6 +25,8 @@ class ViewModel {
             if (this.cart.indexOf(phone) === -1) {
                 phone.isInCart(false);
             }
+
+            this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price);
 
             showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
         };
