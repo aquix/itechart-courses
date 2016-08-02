@@ -67,7 +67,7 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                     <button class="btn btn-danger" data-bind="click: $root.removeFromCart,
-                                       visible: $root.isInCart($data)">
+                                       visible: isInCart">
                         <span class="glyphicon glyphicon-minus"></span>
                     </button>
 
@@ -83,7 +83,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Your shopping cart</h4>
-                    <div data-bind="ifnot: cart().length === 0">
+                    <div data-bind="ifnot: isCartEmpty">
                         <button class="btn btn-success" data-bind="click: buy">
                             Buy: <span data-bind="text: totalPrice"></span> BYN
                         </button>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div data-bind="if: cart().length === 0">
+                    <div data-bind="if: isCartEmpty">
                         Your cart is empty. Please add something.
                     </div>
                     <div class="container" data-bind="foreach: cart">

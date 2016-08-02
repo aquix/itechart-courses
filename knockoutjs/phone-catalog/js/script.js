@@ -2,10 +2,10 @@
 
 class ViewModel {
     constructor() {
-        this.phones = ko.observableArray();
+        this.phones = [];
         this.cart = ko.observableArray([]);
         this.totalPrice = ko.observable(0);
-        this.totalCount = ko.computed(() => {
+        this.totalCount = ko.pureComputed(() => {
             let totalCount = 0;
             for(let item of this.cart()) {
                 totalCount += item.countInCart();
@@ -14,7 +14,9 @@ class ViewModel {
             return totalCount;
         });
 
-        this.isCartEmpty = ko.computed(() => this.cart().length === 0);
+        this.isCartEmpty = ko.pureComputed(() => {
+            return this.cart().length === 0;
+        });
 
         this.addToCart = phone => {
             if (this.cart.indexOf(phone) === -1) {
@@ -36,7 +38,7 @@ class ViewModel {
                 return;
             }
 
-            if (this.cart()[removeIndex].countInCart === 1) {
+            if (this.cart()[removeIndex].countInCart() === 1) {
                 this.cart.remove(phone);
             }
 
@@ -53,10 +55,6 @@ class ViewModel {
             this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price * count);
 
             showNotification(`All items of ${phone.phoneInfo.name} removed from cart`, 'danger');
-        };
-
-        this.isInCart = phone => {
-            return this.cart().indexOf(phone) !== -1;
         };
 
         this.clearCart = () => {
@@ -77,10 +75,10 @@ class ViewModel {
 
 class PhoneViewModel {
     constructor(phoneInfo) {
-        this.isInCart = ko.computed(() => this.countInCart > 0);
         this.phoneInfo = phoneInfo;
         this.countInCart = ko.observable(0);
         this.selectedCount = ko.observable(1);
+        this.isInCart = ko.computed(() => this.countInCart() > 0);
 
         this.fullCostPerItem = ko.computed(() => {
             let count = this.countInCart();
@@ -112,7 +110,7 @@ function initCatalog(data) {
         phones.push(new PhoneViewModel(item));
     }
 
-    viewModel.phones = ko.observableArray(phones);
+    viewModel.phones = phones;
     viewModel.cart = ko.observableArray([]);
     ko.applyBindings(viewModel);
 }
