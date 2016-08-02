@@ -11,11 +11,13 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/css/bootstrap-notify.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+    <div class='notifications alert top-right'></div>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -37,7 +39,7 @@
     <!-- Page Content -->
     <div class="container">
         <div data-bind="foreach: phones">
-            <div class="row">
+            <div class="row" data-bind="highlight: isInCart">
                 <div class="col-md-2">
                     <a data-bind="attr: { href: phoneInfo.infoLink }">
                         <img class="phone-img img-responsive" data-bind="attr: { src: phoneInfo.imgLink }">
@@ -46,9 +48,9 @@
                 <div class="col-md-5">
                     <h3><a data-bind="attr: { href: phoneInfo.infoLink }, text: phoneInfo.name"></a></h3>
                     <p data-bind="text: phoneInfo.description"></p>
-                    <a class="btn btn-primary">Buy: <span data-bind="text: phoneInfo.price"></span> BYN
+                    <span class="btn btn-primary nohover">Buy: <span data-bind="text: phoneInfo.price"></span> BYN
                         <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                    </span>
 
                     <button class="btn btn-success" data-bind="click: $root.addToCart">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -67,7 +69,10 @@
     <!-- /.container -->
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/bootstrap.min.js"></script>
+    <script src="lib/js/bootstrap-notify.js"></script>
     <script src="lib/js/knockout.js"></script>
+    <script src="js/highlight-binding.js"></script>
+    <script src="js/notification.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

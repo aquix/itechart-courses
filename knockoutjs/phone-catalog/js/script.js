@@ -4,10 +4,13 @@ class ViewModel {
     constructor() {
         this.phones = ko.observableArray();
         this.cart = ko.observableArray([]);
-        this.totalPrice = 0;
+        this.totalPrice = ko.observable(0);
 
         this.addToCart = phone => {
             this.cart.push(phone);
+            phone.isInCart(true);
+
+            showNotification(phone.phoneInfo.name + ' added to cart');
         };
 
         this.removeFromCart = phone => {
@@ -17,6 +20,11 @@ class ViewModel {
             }
 
             this.cart.splice(removeIndex, 1);
+            if (this.cart.indexOf(phone) === -1) {
+                phone.isInCart(false);
+            }
+
+            showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
         };
 
         this.isInCart = phone => {
