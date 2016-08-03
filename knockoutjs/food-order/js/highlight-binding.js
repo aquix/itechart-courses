@@ -1,7 +1,7 @@
 /* global ko */
 
 ko.bindingHandlers.highlight = {
-    update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+    update: function(element, valueAccessor) {
         if (ko.unwrap(valueAccessor())) {
             element.classList.add('highlighted');
         } else {

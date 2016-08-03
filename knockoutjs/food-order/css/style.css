@@ -41,6 +41,11 @@ footer {
     width: 20%;
 }
 
+.price {
+    display: inline-block;
+    margin-top: 10px;
+}
+
 /* .modal-transparent */
 
 .modal-transparent {
