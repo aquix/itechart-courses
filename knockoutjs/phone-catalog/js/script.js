@@ -1,10 +1,14 @@
 /* global ko */
 
-class ViewModel {
+class MainViewModel {
     constructor() {
         this.phones = [];
         this.cart = ko.observableArray([]);
-        this.totalPrice = ko.observable(0);
+        this._totalPrice = ko.observable(0);
+        this.totalPrice = ko.pureComputed(() => {
+            return this._totalPrice().toFixed(2);
+        });
+
         this.totalCount = ko.pureComputed(() => {
             let totalCount = 0;
             for(let item of this.cart()) {
@@ -24,7 +28,7 @@ class ViewModel {
             }
 
             phone.countInCart(phone.countInCart() + phone.selectedCount());
-            this.totalPrice(parseFloat(this.totalPrice()) +
+            this._totalPrice(parseFloat(this._totalPrice()) +
                 phone.phoneInfo.price * phone.selectedCount());
 
             phone.selectedCount(1);
@@ -43,7 +47,7 @@ class ViewModel {
             }
 
             phone.countInCart(phone.countInCart() - 1);
-            this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price);
+            this._totalPrice(parseFloat(this._totalPrice()) - phone.phoneInfo.price);
 
             showNotification(phone.phoneInfo.name + ' removed from cart', 'danger');
         };
@@ -52,7 +56,7 @@ class ViewModel {
             let count = phone.countInCart();
             this.cart.remove(phone);
             phone.countInCart(0);
-            this.totalPrice(parseFloat(this.totalPrice()) - phone.phoneInfo.price * count);
+            this._totalPrice(parseFloat(this._totalPrice()) - phone.phoneInfo.price * count);
 
             showNotification(`All items of ${phone.phoneInfo.name} removed from cart`, 'danger');
         };
@@ -63,7 +67,7 @@ class ViewModel {
             }
 
             this.cart.removeAll();
-            this.totalPrice(0);
+            this._totalPrice(0);
         };
 
         this.buy = () => {
@@ -93,7 +97,7 @@ class PhoneViewModel {
     }
 }
 
-let viewModel = new ViewModel();
+let mainViewModel = new MainViewModel();
 
 fetch('/data/phones-info.json')
     .then(res => {
@@ -110,7 +114,7 @@ function initCatalog(data) {
         phones.push(new PhoneViewModel(item));
     }
 
-    viewModel.phones = phones;
-    viewModel.cart = ko.observableArray([]);
-    ko.applyBindings(viewModel);
+    mainViewModel.phones = phones;
+    mainViewModel.cart = ko.observableArray([]);
+    ko.applyBindings(mainViewModel);
 }
