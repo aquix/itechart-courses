@@ -1,0 +1,11 @@
+{
+  "name": "rss-reader",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "latest",
+    "jquery": "latest",
+    "lodash": "latest",
+    "materialize": "latest"
+  },
+  "private": true
+}
