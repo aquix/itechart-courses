@@ -11,15 +11,23 @@
 </head>
 
 <body ng-app="RssReader">
-    <aside ng-controller="UrlsController as urlsCtrl">
+    <aside ng-controller="UrlsController as urlsCtrl" ng-cloak>
         <ul id="slide-out" class="side-nav fixed">
             <li>
                 <div class="input-field col s5">
                     <i class="new-rss-icon material-icons prefix">rss_feed</i>
-                    <input ng-model="urlsCtrl.newUrl" placeholder="Enter RSS address" id="new-rss" type="text" />
+                    <input ng-model="urlsCtrl.newUrl" ng-class="{ invalid: urlsCtrl.invalidInput }" ng-change="urlsCtrl.revalid()"
+                           placeholder="Enter RSS address" id="new-rss" type="text" />
                 </div>
                 <a ng-click="urlsCtrl.addSource()" class="waves-effect waves-light btn">add</a>
             </li>
+
+            <li><a class="subheader" href="">Added sources:</a></li>
+
+            <div ng-repeat="source in urlsCtrl.sources">
+                <li><a href="{{ source.url }}">{{ source.title }} </a></li>
+
+            </div>
         </ul>
         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     </aside>
@@ -31,10 +39,14 @@
 
     <script src="lib/js/jquery.min.js"></script>
     <script src="app/bower_components/angular/angular.js"></script>
+    <script src="app/bower_components/lodash/lodash.js"></script>
     <script src="https://cdn.rawgit.com/sekando/feednami-client/master/releases/1.0.2.js"></script>
     <script src="lib/js/materialize.js"></script>
     <script src="static/js/sidebar.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/rss-services/rss.js"></script>
+    <script src="app/content-service.js"></script>
+    <script src="app/urls-control/urls-controller.js"></script>
 </body>
 
 </html>
