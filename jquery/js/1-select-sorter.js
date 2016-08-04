@@ -1,3 +1,5 @@
+/// <reference path="../typings/tsd.d.ts" />
+
 (function ($) {
     $.fn.sortOptions = function (settings) {
         var defaults = {
@@ -7,6 +9,8 @@
         };
 
         var config = $.extend({}, defaults, settings);
+
+        this.ea
 
         this.each(function () {
             var $this = $(this);

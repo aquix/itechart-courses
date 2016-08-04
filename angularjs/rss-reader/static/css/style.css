@@ -1,0 +1,16 @@
+/* Sidebar */
+
+header, main, footer {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+    padding-left: 0;
+    }
+}
+
+.new-rss-icon {
+    margin-left: 5px;
+    margin-top: 10px;
+}
