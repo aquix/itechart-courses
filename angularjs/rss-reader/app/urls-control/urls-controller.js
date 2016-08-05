@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
-app.controller('UrlsController', ['content', function(content) {
+app.controller('UrlsCtrl', ['Content', function(Content) {
     var self = this;
 
     this.newUrl = '';
@@ -9,7 +9,7 @@ app.controller('UrlsController', ['content', function(content) {
     this.sources = [];
 
     this.addSource = function () {
-        content.addSource(self.newUrl, function (err) {
+        Content.addSource(self.newUrl, function (err) {
             self.invalidInput = true;
         }, function (feed) {
             var newSource = {};

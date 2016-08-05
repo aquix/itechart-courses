@@ -11,7 +11,7 @@
 </head>
 
 <body ng-app="RssReader">
-    <aside ng-controller="UrlsController as urlsCtrl" ng-cloak>
+    <aside ng-controller="UrlsCtrl as urlsCtrl" ng-cloak>
         <ul id="slide-out" class="side-nav fixed">
             <li>
                 <div class="input-field col s5">
@@ -33,7 +33,8 @@
     </aside>
 
 
-    <main>
+    <main ng-controller="ContentCtrl as contentCtrl">
+        <news-card news="contentCtrl.news"></news-card>
     </main>
 
 
@@ -46,6 +47,8 @@
     <script src="app/app.js"></script>
     <script src="app/rss-services/rss.js"></script>
     <script src="app/content-service.js"></script>
+    <script src="app/cards/news-card.js"></script>
+    <script src="app/content-controller.js"></script>
     <script src="app/urls-control/urls-controller.js"></script>
 </body>
 
