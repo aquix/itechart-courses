@@ -5,7 +5,8 @@
     "angular": "latest",
     "jquery": "latest",
     "lodash": "latest",
-    "materialize": "latest"
+    "materialize": "latest",
+    "angular-sanitize": "^1.5.8"
   },
   "private": true
 }

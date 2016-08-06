@@ -1,3 +1,7 @@
 app.controller('ContentCtrl', ['Content', function (Content) {
-    this.news = Content.news;
+    var self = this;
+
+    this.news = function () {
+        return Content.news;
+    }
 }]);

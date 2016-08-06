@@ -2,9 +2,6 @@
 
 app.directive('newsCard', function () {
     return {
-        link: function (scope, elem, attrs) {
-            debugger
-        },
         restrict: 'E',
         templateUrl: 'app/cards/news-card.html',
         scope: {
