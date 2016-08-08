@@ -1,0 +1,112 @@
+{
+    "env": {
+        "browser": true,
+        "es6": false,
+        "jquery": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "warn",
+            4
+        ],
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "no-console": "off",
+        "block-scoped-var": "error",
+        "consistent-return": "error",
+        "curly": [
+            "error",
+            "all"
+        ],
+        "default-case": "warn",
+        "dot-location": [
+            "warn",
+            "property"
+        ],
+        "eqeqeq": [
+            "error",
+            "smart"
+        ],
+        "guard-for-in": "warn",
+        "no-else-return": "warn",
+        "no-implicit-globals": "warn",
+        "no-magic-numbers": [
+            "warn",
+            {
+                "ignore": [-1, 0, 1, 2, 3, 10],
+                "ignoreArrayIndexes": true
+            }
+        ],
+        "no-redeclare": "error",
+        "no-self-compare": "warn",
+        "no-unmodified-loop-condition": "error",
+        "no-unused-expressions": "warn",
+        "no-useless-concat": "warn",
+        "no-useless-escape": "warn",
+        "wrap-iife": "warn",
+        "yoda": "warn",
+        "strict": [
+            "warn",
+            "safe"
+        ],
+        "array-bracket-spacing": "warn",
+        "brace-style": [
+            "error",
+            "1tbs"
+        ],
+        "camelcase": "error",
+        "comma-dangle": "error",
+        "comma-spacing": "warn",
+        "eol-last": "warn",
+        "max-len": [
+            "error",
+            {
+                "code": 120
+            }
+        ],
+        "max-statements-per-line": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
+        "max-statements": [
+            "warn",
+            50
+        ],
+        "new-cap": "error",
+        "no-lonely-if": "error",
+        "no-trailing-spaces": "error",
+        "no-unneeded-ternary": "error",
+        "one-var-declaration-per-line": "error",
+        "operator-assignment": "warn",
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "local"
+            }
+        ],
+        "no-constant-condition": [
+            "error",
+            {
+                "checkLoops": false
+            }
+        ],
+        "no-case-declarations": "off"
+    }
+}

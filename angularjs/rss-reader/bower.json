@@ -6,7 +6,8 @@
     "jquery": "latest",
     "lodash": "latest",
     "materialize": "latest",
-    "angular-sanitize": "^1.5.8"
+    "angular-sanitize": "^1.5.8",
+    "masonry": "^4.1.0"
   },
   "private": true
 }
