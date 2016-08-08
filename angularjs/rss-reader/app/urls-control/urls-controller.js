@@ -21,7 +21,10 @@ app.controller('UrlsCtrl', ['Content', function(Content) {
                 return source.url === newSource.url;
             }) === -1) {
                 self.sources.push(newSource);
+                return true;
             }
+
+            return false;
         })
     };
 

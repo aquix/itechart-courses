@@ -15,8 +15,9 @@ app.service('Content', ['Rss', function (Rss) {
                 return;
             }
 
-            self.news = _.concat(self.news, result.feed.entries);
-            callback(result.feed);
+            if (callback(result.feed)) {
+                self.news = _.concat(self.news, result.feed.entries);
+            }
         });
     };
 }]);

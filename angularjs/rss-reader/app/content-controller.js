@@ -4,4 +4,11 @@ app.controller('ContentCtrl', ['Content', function (Content) {
     this.news = function () {
         return Content.news;
     }
+
+    this.unreadNews = [];
+    this.readNews = [];
+
+    this.markAsRead = function (item) {
+        debugger
+    }
 }]);
