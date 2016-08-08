@@ -5,9 +5,6 @@ app.controller('ContentCtrl', ['Content', function (Content) {
         return Content.news;
     }
 
-    this.unreadNews = [];
-    this.readNews = [];
-
     this.markAsRead = function (item) {
         debugger
     }

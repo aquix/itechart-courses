@@ -4,7 +4,11 @@
 			<div class="card-content white-text">
 				<span class="card-title" ng-bind-html="item.title"></span>
 				<p ng-bind-html="item.description"></p>
+				<button ng-click="markAsRead(item)" class="as-read-btn btn-floating btn-large orange lighten-3">
+					<i class="large material-icons">done</i>
+				</button>
 			</div>
 		</div>
+
 	</div>
 </div>

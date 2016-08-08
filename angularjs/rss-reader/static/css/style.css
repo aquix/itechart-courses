@@ -30,10 +30,25 @@ header, main, footer {
     }
 }
 
+.as-read-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    /*display: none;*/
+    color: green;
+}
 .grid-item {
     display: inline-block;
     width: 100%;
+    position: relative;
 }​
+
+.material-icons {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 
 /* Angular */
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
