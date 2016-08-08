@@ -8,9 +8,10 @@ app.directive('newsCard', function (Content) {
         scope: {
             news: '='
         },
-        link: function ($scope) {
+        link: function ($scope, $window) {
             $scope.markAsRead = function (item) {
-                _.remove(Content.news, item);
+                item.read = true;
+                window.localStorage.setItem('rssReaderUnreadItems', JSON.stringify(Content.news));
             }
         }
     }

@@ -21,6 +21,7 @@ app.controller('UrlsCtrl', ['Content', function(Content) {
                 return source.url === newSource.url;
             }) === -1) {
                 self.sources.push(newSource);
+                window.localStorage.setItem('rssReaderSources', JSON.stringify(self.sources));
                 return true;
             }
 
@@ -31,4 +32,9 @@ app.controller('UrlsCtrl', ['Content', function(Content) {
     this.revalid = function () {
         self.invalidInput = false;
     }
+
+    (function init() {
+        var data = window.localStorage.getItem('rssReaderSources');
+        self.sources = data ? JSON.parse(data) : [];
+    }());
 }]);

@@ -3,9 +3,9 @@ app.controller('ContentCtrl', ['Content', function (Content) {
 
     this.news = function () {
         return Content.news;
-    }
+    };
 
-    this.markAsRead = function (item) {
-        debugger
-    }
+    this.unread = function (item) {
+        return !item.read;
+    };
 }]);

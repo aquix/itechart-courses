@@ -20,4 +20,9 @@ app.service('Content', ['Rss', function (Rss) {
             }
         });
     };
+
+    (function init() {
+        var data = window.localStorage.getItem('rssReaderUnreadItems');
+        self.news = data ? JSON.parse(data) : [];
+    }());
 }]);

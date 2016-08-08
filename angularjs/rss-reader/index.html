@@ -24,7 +24,7 @@
 
             <li><a class="subheader" href="">Added sources:</a></li>
 
-            <div ng-repeat="source in urlsCtrl.sources">
+            <div ng-repeat="source in urlsCtrl.sources track by $index">
                 <li><a href="{{ source.url }}">{{ source.title }} </a></li>
 
             </div>
@@ -34,7 +34,7 @@
 
 
     <main ng-controller="ContentCtrl as contentCtrl">
-        <news-card news="contentCtrl.news()"></news-card>
+        <news-card news="contentCtrl.news() | filter:contentCtrl.unread"></news-card>
     </main>
 
 
