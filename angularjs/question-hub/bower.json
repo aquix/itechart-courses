@@ -1,0 +1,10 @@
+{
+  "name": "question-hub",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "latest",
+    "jquery": "latest",
+    "lodash": "latest"
+  },
+  "private": true
+}
