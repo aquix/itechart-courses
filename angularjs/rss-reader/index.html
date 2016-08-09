@@ -40,7 +40,7 @@
 
 
     <main ng-controller="ContentCtrl as contentCtrl">
-        <news-card news="contentCtrl.news | filter:contentCtrl.unread"></news-card>
+        <news-card news="contentCtrl.getUnreadItems()"></news-card>
     </main>
 
 
@@ -53,12 +53,12 @@
     <script src="https://cdn.rawgit.com/sekando/feednami-client/master/releases/1.0.2.js"></script>
     <script src="bower_components/js-sha256/build/sha256.min.js"></script>
     <script src="static/js/sidebar.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/rss-services/rss.js"></script>
-    <script src="app/content-factory.js"></script>
-    <script src="app/cards/news-card.js"></script>
-    <script src="app/content-controller.js"></script>
-    <script src="app/urls-control/urls-controller.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/rss-services/rss.service.js"></script>
+    <script src="app/news-content/content-provider.service.js"></script>
+    <script src="app/cards/news-card.directive.js"></script>
+    <script src="app/news-content/content.controller.js"></script>
+    <script src="app/sources/sources.controller.js"></script>
 </body>
 
 </html>
