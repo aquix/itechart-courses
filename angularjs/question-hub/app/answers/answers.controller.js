@@ -4,6 +4,16 @@ var answersCtrl = function (db, $stateParams) {
 
     self.question = db.questions.getById(id);
     self.answers = self.question.getAnswers();
+
+    self.isFormVisible = false;
+
+    self.showAnswerForm = function () {
+        self.isFormVisible = true;
+    }
+
+    self.hideAnswerForm = function () {
+        self.isFormVisible = false;
+    }
 };
 
 answersCtrl.$inject = ['db', '$stateParams'];
