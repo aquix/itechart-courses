@@ -12,7 +12,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/answers/:id',
             templateUrl: 'app/views/answers.html',
             controller: 'answersCtrl as ctrl'
-            // we'll get to this in a bit
         })
         .state('newQuestion', {
             url: '/new',

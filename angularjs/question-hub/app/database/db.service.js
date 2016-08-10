@@ -31,12 +31,16 @@ app.service('db', function () {
             question.__proto__ = questionProto;
             question.id = db.questions.length;
             db.questions.push(question);
-        }
+        };
+
+        db.questions.getById = function (id) {
+            return _.find(db.questions, { id: id });
+        };
 
         db.answers.new = function(answer) {
             answer.id = db.answers.length;
             db.answers.push(answer);
-        }
+        };
 
         db.questions.forEach(function(question) {
             question.__proto__ = questionProto;
