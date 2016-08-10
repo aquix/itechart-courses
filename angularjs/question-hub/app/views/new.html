@@ -1,0 +1,17 @@
+<form class="container">
+    <legend>New question</legend>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-4 form-group">
+            <input ng-model="ctrl.title" type="text" class="form-control" placeholder="Title">
+        </div>
+        <div class="col-sm-offset-1 col-sm-3 form-group">
+            <input ng-model="ctrl.author" type="text" class="form-control" placeholder="Author">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8 form-group">
+            <textarea ng-model="ctrl.body" class="form-control" placeholder="Type your question here" rows="20"></textarea>
+        </div>
+    </div>
+    <button ng-click="ctrl.addQuestion()" class="btn btn-primary col-sm-offset-2 ask-btn">Ask</button>
+</form>

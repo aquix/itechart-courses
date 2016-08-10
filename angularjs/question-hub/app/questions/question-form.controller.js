@@ -14,8 +14,8 @@ var questionFormCtrl = function (db) {
         }
 
         db.questions.new(newQuestion);
-    }
+    };
 };
 
-questionsCtrl.$inject(['db']);
+questionFormCtrl.$inject = ['db'];
 app.controller('questionFormCtrl', questionFormCtrl);

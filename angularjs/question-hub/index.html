@@ -19,10 +19,11 @@
             </div>
 
             <form class="navbar-form navbar-right">
+                <button ui-sref="newQuestion" class="btn btn-default">New question</button>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn btn-default">OK</button>
                 </div>
-                <button type="submit" class="btn btn-default">OK</button>
             </form>
         </div>
     </nav>
@@ -31,15 +32,16 @@
 
     </main>
 
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.1.min.js"></script>
 
     <script src="app/app.module.js"></script>
     <script src="app/routes.js"></script>
-    <!--<script src="app/navigation/navigation.controller.js"></script>-->
+    <script src="app/database/db.service.js"></script>
     <script src="app/questions/questions.controller.js"></script>
+    <script src="app/questions/question-form.controller.js"></script>
 
 </body>
 

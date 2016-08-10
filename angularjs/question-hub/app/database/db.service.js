@@ -11,7 +11,7 @@ app.service('db', function () {
     return service;
 
     function init() {
-        db = localStorage.getItem('questions-hub');
+        db = JSON.parse(localStorage.getItem('questions-hub'));
         if (!db) {
             db = {
                 questions: [],
@@ -37,6 +37,10 @@ app.service('db', function () {
             answer.id = db.answers.length;
             db.answers.push(answer);
         }
+
+        db.questions.forEach(function(question) {
+            question.__proto__ = questionProto;
+        });
     }
 
     function save() {

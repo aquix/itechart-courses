@@ -3,5 +3,5 @@ var questionsCtrl = function (db) {
     this.questions = db.questions;
 };
 
-questionsCtrl.$inject(['db']);
+questionsCtrl.$inject = ['db'];
 app.controller('questionsCtrl', questionsCtrl);
