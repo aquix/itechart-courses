@@ -6,18 +6,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('index', {
             url: '/',
             templateUrl: 'app/views/questions.html',
-            controller: 'questionsCtrl as ctrl'
+            controller: 'questionsListCtrl as ctrl'
         })
         .state('answers', {
-            url: '/answers:id',
+            url: '/answers/:id',
             templateUrl: 'app/views/answers.html',
-            controller: 'questionsCtrl as ctrl'
+            controller: 'answersCtrl as ctrl'
             // we'll get to this in a bit
         })
         .state('newQuestion', {
             url: '/new',
             templateUrl: 'app/views/new.html',
-            controller: 'questionFormCtrl as ctrl'
+            controller: 'newQuestionCtrl as ctrl'
         });
 
 });

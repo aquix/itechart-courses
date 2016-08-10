@@ -1,4 +1,4 @@
-var questionFormCtrl = function (db) {
+var newQuestionCtrl = function (db) {
     var self = this;
 
     self.title = '';
@@ -17,5 +17,5 @@ var questionFormCtrl = function (db) {
     };
 };
 
-questionFormCtrl.$inject = ['db'];
-app.controller('questionFormCtrl', questionFormCtrl);
+newQuestionCtrl.$inject = ['db'];
+app.controller('newQuestionCtrl', newQuestionCtrl);
