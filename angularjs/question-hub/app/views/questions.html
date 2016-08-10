@@ -1,0 +1,12 @@
+<div class="row" ng-repeat="question in ctrl.questions">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3><a ui-sref="answers({ id: question.id })">{{ question.title }}</a></h3>
+                <p>{{ question.body }}</p>
+                <p>{{ question.author }}</p>
+                <p>{{ question.date }}</p>
+            </div>
+        </div>
+    </div>
+</div>
