@@ -1,15 +1,27 @@
-<div class="row" ng-repeat="question in ctrl.questions">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="thumbnail">
-            <div class="caption">
-                <h3><a ui-sref="answers({ id: question.id })">{{ question.title }}</a></h3>
-                <p>{{ question.body }}</p>
-                <div class="question-footer">
+<div ng-if="ctrl.questions.length" class="container-fluid">
+	<div class="row" ng-repeat="question in ctrl.questions">
+	    <div class="col-md-6 col-md-offset-3">
+	        <div class="thumbnail">
+	            <div class="caption">
+	                <h3><a ui-sref="answers({ id: question.id })">{{ question.title }}</a></h3>
+	                <p>{{ question.body }}</p>
+	                <div class="question-footer">
 
-                    <p class="author"><em>{{ question.author }}</em></p>
-                    <p class="date"><em>{{ question.date | date: 'medium' }}</em></p>
-                </div>
-            </div>
-        </div>
+	                    <p class="author"><em>{{ question.author }}</em></p>
+	                    <p class="date"><em>{{ question.date | date: 'medium' }}</em></p>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+<div ng-if="ctrl.questions.length === 0" class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>
+            <p>It's so lonely here.</p>
+            <span>
+                Ask new question <a ui-sref="newQuestion">here</a>
+            </span>
+        </h2>
     </div>
 </div>

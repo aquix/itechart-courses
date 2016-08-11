@@ -1,4 +1,4 @@
-var newQuestionCtrl = function (db) {
+var newQuestionCtrl = function (db, userService) {
     var self = this;
 
     self.title = '';
@@ -10,12 +10,13 @@ var newQuestionCtrl = function (db) {
             title: self.title,
             body: self.body,
             author: self.author,
-            date: Date.now()
+            date: Date.now(),
+            userId: userService.userId
         }
 
         db.questions.new(newQuestion);
     };
 };
 
-newQuestionCtrl.$inject = ['db'];
+newQuestionCtrl.$inject = ['db', 'userService'];
 app.controller('newQuestionCtrl', newQuestionCtrl);

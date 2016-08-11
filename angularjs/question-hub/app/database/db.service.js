@@ -1,4 +1,4 @@
-app.service('db', function () {
+var db = function () {
     var db;
 
     init();
@@ -23,7 +23,7 @@ app.service('db', function () {
         var questionProto = {
             getAnswers: function () {
                 var self = this;
-                return _.filter(db.answers, { id: self.answerId });
+                return _.filter(db.answers, { questionId: self.id });
             }
         };
 
@@ -37,7 +37,8 @@ app.service('db', function () {
             return _.find(db.questions, { id: id });
         };
 
-        db.answers.new = function(answer) {
+        db.answers.new = function(answer, question) {
+            answer.questionId = question.id;
             answer.id = db.answers.length;
             db.answers.push(answer);
         };
@@ -50,4 +51,6 @@ app.service('db', function () {
     function save() {
         localStorage.setItem('questions-hub', JSON.stringify(db));
     }
-});
+};
+
+app.service('db', db);

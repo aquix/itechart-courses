@@ -14,6 +14,8 @@ var answersCtrl = function (db, $stateParams) {
     self.hideAnswerForm = function () {
         self.isFormVisible = false;
     }
+
+
 };
 
 answersCtrl.$inject = ['db', '$stateParams'];
