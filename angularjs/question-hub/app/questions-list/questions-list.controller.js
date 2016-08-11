@@ -1,7 +1,7 @@
-var questionsListCtrl = function (db) {
-    var currentDate = new Date();
+var QuestionsListCtrl = function (db, searchService) {
+    this.data = searchService.data;
     this.questions = db.questions;
 };
 
-questionsListCtrl.$inject = ['db'];
-app.controller('questionsListCtrl', questionsListCtrl);
+QuestionsListCtrl.$inject = ['db', 'searchService'];
+app.controller('QuestionsListCtrl', QuestionsListCtrl);

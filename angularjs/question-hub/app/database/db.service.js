@@ -24,8 +24,23 @@ var db = function () {
             getAnswers: function () {
                 var self = this;
                 return _.filter(db.answers, { questionId: self.id });
+            },
+
+            remove: function () {
+                var self = this;
+
+                _.remove(db.answers, function (ans) {
+                    return ans.questionId === self.id;
+                });
+                _.pull(db.questions, self);
             }
         };
+
+        var answerProto = {
+            remove: function () {
+                _.pull(db.answers, this);
+            }
+        }
 
         db.questions.new = function(question) {
             question.__proto__ = questionProto;
@@ -46,6 +61,7 @@ var db = function () {
         db.questions.forEach(function(question) {
             question.__proto__ = questionProto;
         });
+
     }
 
     function save() {

@@ -1,4 +1,4 @@
-var newQuestionCtrl = function (db, userService) {
+var NewQuestionCtrl = function (db, userService) {
     var self = this;
 
     self.title = '';
@@ -18,5 +18,5 @@ var newQuestionCtrl = function (db, userService) {
     };
 };
 
-newQuestionCtrl.$inject = ['db', 'userService'];
-app.controller('newQuestionCtrl', newQuestionCtrl);
+NewQuestionCtrl.$inject = ['db', 'userService'];
+app.controller('NewQuestionCtrl', NewQuestionCtrl);

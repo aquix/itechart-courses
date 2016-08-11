@@ -1,5 +1,5 @@
 var answer = function (userService) {
-    var answerCtrl = function () {
+    var AnswerCtrl = function () {
         var self = this;
 
         self.usefullness = function () {
@@ -48,7 +48,7 @@ var answer = function (userService) {
     }
     return {
         templateUrl: 'app/answers/answer.html',
-        controller: answerCtrl,
+        controller: AnswerCtrl,
         controllerAs: 'ctrl',
         scope: {
             answer: '=data',

@@ -1,5 +1,5 @@
 var answerForm = function (db, userService) {
-    var answerFormCtrl = function () {
+    var AnswerFormCtrl = function () {
         var self = this;
 
         self.author = '';
@@ -21,7 +21,7 @@ var answerForm = function (db, userService) {
     }
     return {
         templateUrl: 'app/answers/answer-form.html',
-        controller: answerFormCtrl,
+        controller: AnswerFormCtrl,
         controllerAs: 'ctrl',
         scope: {
             question: '=',

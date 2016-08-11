@@ -1,9 +1,10 @@
-var answersCtrl = function (db, $stateParams) {
+var AnswersCtrl = function (db, $state, $stateParams, userService) {
     var self = this;
     var id = parseInt($stateParams.id);
 
     self.question = db.questions.getById(id);
     self.answers = self.question.getAnswers();
+    self.iAmAuthor = (self.question.userId === userService.userId);
 
     self.isFormVisible = false;
 
@@ -15,8 +16,12 @@ var answersCtrl = function (db, $stateParams) {
         self.isFormVisible = false;
     }
 
+    self.deleteQuestion = function () {
+        self.question.remove();
+        $state.go('index');
+    }
 
 };
 
-answersCtrl.$inject = ['db', '$stateParams'];
-app.controller('answersCtrl', answersCtrl);
+AnswersCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
+app.controller('AnswersCtrl', AnswersCtrl);

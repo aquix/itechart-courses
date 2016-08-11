@@ -20,8 +20,8 @@
 
             <form class="navbar-form navbar-right">
                 <button ui-sref="newQuestion" class="btn btn-default">New question</button>
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                <div class="form-group" ng-controller="SearchCtrl as ctrl">
+                    <input ng-model="ctrl.data.query" type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
         </div>
@@ -42,6 +42,8 @@
     <script src="app/routes.js"></script>
     <script src="app/database/db.service.js"></script>
     <script src="app/users/user.service.js"></script>
+    <script src="app/search/search.service.js"></script>
+    <script src="app/search/search.controller.js"></script>
     <script src="app/questions-list/questions-list.controller.js"></script>
     <script src="app/new-question/new-question.controller.js"></script>
     <script src="app/answers/answers.controller.js"></script>

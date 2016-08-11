@@ -1,5 +1,5 @@
 <div ng-if="ctrl.questions.length" class="container-fluid">
-	<div class="row" ng-repeat="question in ctrl.questions">
+	<div class="row" ng-repeat="question in ctrl.questions | filter: ctrl.data.query">
 	    <div class="col-md-6 col-md-offset-3">
 	        <div class="thumbnail">
 	            <div class="caption">
