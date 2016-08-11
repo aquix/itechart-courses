@@ -15,52 +15,34 @@ var db = function () {
         if (!db) {
             db = {
                 questions: [],
-                answers: []
+                answers: [],
+                tags: []
             };
             save();
         }
 
-        var questionProto = {
-            getAnswers: function () {
-                var self = this;
-                return _.filter(db.answers, { questionId: self.id });
-            },
-
-            remove: function () {
-                var self = this;
-
-                _.remove(db.answers, function (ans) {
-                    return ans.questionId === self.id;
-                });
-                _.pull(db.questions, self);
-            }
-        };
-
-        var answerProto = {
-            remove: function () {
-                _.pull(db.answers, this);
-            }
-        }
-
-        db.questions.new = function(question) {
-            question.__proto__ = questionProto;
-            question.id = db.questions.length;
-            db.questions.push(question);
+        db.questions.new = function(data) {
+            data.id = db.questions.length;
+            db.questions.push(new Question(data, db));
         };
 
         db.questions.getById = function (id) {
             return _.find(db.questions, { id: id });
         };
 
-        db.answers.new = function(answer, question) {
-            answer.questionId = question.id;
-            answer.id = db.answers.length;
-            db.answers.push(answer);
+        db.answers.new = function(data, question) {
+            data.id = db.answers.length;
+            data.questionId = question.id;
+            db.answers.push(new Answer(data, db));
         };
 
-        db.questions.forEach(function(question) {
-            question.__proto__ = questionProto;
-        });
+        for (var i = 0; i < db.questions.length; i++) {
+            db.questions[i] = new Question(db.questions[i], db);
+        }
+
+        for (var i = 0; i < db.answers.length; i++) {
+            db.answers[i] = new Answer(db.answers[i], db);
+        }
 
     }
 
