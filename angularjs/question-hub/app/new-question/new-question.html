@@ -1,4 +1,4 @@
-<form class="container" name="questionForm">
+<form name="questionForm">
     <legend>New question</legend>
     <div class="row">
         <div class="col-sm-offset-2 col-sm-4 form-group">
@@ -13,5 +13,10 @@
             <textarea ng-model="ctrl.body" required="required" class="form-control" placeholder="Type your question here" rows="20"></textarea>
         </div>
     </div>
-    <button ng-click="ctrl.addQuestion()" ng-disabled="!questionForm.$valid" class="btn btn-primary col-sm-offset-2 ask-btn">Ask</button>
+    <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <button ng-click="ctrl.addQuestion()" ng-disabled="!questionForm.$valid"
+                    class="btn btn-primary">Ask</button>
+        </div>
+    </div>
 </form>

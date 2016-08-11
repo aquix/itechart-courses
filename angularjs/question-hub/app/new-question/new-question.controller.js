@@ -1,4 +1,4 @@
-var NewQuestionCtrl = function (db, userService) {
+var NewQuestionCtrl = function (db, userService, $state) {
     var self = this;
 
     self.title = '';
@@ -14,9 +14,10 @@ var NewQuestionCtrl = function (db, userService) {
             userId: userService.userId
         }
 
-        db.questions.new(newQuestion);
+        db.addQuestion(newQuestion);
+        $state.transitionTo('questionView', { id: newQuestion.id });
     };
 };
 
-NewQuestionCtrl.$inject = ['db', 'userService'];
+NewQuestionCtrl.$inject = ['db', 'userService', '$state'];
 app.controller('NewQuestionCtrl', NewQuestionCtrl);

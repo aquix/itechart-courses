@@ -1,9 +1,8 @@
-var AnswersCtrl = function (db, $state, $stateParams, userService) {
+var QuestionViewCtrl = function (db, $state, $stateParams, userService) {
     var self = this;
-    var id = parseInt($stateParams.id);
+    var id = $stateParams.id;
 
-    self.question = db.questions.getById(id);
-    self.answers = self.question.getAnswers();
+    self.question = db.getQuestionById(id);
     self.iAmAuthor = (self.question.userId === userService.userId);
 
     self.isFormVisible = false;
@@ -23,5 +22,5 @@ var AnswersCtrl = function (db, $state, $stateParams, userService) {
 
 };
 
-AnswersCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
-app.controller('AnswersCtrl', AnswersCtrl);
+QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
+app.controller('QuestionViewCtrl', QuestionViewCtrl);

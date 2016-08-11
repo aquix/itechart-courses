@@ -15,7 +15,7 @@ var answerForm = function (db, userService) {
                 disliked: []
             };
 
-            db.answers.new(answer, self.question);
+            db.addAnswer(answer, self.question);
             self.hide();
         }
     }

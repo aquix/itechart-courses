@@ -5,17 +5,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('index', {
             url: '/',
-            templateUrl: 'app/views/questions.html',
-            controller: 'QuestionsListCtrl as ctrl'
+            templateUrl: 'app/question-list/question-list.html',
+            controller: 'QuestionListCtrl as ctrl'
         })
-        .state('answers', {
-            url: '/answers/:id',
-            templateUrl: 'app/views/answers.html',
-            controller: 'AnswersCtrl as ctrl'
+        .state('questionView', {
+            url: '/questions/:id',
+            templateUrl: 'app/question-view/question-view.html',
+            controller: 'QuestionViewCtrl as ctrl'
         })
         .state('newQuestion', {
             url: '/new',
-            templateUrl: 'app/views/new.html',
+            templateUrl: 'app/new-question/new-question.html',
             controller: 'NewQuestionCtrl as ctrl'
         });
 

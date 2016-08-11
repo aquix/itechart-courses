@@ -10,7 +10,7 @@
         </div>
 
         <div class="answers">
-            <answer ng-repeat="answer in ctrl.answers track by answer.id" data="answer"></answer>
+            <answer ng-repeat="answer in ctrl.question.answers track by answer.id" data="answer"></answer>
         </div>
     </div>
 </div>
@@ -19,4 +19,4 @@
 <button ng-hide="ctrl.iAmAuthor" class="btn btn-success" ng-click="ctrl.showAnswerForm()">Answer this question</button>
 <button ng-show="ctrl.iAmAuthor" ng-click="ctrl.deleteQuestion()" class="btn btn-danger" ng-click="ctrl.deleteQuestion()">Delete question</button>
 
-<answer-form ng-show="ctrl.isFormVisible" question="ctrl.question" hide="ctrl.hideAnswerForm"></answer-form>
+<answer-form ng-if="ctrl.isFormVisible" question="ctrl.question" hide="ctrl.hideAnswerForm"></answer-form>
