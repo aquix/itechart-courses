@@ -8,3 +8,18 @@
   border-top: 1px solid #EEEEEE;
   padding-top: 10px;
 }
+
+answer .good {
+  color: green;
+}
+
+answer .bad {
+  color: red;
+}
+
+.vote-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}

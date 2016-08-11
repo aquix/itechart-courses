@@ -10,15 +10,7 @@
         </div>
 
         <div class="answers">
-            <div ng-repeat="answer in ctrl.answers track by answer.id" class="thumbnail">
-                <div class="caption">
-                    <h3>{{ answer.body }}</h3>
-                    <div class="question-footer">
-                        <p class="author"><em>{{ answer.author }}</em></p>
-                        <p class="date"><em>{{ answer.date | date: 'medium' }}</em></p>
-                    </div>
-                </div>
-            </div>
+            <answer ng-repeat="answer in ctrl.answers track by answer.id" data="answer"></answer>
         </div>
     </div>
 </div>
