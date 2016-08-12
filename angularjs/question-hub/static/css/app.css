@@ -29,3 +29,7 @@ answer .bad {
   top: 0px;
   right: 15px;
 }
+
+.tags span {
+  margin-right: 5px;
+}

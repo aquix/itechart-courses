@@ -14,6 +14,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-sm-offset-2 col-sm-8 form-group">
+            <tags-input ng-model="ctrl.tags" add-on-space="true"></tags-input>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-offset-2 col-sm-8">
             <button ng-click="ctrl.addQuestion()" ng-disabled="!questionForm.$valid"
                     class="btn btn-primary">Ask</button>
