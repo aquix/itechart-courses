@@ -1,7 +1,11 @@
-var searchService = function () {
-    this.data = {
-        query: ''
-    }
-};
+(function() {
+    'use strict';
 
-app.service('searchService', searchService);
+    angular
+        .module('app')
+        .service('searchService', searchService);
+
+    function searchService() {
+        this.query = '';
+    }
+})();

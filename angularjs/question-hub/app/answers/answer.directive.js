@@ -1,5 +1,25 @@
-var answer = function (userService) {
-    var AnswerCtrl = function () {
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .directive('answer', answer);
+
+    function answer() {
+        var directive = {
+            templateUrl: 'app/answers/answer.html',
+            bindToController: true,
+            controller: AnswerCtrl,
+            controllerAs: 'ctrl',
+            scope: {
+                answer: '=data'
+            }
+        };
+        return directive;
+    }
+    /* @ngInject */
+    AnswerCtrl.$inject = ['userService'];
+    function AnswerCtrl(userService) {
         var self = this;
 
         self.usefullness = function () {
@@ -44,19 +64,5 @@ var answer = function (userService) {
         self.dislikedByMe = function () {
             return self.answer.disliked.indexOf(userService.userId) !== -1;
         }
-
     }
-    return {
-        templateUrl: 'app/answers/answer.html',
-        controller: AnswerCtrl,
-        controllerAs: 'ctrl',
-        scope: {
-            answer: '=data',
-        },
-        bindToController: true
-    }
-};
-
-answer.$inject = ['userService'];
-
-app.directive('answer', answer);
+})();

@@ -1,7 +1,15 @@
-var QuestionListCtrl = function (db, searchService) {
-    this.data = searchService.data;
-    this.db = db;
-};
+(function() {
+    'use strict';
 
-QuestionListCtrl.$inject = ['db', 'searchService'];
-app.controller('QuestionListCtrl', QuestionListCtrl);
+    angular
+        .module('app')
+        .controller('QuestionListCtrl', QuestionListCtrl);
+
+    QuestionListCtrl.$inject = ['db', 'searchService'];
+    function QuestionListCtrl(db, searchService) {
+        var self = this;
+
+        self.searchService = searchService;
+        self.db = db;
+    }
+})();

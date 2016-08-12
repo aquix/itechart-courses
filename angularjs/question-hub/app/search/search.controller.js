@@ -1,6 +1,12 @@
-var SearchCtrl = function (searchService) {
-    this.data = searchService.data;
-}
+(function() {
+    'use strict';
 
-SearchCtrl.$inject = ['searchService'];
-app.controller('SearchCtrl', SearchCtrl);
+    angular
+        .module('app')
+        .controller('SearchCtrl', SearchCtrl);
+
+    SearchCtrl.$inject = ['searchService'];
+    function SearchCtrl(searchService) {
+        this.searchService = searchService;
+    }
+})();

@@ -1,26 +1,31 @@
-var QuestionViewCtrl = function (db, $state, $stateParams, userService) {
-    var self = this;
-    var id = $stateParams.id;
+(function () {
+    'use strict';
 
-    self.question = db.getQuestionById(id);
-    self.iAmAuthor = (self.question.userId === userService.userId);
+    angular
+        .module('app')
+        .controller('QuestionViewCtrl', QuestionViewCtrl);
 
-    self.isFormVisible = false;
+    QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
+    function QuestionViewCtrl(db, $state, $stateParams, userService) {
+        var self = this;
+        var id = $stateParams.id;
 
-    self.showAnswerForm = function () {
-        self.isFormVisible = true;
-    }
+        self.question = db.getQuestionById(id);
+        self.iAmAuthor = (self.question.userId === userService.userId);
 
-    self.hideAnswerForm = function () {
         self.isFormVisible = false;
+
+        self.showAnswerForm = function () {
+            self.isFormVisible = true;
+        }
+
+        self.hideAnswerForm = function () {
+            self.isFormVisible = false;
+        }
+
+        self.deleteQuestion = function () {
+            db.removeQuestion(self.question);
+            $state.go('index');
+        }
     }
-
-    self.deleteQuestion = function () {
-        self.question.remove();
-        $state.go('index');
-    }
-
-};
-
-QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
-app.controller('QuestionViewCtrl', QuestionViewCtrl);
+})();

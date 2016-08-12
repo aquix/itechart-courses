@@ -1,8 +1,17 @@
-var app = angular.module('questionHub', ['ui.bootstrap', 'ui.router', 'ngCookies']);
+(function() {
+    'use strict';
 
-app.run(['$window', 'db', '$cookies', function ($window, db, $cookies) {
-    $window.onbeforeunload = function () {
-        db.save();
-        $cookies.remove('user');
-    };
-}]);
+    angular
+        .module('app', [
+            'app.database',
+            'ui.bootstrap',
+            'ui.router',
+            'ngCookies'
+        ])
+        .run(['$window', 'db', '$cookies', function ($window, db, $cookies) {
+            $window.onbeforeunload = function () {
+                db.save();
+                $cookies.remove('user');
+            };
+        }]);
+})();

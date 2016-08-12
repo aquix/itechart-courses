@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="static/css/app.css">
 </head>
 
-<body ng-app="questionHub">
+<body ng-app="app">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -20,7 +20,7 @@
             <form class="navbar-form navbar-right">
                 <button ui-sref="newQuestion" class="btn btn-default">New question</button>
                 <div class="form-group" ng-controller="SearchCtrl as ctrl">
-                    <input ng-model="ctrl.data.query" type="text" class="form-control" placeholder="Search">
+                    <input ng-model="ctrl.searchService.query" type="text" class="form-control" placeholder="Search">
                 </div>
             </form>
         </div>
@@ -36,8 +36,9 @@
     <script src="bower_components/js-sha256/build/sha256.min.js"></script>
 
     <script src="app/app.module.js"></script>
-    <script src="app/routes.js"></script>
-    <script src="app/database/db.service.js"></script>
+    <script src="app/app.routes.js"></script>
+    <script src="app/app.database/app.database.module.js"></script>
+    <script src="app/app.database/db.service.js"></script>
     <script src="app/users/user.service.js"></script>
     <script src="app/search/search.service.js"></script>
     <script src="app/search/search.controller.js"></script>
