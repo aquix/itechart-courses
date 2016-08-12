@@ -7,7 +7,8 @@
             'ui.bootstrap',
             'ui.router',
             'ngCookies',
-            'ngTagsInput'
+            'ngTagsInput',
+            'ngAnimate'
         ])
         .run(['$window', 'db', '$cookies', function ($window, db, $cookies) {
             $window.onbeforeunload = function () {

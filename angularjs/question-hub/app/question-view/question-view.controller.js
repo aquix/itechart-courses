@@ -5,11 +5,12 @@
         .module('app')
         .controller('QuestionViewCtrl', QuestionViewCtrl);
 
-    QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService', '$timeout', '$anchorScroll'];
-    function QuestionViewCtrl(db, $state, $stateParams, userService, $timeout, $anchorScroll) {
+    QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService', '$timeout', '$anchorScroll', 'searchService'];
+    function QuestionViewCtrl(db, $state, $stateParams, userService, $timeout, $anchorScroll, searchService) {
         var self = this;
         var id = $stateParams.id;
 
+        self.searchService = searchService;
         self.question = db.getQuestionById(id);
         self.iAmAuthor = (self.question.userId === userService.userId);
         self.newAnswer = {

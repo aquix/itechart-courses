@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
         <div>
             <div class="caption">
                 <h3>{{ ctrl.question.title }}</h3>
@@ -16,7 +16,8 @@
             </div>
 
             <div class="answers">
-                <answer ng-repeat="answer in ctrl.question.answers track by answer.id" model="answer" question="ctrl.question"></answer>
+                <answer ng-repeat="answer in ctrl.question.answers | filter: ctrl.searchService.query track by answer.id"
+                        model="answer" question="ctrl.question" class="repeated-item"></answer>
             </div>
         </div>
     </div>
@@ -29,9 +30,8 @@
 
 
 <div ng-if="ctrl.isFormVisible" class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-
-        <legend class="col-md-offset-3 col-md-6">New answer</legend>
+    <div class="col-sm-8 col-sm-offset-2">
+        <legend>New answer</legend>
         <answer-form question="ctrl.question" model='ctrl.newAnswer' submit="ctrl.addAnswer" hide="ctrl.hideAnswerForm"></answer-form>
     </div>
 </div>
