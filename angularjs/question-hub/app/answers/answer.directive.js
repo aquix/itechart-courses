@@ -12,20 +12,25 @@
             controller: AnswerCtrl,
             controllerAs: 'ctrl',
             scope: {
-                answer: '=data'
+                question: '=',
+                model: '='
             }
         };
         return directive;
     }
     /* @ngInject */
-    AnswerCtrl.$inject = ['userService'];
-    function AnswerCtrl(userService) {
+    AnswerCtrl.$inject = ['db', 'userService', '$anchorScroll', '$timeout'];
+    function AnswerCtrl(db, userService, $anchorScroll, $timeout) {
         var self = this;
 
+        self.iAmAuthor = self.model.userId === userService.userId;
+        self.isEditFormVisible = false;
+        self.isEditGroupVisible = false;
+
         self.usefullness = function () {
-            if (self.answer.rating > 0) {
+            if (self.model.rating > 0) {
                 return 'good';
-            } else if (self.answer.rating < 0) {
+            } else if (self.model.rating < 0) {
                 return 'bad';
             } else {
                 return 'neutral';
@@ -35,34 +40,63 @@
 
         self.like = function () {
             if (!self.likedByMe()) {
-                self.answer.rating += 1;
+                self.model.rating += 1;
 
                 if (self.dislikedByMe()) {
-                    _.pull(self.answer.disliked, userService.userId)
+                    _.pull(self.model.disliked, userService.userId)
                 } else {
-                    self.answer.liked.push(userService.userId);
+                    self.model.liked.push(userService.userId);
                 }
             }
-        }
+        };
 
         self.dislike = function () {
             if (!self.dislikedByMe()) {
-                self.answer.rating -= 1;
+                self.model.rating -= 1;
 
                 if (self.likedByMe()) {
-                    _.pull(self.answer.liked, userService.userId)
+                    _.pull(self.model.liked, userService.userId)
                 } else {
-                    self.answer.disliked.push(userService.userId);
+                    self.model.disliked.push(userService.userId);
                 }
+            }
+        };
+
+        self.likedByMe = function () {
+            return self.model.liked.indexOf(userService.userId) !== -1;
+        };
+
+        self.dislikedByMe = function () {
+            return self.model.disliked.indexOf(userService.userId) !== -1;
+        };
+
+        self.showEditForm = function () {
+            self.isEditFormVisible = true;
+            $timeout(function () {
+                $anchorScroll('answer-form');
+            }, 50)
+        };
+
+        self.hideEditForm = function () {
+            self.isEditFormVisible = false;
+        };
+
+        self.showEditGroup = function () {
+            if (self.iAmAuthor) {
+                self.isEditGroupVisible = true;
             }
         }
 
-        self.likedByMe = function () {
-            return self.answer.liked.indexOf(userService.userId) !== -1;
+        self.hideEditGroup = function () {
+            self.isEditGroupVisible = false;
         }
 
-        self.dislikedByMe = function () {
-            return self.answer.disliked.indexOf(userService.userId) !== -1;
+        self.editAnswer = function (answer) {
+            answer.date = Date.now();
+        };
+
+        self.deleteAnswer = function () {
+            db.removeAnswer(self.model, self.question);
         }
     }
 })();

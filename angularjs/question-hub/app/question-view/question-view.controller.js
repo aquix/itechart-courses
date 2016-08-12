@@ -5,18 +5,30 @@
         .module('app')
         .controller('QuestionViewCtrl', QuestionViewCtrl);
 
-    QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService'];
-    function QuestionViewCtrl(db, $state, $stateParams, userService) {
+    QuestionViewCtrl.$inject = ['db', '$state', '$stateParams', 'userService', '$timeout', '$anchorScroll'];
+    function QuestionViewCtrl(db, $state, $stateParams, userService, $timeout, $anchorScroll) {
         var self = this;
         var id = $stateParams.id;
 
         self.question = db.getQuestionById(id);
         self.iAmAuthor = (self.question.userId === userService.userId);
+        self.newAnswer = {
+            author: '',
+            body: '',
+            date: Date.now(),
+            rating: 0,
+            userId: userService.userId,
+            liked: [],
+            disliked: []
+        };
 
         self.isFormVisible = false;
 
         self.showAnswerForm = function () {
             self.isFormVisible = true;
+            $timeout(function () {
+                $anchorScroll('answer-form');
+            }, 50);
         }
 
         self.hideAnswerForm = function () {
@@ -26,6 +38,11 @@
         self.deleteQuestion = function () {
             db.removeQuestion(self.question);
             $state.go('index');
+        }
+
+        self.addAnswer = function (answer) {
+            answer.date = Date.now()
+            db.addAnswer(answer, self.question);
         }
     }
 })();

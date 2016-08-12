@@ -1,22 +1,32 @@
-<div class="col-md-6 col-md-offset-3">
-    <div>
-        <div class="caption">
-            <h3>{{ ctrl.question.title }}</h3>
-            <p>{{ ctrl.question.body }}</p>
-            <div class="question-footer">
-                <p class="author"><em>{{ ctrl.question.author }}</em></p>
-                <p class="date"><em>{{ ctrl.question.date | date: 'medium' }}</em></p>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div>
+            <div class="caption">
+                <h3>{{ ctrl.question.title }}</h3>
+                <p>{{ ctrl.question.body }}</p>
+                <div class="question-footer">
+                    <p class="author"><em>{{ ctrl.question.author }}</em></p>
+                    <p class="date"><em>{{ ctrl.question.date | date: 'medium' }}</em></p>
+                </div>
+            </div>
+
+            <div class="answers">
+                <answer ng-repeat="answer in ctrl.question.answers track by answer.id" model="answer" question="ctrl.question"></answer>
             </div>
         </div>
-
-        <div class="answers">
-            <answer ng-repeat="answer in ctrl.question.answers track by answer.id" data="answer"></answer>
-        </div>
+    </div>
+    <div class="col-md-offset-9">
+        <button ng-hide="ctrl.iAmAuthor" class="btn btn-success" ng-click="ctrl.showAnswerForm()">Answer this question</button>
+        <button ng-show="ctrl.iAmAuthor" ng-click="ctrl.deleteQuestion()" class="btn btn-danger" ng-click="ctrl.deleteQuestion()">Delete question</button>
     </div>
 </div>
 
 
-<button ng-hide="ctrl.iAmAuthor" class="btn btn-success" ng-click="ctrl.showAnswerForm()">Answer this question</button>
-<button ng-show="ctrl.iAmAuthor" ng-click="ctrl.deleteQuestion()" class="btn btn-danger" ng-click="ctrl.deleteQuestion()">Delete question</button>
 
-<answer-form ng-if="ctrl.isFormVisible" question="ctrl.question" hide="ctrl.hideAnswerForm"></answer-form>
+<div ng-if="ctrl.isFormVisible" class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <legend class="col-md-offset-3 col-md-6">New answer</legend>
+        <answer-form question="ctrl.question" model='ctrl.newAnswer' submit="ctrl.addAnswer" hide="ctrl.hideAnswerForm"></answer-form>
+    </div>
+</div>

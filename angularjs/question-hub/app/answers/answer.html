@@ -1,18 +1,32 @@
-<div class="thumbnail">
+<div class="thumbnail" ng-mouseover="ctrl.showEditGroup()" ng-mouseleave="ctrl.hideEditGroup()">
     <div class="caption row">
         <div class="col-xs-1">
             <div class="vote-panel">
                 <div><button ng-click="ctrl.like()" ng-disabled="ctrl.likedByMe()" class="btn btn-default btn-xs">▲</button></div>
-                <div><h4 ng-class="ctrl.usefullness()">{{ ctrl.answer.rating }}</h4></div>
+                <div>
+                    <h4 ng-class="ctrl.usefullness()">{{ ctrl.model.rating }}</h4>
+                </div>
                 <div><button ng-click="ctrl.dislike()" ng-disabled="ctrl.dislikedByMe()" class="btn btn-default btn-xs">▼</button></div>
             </div>
         </div>
         <div class="col-xs-11">
-            <p>{{ ctrl.answer.body }}</p>
+            <p>{{ ctrl.model.body }}</p>
+            <div ng-if="ctrl.isEditGroupVisible" class="edit-group">
+                <button ng-click="ctrl.showEditForm()" class="btn btn-primary btn-xs">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button ng-click="ctrl.deleteAnswer()" class="btn btn-danger btn-xs">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
             <div class="question-footer">
-                <p class="author"><em>{{ ctrl.answer.author }}</em></p>
-                <p class="date"><em>{{ ctrl.answer.date | date: 'medium' }}</em></p>
+                <p class="author"><em>{{ ctrl.model.author }}</em></p>
+                <p class="date"><em>{{ ctrl.model.date | date: 'medium' }}</em></p>
             </div>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <answer-form ng-if="ctrl.isEditFormVisible" question="ctrl.question" model='ctrl.model' submit="ctrl.editAnswer" hide="ctrl.hideEditForm"></answer-form>
 </div>

@@ -17,7 +17,8 @@
             getQuestionById: getQuestionById,
             addAnswer: addAnswer,
             addQuestion: addQuestion,
-            removeQuestion: removeQuestion
+            removeQuestion: removeQuestion,
+            removeAnswer: removeAnswer
         };
         return service;
 
@@ -55,6 +56,10 @@
 
         function removeQuestion(question) {
             _.pull(db.questions, question);
+        }
+
+        function removeAnswer(answer, question) {
+            _.pull(question.answers, answer);
         }
     }
 })();

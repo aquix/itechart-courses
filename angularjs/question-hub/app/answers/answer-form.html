@@ -1,17 +1,14 @@
-<form name="answerForm">
+<form id="answer-form" name="answerForm" class="container-fluid">
     <div class="row">
-        <legend class="col-md-offset-3 col-md-6">New answer</legend>
-    </div>
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6 form-group">
-            <textarea ng-model="ctrl.body" required="required" class="form-control" placeholder="Type your answer here" rows="5"></textarea>
+        <div class="form-group">
+            <textarea ng-model="ctrl.model.body" required="required" class="form-control" placeholder="Type your answer here" rows="5"></textarea>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-3 col-md-3 form-group">
-            <input ng-model="ctrl.author" required="required" type="text" class="form-control" placeholder="Author">
+        <div class="form-group">
+            <input ng-model="ctrl.model.author" required="required" type="text" class="form-control" placeholder="Author">
         </div>
-        <button ng-click="ctrl.newAnswer()" ng-disabled="!answerForm.$valid" class="btn btn-primary">Answer</button>
+        <button ng-click="ctrl.submit(ctrl.model)" ng-disabled="!answerForm.$valid" class="btn btn-primary">Answer</button>
         <button ng-click="ctrl.hide()" class="btn btn-danger">Cancel</button>
     </div>
 </form>

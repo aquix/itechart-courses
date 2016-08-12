@@ -13,7 +13,9 @@
             controllerAs: 'ctrl',
             scope: {
                 question: '=',
-                hide: '='
+                hide: '=',
+                submitAction: '=submit',
+                model: '='
             }
         };
         return directive;
@@ -23,21 +25,9 @@
     function AnswerFormCtrl(db, userService) {
         var self = this;
 
-        self.author = '';
-        self.body = '';
-
-        self.newAnswer = function () {
-            var answer = {
-                author: self.author,
-                body: self.body,
-                rating: 0,
-                userId: userService.userId,
-                liked: [],
-                disliked: []
-            };
-
-            db.addAnswer(answer, self.question);
+        self.submit = function () {
             self.hide();
+            return self.submitAction.apply(self, arguments);
         }
     }
 })();

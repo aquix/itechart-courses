@@ -23,3 +23,9 @@ answer .bad {
   align-items: center;
   margin-left: 10px;
 }
+
+.edit-group {
+  position: absolute;
+  top: 0px;
+  right: 15px;
+}
