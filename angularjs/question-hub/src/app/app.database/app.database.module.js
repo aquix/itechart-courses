@@ -1,5 +1,5 @@
-(function() {
-    'use strict';
+import db from './db.service';
 
-    angular.module('app.database', []);
-})();
+export default angular.module('app.database', [])
+    .factory('db', db)
+    .name;

@@ -1,35 +1,27 @@
-(function () {
-    'use strict';
+/* @ngInject */
+export default function NewQuestionCtrl(db, userService, $state) {
+    var self = this;
 
-    angular
-        .module('app')
-        .controller('NewQuestionCtrl', NewQuestionCtrl);
+    self.title = '';
+    self.body = '';
+    self.author = '';
+    self.tags = [];
 
-    NewQuestionCtrl.$inject = ['db', 'userService', '$state'];
-    function NewQuestionCtrl(db, userService, $state) {
-        var self = this;
+    self.addQuestion = function () {
+        var tags = _.map(self.tags, function (tag) {
+            return tag.text;
+        });
 
-        self.title = '';
-        self.body = '';
-        self.author = '';
-        self.tags = [];
+        var newQuestion = {
+            title: self.title,
+            body: self.body,
+            author: self.author,
+            tags: tags,
+            date: Date.now(),
+            userId: userService.userId
+        }
 
-        self.addQuestion = function () {
-            var tags = _.map(self.tags, function (tag) {
-                return tag.text;
-            });
-
-            var newQuestion = {
-                title: self.title,
-                body: self.body,
-                author: self.author,
-                tags: tags,
-                date: Date.now(),
-                userId: userService.userId
-            }
-
-            db.addQuestion(newQuestion);
-            $state.transitionTo('questionView', { id: newQuestion.id });
-        };
-    }
-})();
+        db.addQuestion(newQuestion);
+        $state.transitionTo('questionView', { id: newQuestion.id });
+    };
+}

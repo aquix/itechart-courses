@@ -1,23 +1,17 @@
-(function () {
-    'use strict';
+import sha256 from 'js-sha256';
 
-    angular
-        .module('app')
-        .service('userService', userService);
+/* @ngInject */
+export default function userService($cookies) {
+    init();
 
-    userService.$inject = ['$cookies'];
-    function userService($cookies) {
-        init();
+    this.userId = $cookies.get('user');
 
-        this.userId = $cookies.get('user');
+    ////////////////
 
-        ////////////////
-
-        function init() {
-            if (!$cookies.get('user')) {
-                var userId = sha256(Date.now().toString());
-                $cookies.put('user', userId);
-            }
+    function init() {
+        if (!$cookies.get('user')) {
+            var userId = sha256(Date.now().toString());
+            $cookies.put('user', userId);
         }
     }
-})();
+}
