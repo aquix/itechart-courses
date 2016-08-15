@@ -21,7 +21,8 @@ create table orders (
     amount int not null,
     date datetime not null,
     price decimal not null,
-    customer_id int not null
+    customer_id int not null,
+    shop_id int not null,
 );
 
 create table orders_products (
