@@ -58,4 +58,25 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="create_tables.sql" />
+    <None Include="shops_init.sql" />
+    <None Include="shops_products_init.sql" />
+    <None Include="products_init.sql" />
+    <None Include="orders_products_init.sql" />
+    <None Include="orders_init.sql" />
+    <None Include="customers_init.sql" />
+    <None Include="test.sql" />
+    <None Include="task1.sql" />
+    <None Include="task2.sql" />
+    <None Include="task3.sql" />
+    <None Include="task4.sql" />
+    <None Include="task5.sql" />
+    <None Include="task6.sql" />
+    <None Include="task7.sql" />
+    <None Include="task9.sql" />
+    <None Include="task8.sql" />
+    <None Include="task10.sql" />
+    <None Include="task11.sql" />
+  </ItemGroup>
 </Project>
