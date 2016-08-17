@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{2a31dfe5-6831-448a-9f09-99f91b33a1ee}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -57,26 +57,72 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="DataSample" />
+    <Folder Include="Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="create_tables.sql" />
-    <None Include="shops_init.sql" />
-    <None Include="shops_products_init.sql" />
-    <None Include="products_init.sql" />
-    <None Include="orders_products_init.sql" />
-    <None Include="orders_init.sql" />
-    <None Include="customers_init.sql" />
-    <None Include="test.sql" />
-    <None Include="task1.sql" />
-    <None Include="task2.sql" />
-    <None Include="task3.sql" />
-    <None Include="task4.sql" />
-    <None Include="task5.sql" />
-    <None Include="task6.sql" />
-    <None Include="task7.sql" />
-    <None Include="task9.sql" />
-    <None Include="task8.sql" />
-    <None Include="task10.sql" />
-    <None Include="task11.sql" />
+    <Build Include="Tables\orders.sql" />
+    <Build Include="Tables\shops.sql" />
+    <Build Include="Tables\customers.sql" />
+    <Build Include="Tables\orders_products.sql" />
+    <Build Include="Tables\products.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\shops_products.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\customers.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\orders.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\orders_products.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\products.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\shops.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataSample\shops_products.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task10.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task11.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task2.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task3.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task4.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task5.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task6.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task7.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task8.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tasks\task9.sql" />
   </ItemGroup>
 </Project>

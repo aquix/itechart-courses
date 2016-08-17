@@ -1,0 +1,5 @@
+C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.dacpac
+C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.dll
+C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.pdb
+C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\TradeNetwork.dll
+C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\TradeNetwork.pdb
