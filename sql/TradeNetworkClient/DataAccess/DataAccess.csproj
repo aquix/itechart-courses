@@ -51,10 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerCostsInfo.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\SalesCount.cs" />
+    <Compile Include="Models\ProductSalesInfo.cs" />
     <Compile Include="Models\Shop.cs" />
+    <Compile Include="Models\ShopStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TradeNetworkContext.cs" />
     <Compile Include="TradeNetworkService.cs" />

@@ -4,128 +4,105 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Models;
+using System.Data.Entity;
 
 namespace DataAccess
 {
-    public class TradeNetworkService
+    public class TradeNetworkService : IDisposable
     {
         private TradeNetworkContext db = new TradeNetworkContext();
 
-        public void printProducts()
+        public ICollection<Product> GetProducts()
         {
-            foreach (var product in db.Products) {
-                Console.WriteLine($"{product.Id}\t{product.Name}\t{product.Price}");
-            }
+            return db.Products.ToList();
         }
 
-        public void printProductsCheaperThan(decimal maxPrice)
+        public ICollection<Product> GetProductsCheaperThan(decimal maxPrice)
         {
-            var result = db.Products.Where(p => p.Price < maxPrice);
-            foreach (var product in result) {
-                Console.WriteLine($"{product.Id}\t{product.Name}\t{product.Price}");
-            }
+            return db.Products
+                .Where(p => p.Price < maxPrice)
+                .ToList();
         }
 
-        public void printAverageOrderPriceInYear(int year)
+        public decimal GetAverageOrderPriceInYear(int year)
         {
-            var result = db.Orders
+            return db.Orders
                 .Where(o => o.Date.Year == year)
                 .Average(o => o.Price);
-
-            Console.WriteLine(result);
         }
 
-        public void printMostExpensiveProduct()
+        public Product GetMostExpensiveProduct()
         {
-            var result = db.Products.OrderByDescending(p => p.Price).First();
-            Console.WriteLine($"{result.Id}\t{result.Name}\t{result.Price}");
+            return db.Products
+                .OrderByDescending(p => p.Price)
+                .First();
         }
 
-        public void printProductBoughtInYear(int year)
+        public ICollection<Product> GetProductBoughtInYear(int year)
         {
-            var result = db.Products
+            return db.Products
                 .Where(p => p.Orders
                     .Where(o => o.Date.Year == year)
                     .Count() != 0)
-                .OrderBy(p => p.Name);
-
-            foreach (var product in result) {
-                Console.WriteLine($"{product.Id}\t{product.Name}");
-            }
+                .OrderBy(p => p.Name).ToList();
         }
 
-        public void printUnpopularProducts(int year)
+        public ICollection<ProductSalesInfo> GetUnpopularProducts(int year)
         {
             var result = db.Products
-                .Select(p => new
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    SalesInPrevYear = p.Orders.Where(o => o.Date.Year == year - 1).Count(),
-                    SalesInCurrentYear = p.Orders.Where(o => o.Date.Year == year).Count()
+                .Select(p => new ProductSalesInfo {
+                    Product = p,
+                    CurrentYearSales = p.Orders.Where(o => o.Date.Year == year - 1).Count(),
+                    PrevYearSales = p.Orders.Where(o => o.Date.Year == year).Count()
                 })
-                .Where(p => p.SalesInCurrentYear < p.SalesInPrevYear)
-                .OrderBy(p => p.Name);
-            
+                .Where(p => p.CurrentYearSales < p.PrevYearSales)
+                .OrderBy(p => p.Product.Name);
 
-            foreach (var product in result) {
-                Console.WriteLine($"{product.Id}\t{product.Name}\t{product.SalesInPrevYear}\t{product.SalesInCurrentYear}");
-            }
+            return result.ToList();
         }
 
-        public void printAveragePrices()
+        public ICollection<ShopStats> GetAveragePrices()
         {
             var result = db.Shops
-                .Select(s => new
-                {
-                    Id = s.Id,
-                    Name = s.Name,
+                .Select(s => new ShopStats {
+                    Shop = s,
                     AveragePrice = s.Products.Average(p => p.Price)
                 })
-                .OrderBy(s => s.Name).ToList();
+                .OrderBy(s => s.Shop.Name);
 
-            foreach (var shop in result) {
-                Console.WriteLine($"{shop.Id}\t{shop.Name}\t{shop.AveragePrice}");
-            }
+            return result.ToList();
         }
 
-        public void printAmountOfSales(int year)
+        public ICollection<ShopStats> GetAmountOfSales(int year)
         {
             var result = db.Shops
-                .Select(s => new {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Amount = s.Orders
+                .Select(s => new ShopStats {
+                    Shop = s,
+                    AmountOfSales = s.Orders
                         .Where(o => o.Date.Year == year)
                         .Sum(o => (int?)o.Amount) ?? 0
                 })
-                .Where(s => s.Amount > 0)
-                .OrderByDescending(s => s.Amount);
+                .Where(s => s.AmountOfSales > 0)
+                .OrderByDescending(s => s.AmountOfSales);
 
-            foreach (var shop in result) {
-                Console.WriteLine($"{shop.Id}\t{shop.Name}\t{shop.Amount}");
-            }
+            return result.ToList();
         }
 
-        public void printRichPeople(decimal minCosts)
+        public ICollection<CustomerCostsInfo> GetRichPeople(decimal minCosts)
         {
             var result = db.Customers
-                .Select(c => new
+                .Select(c => new CustomerCostsInfo
                 {
-                    Id = c.Id,
-                    FirstName = c.FirstName,
-                    LastName = c.LastName,
+                    Customer = c,
                     Costs = c.Orders.Sum(o => o.Price)
                 })
                 .Where(c => c.Costs >= minCosts)
                 .OrderByDescending(c => c.Costs);
 
-            foreach (var customer in result) {
-                Console.WriteLine($"{customer.Id}\t{customer.FirstName}\t{customer.LastName}\t{customer.Costs}");
-            }
+            return result.ToList();
         }
 
-        public void increaseProductCosts(double multiplier, decimal maxCost)
+        public async Task IncreaseProductCosts(double multiplier, decimal maxCost)
         {
             foreach (var product in db.Products) {
                 if (product.Price < maxCost) {
@@ -133,23 +110,18 @@ namespace DataAccess
                 }
             }
 
-            db.SaveChanges();
-
-            foreach (var product in db.Products) {
-                Console.WriteLine($"{product.Id}\t{product.Name}\t{product.Price}");
-            }
-            Console.WriteLine("Done!");
+            await db.SaveChangesAsync();
         }
 
-        public void deleteOldOrders(int year)
+        public async Task DeleteOldOrders(int year)
         {
             db.Orders.RemoveRange(db.Orders.Where(o => o.Date.Year <= year));
-            db.SaveChanges();
+            await db.SaveChangesAsync();
+        }
 
-            foreach (var order in db.Orders.OrderByDescending(o => o.Date)) {
-                Console.WriteLine($"{order.Id}\t{order.Date}");
-            }
-            Console.WriteLine("Done!");
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }
