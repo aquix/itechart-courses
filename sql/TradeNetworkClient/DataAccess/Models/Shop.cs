@@ -13,6 +13,8 @@ namespace DataAccess.Models
         public string City { get; set; }
         public string Address { get; set; }
 
-        public List<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+ 
     }
 }
