@@ -1,9 +1,0 @@
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.dacpac
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.dll
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\bin\Debug\TradeNetwork.pdb
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\TradeNetwork.dll
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\TradeNetwork.pdb
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\Model.xml
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\refactor.xml
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\postdeploy.sql
-C:\Users\u.klimiankou\Documents\itechart-courses\sql\TradeNetwork\TradeNetwork\obj\Debug\predeploy.sql

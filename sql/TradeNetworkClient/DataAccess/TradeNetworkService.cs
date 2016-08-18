@@ -49,8 +49,6 @@ namespace DataAccess
                     .Count() != 0)
                 .OrderBy(p => p.Name);
 
-            var res = result.ToList();
-
             foreach (var product in result) {
                 Console.WriteLine($"{product.Id}\t{product.Name}");
             }
@@ -58,44 +56,21 @@ namespace DataAccess
 
         public void printUnpopularProducts(int year)
         {
-            var startDate = new DateTime(year - 1, 1, 1);
-            var endDate = new DateTime(year - 1, 12, 31);
+            var result = db.Products
+                .Select(p => new
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    SalesInPrevYear = p.Orders.Where(o => o.Date.Year == year - 1).Count(),
+                    SalesInCurrentYear = p.Orders.Where(o => o.Date.Year == year).Count()
+                })
+                .Where(p => p.SalesInCurrentYear < p.SalesInPrevYear)
+                .OrderBy(p => p.Name);
+            
 
-            var salesPrev = getSalesCount(startDate, endDate);
-            var sales = getSalesCount(startDate.AddYears(1), endDate.AddYears(1));
-
-            var compareTable = salesPrev
-                .Select(s => new {
-                    Id = s.Id,
-                    SalesPrev = s.Count,
-                    Sales = sales.FirstOrDefault(i => i.Id == s.Id) != null ? sales.First(i => i.Id == s.Id).Count : 0
-                });
-
-            var result = compareTable
-                .Where(item => item.Sales < item.SalesPrev)
-                .Join(db.Products,
-                    item => item.Id,
-                    p => p.Id,
-                    (item, p) => new {
-                        Id = item.Id,
-                        SalesInCurrentYear = item.Sales,
-                        SalesInPrevYear = item.SalesPrev,
-                        Name = p.Id
-                    });
-
-            foreach (var item in result) {
-                Console.WriteLine($"{item.Id}\t{item.Name}\t{item.SalesInCurrentYear}\t{item.SalesInPrevYear}");
+            foreach (var product in result) {
+                Console.WriteLine($"{product.Id}\t{product.Name}\t{product.SalesInPrevYear}\t{product.SalesInCurrentYear}");
             }
-        }
-
-        private IQueryable<SalesCount> getSalesCount(DateTime startDate, DateTime endDate)
-        {
-            return db.Products
-                .Where(p => p.Orders
-                    .Where(o => o.Date >= startDate && o.Date <= endDate)
-                    .Count() != 0)
-                .GroupBy(p => p.Id)
-                .Select(g => new SalesCount { Id = g.Key, Count = g.Count() });
         }
 
         public void printAveragePrices()

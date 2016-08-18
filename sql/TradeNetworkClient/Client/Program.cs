@@ -51,8 +51,6 @@ namespace Client
                         dbService.printProductBoughtInYear(year);
                         break;
                     case 6:
-                        Console.WriteLine("Not implemented yet");
-                        break;
                         Console.WriteLine("Year: ");
                         year = int.Parse(Console.ReadLine());
                         dbService.printUnpopularProducts(year);
