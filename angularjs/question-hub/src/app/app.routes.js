@@ -5,17 +5,17 @@ export default function routesConfig ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('index', {
             url: '/',
-            templateUrl: 'app/question-list/question-list.html',
+            templateUrl: require('./question-list/question-list.html'),
             controller: 'QuestionListCtrl as ctrl'
         })
         .state('questionView', {
             url: '/questions/:id',
-            templateUrl: 'app/question-view/question-view.html',
+            templateUrl: require('./question-view/question-view.html'),
             controller: 'QuestionViewCtrl as ctrl'
         })
         .state('newQuestion', {
             url: '/new',
-            templateUrl: 'app/new-question/new-question.html',
+            templateUrl: require('./new-question/new-question.html'),
             controller: 'NewQuestionCtrl as ctrl'
         });
 

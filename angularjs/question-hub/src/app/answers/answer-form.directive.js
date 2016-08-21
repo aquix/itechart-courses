@@ -1,6 +1,8 @@
+import templateUrl from 'html!./answer-form.html'
+
 export default function answerForm() {
     var directive = {
-        templateUrl: 'app/answers/answer-form.html',
+        templateUrl: templateUrl,
         bindToController: true,
         controller: AnswerFormCtrl,
         controllerAs: 'ctrl',
